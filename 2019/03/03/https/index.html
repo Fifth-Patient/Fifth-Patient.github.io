@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="2019/01/09 | 分类： 基础技术 | 2 条评论 | 标签： https  译文出处： oschina |  原文出处：freecodecamp  密码学是一门难以理解的学科，因为它充满了数学定理。但是除非你要实际开发出一套加密算法系统，否则你是没必要强制理解那些深奥的数学定理的。 如果你阅读本文的目的是想设计下一套 HTTPS 协议，那我只能抱歉的说本文的知识还远远不够；如果不是的话，">
+<meta name="keywords" content="转载">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用信鸽来解释 HTTPS">
+<meta property="og:url" content="https://fifth-patient.github.io/2019/03/03/https/index.html">
+<meta property="og:site_name" content="巫术师">
+<meta property="og:description" content="2019/01/09 | 分类： 基础技术 | 2 条评论 | 标签： https  译文出处： oschina |  原文出处：freecodecamp  密码学是一门难以理解的学科，因为它充满了数学定理。但是除非你要实际开发出一套加密算法系统，否则你是没必要强制理解那些深奥的数学定理的。 如果你阅读本文的目的是想设计下一套 HTTPS 协议，那我只能抱歉的说本文的知识还远远不够；如果不是的话，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-03T03:49:36.981Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用信鸽来解释 HTTPS">
+<meta name="twitter:description" content="2019/01/09 | 分类： 基础技术 | 2 条评论 | 标签： https  译文出处： oschina |  原文出处：freecodecamp  密码学是一门难以理解的学科，因为它充满了数学定理。但是除非你要实际开发出一套加密算法系统，否则你是没必要强制理解那些深奥的数学定理的。 如果你阅读本文的目的是想设计下一套 HTTPS 协议，那我只能抱歉的说本文的知识还远远不够；如果不是的话，">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://fifth-patient.github.io/2019/03/03/https/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>用信鸽来解释 HTTPS | 巫术师</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">巫术师</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">双手充满魔力</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fifth-patient.github.io/2019/03/03/https/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Author">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="巫术师">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">用信鸽来解释 HTTPS
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-03 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-03T00:00:00+08:00">2019-03-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-03 11:49:36" itemprop="dateModified" datetime="2019-04-03T11:49:36+08:00">2019-04-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/转载/" itemprop="url" rel="index"><span itemprop="name">转载</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>2019/01/09 | 分类： 基础技术 | 2 条评论 | 标签： https</p>
+<blockquote>
+<p>译文出处： <a href="https://www.oschina.net/translate/https-explained-with-carrier-pigeons" target="_blank" rel="noopener">oschina</a> |  原文出处：<a href="https://medium.freecodecamp.org/https-explained-with-carrier-pigeons-7029d2193351" target="_blank" rel="noopener">freecodecamp</a></p>
+</blockquote>
+<p>密码学是一门难以理解的学科，因为它充满了数学定理。但是除非你要实际开发出一套加密算法系统，否则你是没必要强制理解那些深奥的数学定理的。</p>
+<p>如果你阅读本文的目的是想设计下一套 HTTPS 协议，那我只能抱歉的说本文的知识还远远不够；如果不是的话，那么就煮杯咖啡，轻松愉悦的阅读本文吧。</p>
+<h2 id="爱丽丝、鲍伯和-…-信鸽？"><a href="#爱丽丝、鲍伯和-…-信鸽？" class="headerlink" title="爱丽丝、鲍伯和 … 信鸽？"></a>爱丽丝、鲍伯和 … 信鸽？</h2><p>你在互联网上从事的任何活动（阅读这篇文章、在亚马逊上购物、上传图片等）归结到底都是从某台服务器上发送和接收信息。</p>
+<p>这个说起来可能有点抽象，不如让我们假设这些消息都是由信鸽来传递的。我知道这个假设有些太过随意，但相信我 HTTPS 就是这样工作的，尽管它的速度快的多。</p>
+<p>我们先不谈服务器、客户端或者黑客攻击，先来聊一下爱丽丝、鲍伯和马洛里。如果这已不是你第一次接触密码学理论，你应该会认识这些名字，因为他们经常在各种密码学文献中被提及。</p>
+<h2 id="一个简单的通信方式"><a href="#一个简单的通信方式" class="headerlink" title="一个简单的通信方式"></a>一个简单的通信方式</h2><p>如果爱丽丝想给鲍伯发个消息，她会把消息绑在信鸽的腿上寄给鲍伯。然后鲍伯收到了消息，并阅读了它。这一切都是美好的。</p>
+<p>但如果马洛里拦截了爱丽丝飞翔中的信鸽并且修改消息内容呢？鲍伯将无法知道爱丽丝发来的消息已经在传输过程中被修改了。</p>
+<p>这就是 HTTP 的工作方式，很可怕吧？我绝不会通过 HTTP 发送我的银行凭证，希望你也不会。</p>
+<a id="more"></a>
+<h2 id="隐蔽的密码"><a href="#隐蔽的密码" class="headerlink" title="隐蔽的密码"></a>隐蔽的密码</h2><p>那么如果爱丽丝和鲍勃都非常的机智。他们一致认同使用一种隐蔽的密码来书写他们的信息。他们会将信息中的每个字母按照字母表中的顺序前移三位。比如，D→A，E→B，F→C。如此一来，原文为 “secret message” 的信息就变成了 “pbzobq jbppxdb” 。</p>
+<p>那现在如果马洛里再截获了信鸽，她既不能做出有意义的修改同时也不会知道信息的内容，因为她不知道隐蔽的密码到底是什么。然而鲍勃却可以很容易反转密码，依靠 A → D, B → E, C → F 之类的规则破译信息的内容。加密后的信息 “pbzobq jbppxdb” 会被破解还原为 “secret message” 。</p>
+<p>搞定！</p>
+<p>这就是对称密匙加密，因为如果你知道如何加密一段信息那么你同样可以解密这段信息。</p>
+<p>上述的密码通常被称为凯撒码。在现实生活中，我们会使用更为奇特和复杂的密码，但原理相同。</p>
+<h2 id="我们如何决定密匙？"><a href="#我们如何决定密匙？" class="headerlink" title="我们如何决定密匙？"></a>我们如何决定密匙？</h2><p>如果除了发信者和收信者之外没有人知道使用的是什么密匙，对称密匙加密是非常安全的。在凯撒加密中，密匙就是每个字母变到加密字母需要移动多少位的偏移量。我之前的距离中，使用的偏移量是 3 ，但是也可以用 4 或者 12 。</p>
+<p>问题是如果爱丽丝和鲍勃在开始用信鸽传信之前没有碰过头，他们没有一个安全的方式来确立密匙。如果他们自己来在信中传递密匙，马洛里就会截获信息并发现密匙。这就使得马洛里可以在爱丽丝和鲍勃开始加密他们的信息之前或之后，阅读到他们信息的内容并按照她的意愿来篡改信息。</p>
+<p>这是一个中间人攻击的典型例子，避免这个问题的唯一方法就是收发信的两方一起修改他们的编码系统。<br>通过信鸽传递盒子</p>
+<p>所以爱丽丝和鲍勃就想出了一个更好的系统。当鲍勃想要给爱丽丝发送信息时，他会按照如下的步骤来进行：</p>
+<ul>
+<li>鲍勃向爱丽丝送一只没有携带任何信息的鸽子。</li>
+<li>爱丽丝给鲍勃送回鸽子，并且这只鸽子带有一个有开着的锁的盒子，爱丽丝保管着锁的钥匙。</li>
+<li>鲍勃把信放进盒子中，把锁锁上然后把盒子送给爱丽丝。</li>
+<li>爱丽丝收到盒子，用钥匙打开然后阅读信息。</li>
+</ul>
+<p>这样马洛里就不能通过截获鸽子来篡改信息了，因为她没有打开盒子的钥匙。当爱丽丝要给鲍勃发送消息的时候同样按照上述的流程。</p>
+<p>爱丽丝和鲍勃所使用的流程通常被称为非对称密钥加密。之所以称之为非对称，是因为即使是你把信息编码（锁上盒子）也不能破译信息（打开锁住的盒子）。</p>
+<p>在术语中，盒子被称为公匙而用来打开盒子的钥匙被称为私匙。</p>
+<h2 id="如何信任盒子"><a href="#如何信任盒子" class="headerlink" title="如何信任盒子"></a>如何信任盒子</h2><p>如果你稍加注意你就会发现还是存在问题。当鲍勃收到盒子时他如何能确定这个盒子来自爱丽丝而不是马洛里截获了鸽子然后换了一个她有钥匙能打开的盒子呢？</p>
+<p>爱丽丝决定签名标记一下盒子，这样鲍勃收到盒子的时候就可以检查签名来确定是爱丽丝送出的盒子了。</p>
+<p>那么你们之中的一些人可能就会想了，鲍勃如何打一开始就能识别出爱丽丝的签名呢？这是个好问题。爱丽丝和鲍勃也确实有这个问题，所以他们决定让泰德代替爱丽丝来标记这个盒子。</p>
+<p>那么谁是泰德呢？泰德很有名的，是一个值得信任的家伙。他会给任何人签名并且所有人都信任他只会给合法的人签名标记盒子。</p>
+<p>如果泰德可以确认索要签名的人是爱丽丝，他就会在爱丽丝的盒子上签名。因此马洛里就不可能搞到一个有着泰德代表爱丽丝签了名的盒子，因为鲍勃知道泰德只会给他确认过的人签名，从而识破马洛里的诡计。</p>
+<p>泰德的角色在术语中被称为认证机构。而你阅读此文时所用的浏览器打包存有许多认证机构的签名。</p>
+<p>所以当你首次接入一个网站的时候你可以信任来自这个站点的盒子因为你信任泰德而泰德会告诉你盒子是合法的。</p>
+<h2 id="沉重的盒子"><a href="#沉重的盒子" class="headerlink" title="沉重的盒子"></a>沉重的盒子</h2><p>现在爱丽丝和鲍勃有了一个可靠的系统来进行交流，然他们也意识到让鸽子携带盒子比原本只携带信件要慢一些。</p>
+<p>因此他们决定只有在选择用对称加密来给信息编码（还记得凯撒加密法吧？）的密匙时，使用传递盒子的方法（非对称加密）。</p>
+<p>这样就可以二者的优点兼具了，非对称加密的可靠性和对称加密的高效性。</p>
+<p>现实世界中我们不会用信鸽这样慢的送信手段，但用非对称加密来编码信息仍要慢于使用对称加密技术，所以我们只有在交换编码密匙的时候会使用非对称加密技术。</p>
+<p>现在你已经了解了HTTPS是如何工作的了，你的咖啡也应该准备好了。好好享用吧你受之无愧。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/转载/" rel="tag"># 转载</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/09/ES2019/" rel="next" title="JavaScript ES2019 中的 8 个新功能">
+                <i class="fa fa-chevron-left"></i> JavaScript ES2019 中的 8 个新功能
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/27/killing-night/" rel="prev" title="嗜夜">
+                嗜夜 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/avatar.jpg" alt="Author">
+            
+              <p class="site-author-name" itemprop="name">Author</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Fifth-Patient" title="GitHub &rarr; https://github.com/Fifth-Patient" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:1923407743@qq.com" title="E-Mail &rarr; mailto:1923407743@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#爱丽丝、鲍伯和-…-信鸽？"><span class="nav-number">1.</span> <span class="nav-text">爱丽丝、鲍伯和 … 信鸽？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个简单的通信方式"><span class="nav-number">2.</span> <span class="nav-text">一个简单的通信方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐蔽的密码"><span class="nav-number">3.</span> <span class="nav-text">隐蔽的密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我们如何决定密匙？"><span class="nav-number">4.</span> <span class="nav-text">我们如何决定密匙？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何信任盒子"><span class="nav-number">5.</span> <span class="nav-text">如何信任盒子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#沉重的盒子"><span class="nav-number">6.</span> <span class="nav-text">沉重的盒子</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Author</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1276849986&web_id=1276849986"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="100,100,100" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
