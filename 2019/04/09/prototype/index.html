@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="原型链是js的大动脉。  导读js的原型链难以避免要牵扯到面向对象，这里我们先简单说说原型还有原型链。之后我们说到面向对象的演变过程，会再次涉及到原型链，还有更多的东西。相信看完的读者会对JavaScript会有更深的认识。 原型对象本小节意在介绍js中几位朋友，读者只需要记住有它们的存在就行了，毕竟这几位朋友性格有点隐匿。 首先，我们要明白，声明一个对象，哪怕是空属性，js也生成一些内置的属性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原型链是如何贯穿js的">
+<meta property="og:url" content="https://fifth-patient.github.io/2019/04/09/prototype/index.html">
+<meta property="og:site_name" content="巫术师">
+<meta property="og:description" content="原型链是js的大动脉。  导读js的原型链难以避免要牵扯到面向对象，这里我们先简单说说原型还有原型链。之后我们说到面向对象的演变过程，会再次涉及到原型链，还有更多的东西。相信看完的读者会对JavaScript会有更深的认识。 原型对象本小节意在介绍js中几位朋友，读者只需要记住有它们的存在就行了，毕竟这几位朋友性格有点隐匿。 首先，我们要明白，声明一个对象，哪怕是空属性，js也生成一些内置的属性">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://fifth-patient.github.io/2019/04/09/prototype/obj_attr.jpg">
+<meta property="og:image" content="https://fifth-patient.github.io/2019/04/09/prototype/obj_1__proto__.jpg">
+<meta property="og:image" content="https://fifth-patient.github.io/2019/04/09/prototype/proto_egg.jpg">
+<meta property="og:image" content="https://fifth-patient.github.io/2019/04/09/prototype/proto_link.jpg">
+<meta property="og:updated_time" content="2019-04-11T06:50:48.947Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="原型链是如何贯穿js的">
+<meta name="twitter:description" content="原型链是js的大动脉。  导读js的原型链难以避免要牵扯到面向对象，这里我们先简单说说原型还有原型链。之后我们说到面向对象的演变过程，会再次涉及到原型链，还有更多的东西。相信看完的读者会对JavaScript会有更深的认识。 原型对象本小节意在介绍js中几位朋友，读者只需要记住有它们的存在就行了，毕竟这几位朋友性格有点隐匿。 首先，我们要明白，声明一个对象，哪怕是空属性，js也生成一些内置的属性">
+<meta name="twitter:image" content="https://fifth-patient.github.io/2019/04/09/prototype/obj_attr.jpg">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://fifth-patient.github.io/2019/04/09/prototype/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>原型链是如何贯穿js的 | 巫术师</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">巫术师</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">双手充满魔力</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fifth-patient.github.io/2019/04/09/prototype/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chris Chen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="巫术师">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">原型链是如何贯穿js的
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-09 15:31:56" itemprop="dateCreated datePublished" datetime="2019-04-09T15:31:56+08:00">2019-04-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-11 14:50:48" itemprop="dateModified" datetime="2019-04-11T14:50:48+08:00">2019-04-11</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>原型链是js的大动脉。</p>
+</blockquote>
+<h1 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h1><p>js的原型链难以避免要牵扯到面向对象，这里我们先简单说说原型还有原型链。之后我们说到面向对象的演变过程，会再次涉及到原型链，还有更多的东西。相信看完的读者会对JavaScript会有更深的认识。</p>
+<h2 id="原型对象"><a href="#原型对象" class="headerlink" title="原型对象"></a>原型对象</h2><p>本小节意在介绍js中几位朋友，读者只需要记住有它们的存在就行了，毕竟这几位朋友性格有点隐匿。</p>
+<p>首先，我们要明白，声明一个对象，哪怕是空属性，js也生成一些内置的属性和方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 两种方法声明对象 */</span></span><br><span class="line"><span class="comment">// 对象直接量</span></span><br><span class="line"><span class="keyword">var</span> obj_1 = &#123;&#125;;</span><br><span class="line"><span class="comment">// new关键字声明对象</span></span><br><span class="line"><span class="keyword">var</span> obj_2 = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在Object的原型对象添加属性</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.attr = <span class="string">'myarr'</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj_1); <span class="comment">// &#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(obj_2); <span class="comment">// &#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// js中的恒等符号对函数来说只比较引用</span></span><br><span class="line"><span class="comment">// obj_1.valuOf函数来源于Object.valueOf</span></span><br><span class="line"><span class="comment">// 更准确来说是Object.protoype.valueOf</span></span><br><span class="line"><span class="built_in">console</span>.log(obj_1.valueOf === <span class="built_in">Object</span>.valueOf); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// obj_1并未声明attr属性，通过Object.prototype继承得到attr属性</span></span><br><span class="line"><span class="built_in">console</span>.log(obj_1.attr); <span class="comment">// myarr</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2019/04/09/prototype/./obj_attr.jpg" alt="空对象属性的prototype"></p>
+<p align="center"><em>firefox控制台中空对象仍然有<code>prototype</code>属性</em></p>
+
+<p>  误区：每个浏览器的控制台输出都不太一样，Chrome和Edge并不显示<code>prototype</code>属性，因为我们并没有给obj_1的<code>prototype</code>属性定义任何属性和方法。<br>  由于历代浏览器的更新和ECMAScript的修正，有时难以体现<code>prototype</code>和<code>__proto__</code>的存在，但我们的js代码能体现出它们的确是真实存在的。</p>
+<p><code>prototype</code>在这里称之为<code>obj_1</code>的原型对象，通过对象直接量和<code>new</code>关键字声明的对象都具有原型对象，继承自<code>Object.prototype</code>；几乎每个对象都有其原型对象，null是特例。</p>
+<h2 id="双对象实现原型继承"><a href="#双对象实现原型继承" class="headerlink" title="双对象实现原型继承"></a>双对象实现原型继承</h2><p>需要原型对象是为了实现继承，但有了原型对象我们还无法把<code>obj_1</code>与<code>Object.prototype</code>链接起来。<br>我们还需要另一个对象：<code>__proto__</code>，该属性能指向构造函数的原形属性<code>constructor</code>。<br>一些老版本浏览器不识别，有些无法识别其内部信息，但不影响程序的正常运行。</p>
+<p><img src="/2019/04/09/prototype/./obj_1__proto__.jpg" alt="obj_1的__proto__"></p>
+<p align="center"><em><code>obj_1</code>的<code>__proto__</code>对象, 该属性下又有<code>__proto__</code>和<code>constructor</code>属性</em></p>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">obj_1.__proto__ === <span class="built_in">Object</span>.prototype  <span class="comment">// true</span></span><br><span class="line">obj_1.__proto__.constructor === <span class="built_in">Object</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>这里有三个概念先行抛出</p>
+<ul>
+<li>继承：继承使子类（超类）可拥有父类的属性和方法，子类也可添加属性和方法</li>
+<li>父类：提供属性和方法被子类继承</li>
+<li>子类：被父类继承的对象，可调用父类的属性和方法，也能定义属性和方法（父类无法调用）</li>
+</ul>
+<p>通过<code>Object.prototype.attr</code>与<code>obj_1.attr</code>，我们可以看出 <code>obj_1</code> (子类) 继承了 <code>Object</code> (父类)的原型对象的<code>attr</code>属性。<br>正是因为<code>obj_1</code>的<code>__proto__</code>指向<code>Object.prototype</code>，obj_1继承了父类原型对象，使之拥有了<code>attr</code>属性。<br>而子类的<code>__proto__.constructor</code>直接指向父类。</p>
+<blockquote>
+<p><strong>原型继承：每声明一个对象，其本身拥有用两个对象：原型对象(<code>prototype</code>)，与<code>__proto__</code>对象，原型对象即可供自身使用，子类继承后也可调用；自身的<code>__proto__</code>对象指向父类的原型对象，其<code>constructor</code>属性指向父类的构造函数</strong>。通过原型对象的方法实现继承，叫原型继承。**</p>
+</blockquote>
+<h2 id="双对象与原型链"><a href="#双对象与原型链" class="headerlink" title="双对象与原型链"></a>双对象与原型链</h2><p>综合以上，我们知道了使用原型对象<code>prototype</code>和<code>__proto__</code>对象可以实现继承的功能。那么我们是不是可以一直继承下去呢？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">People</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Engineer</span>(<span class="params">type</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.type = type;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Engineer.prototype = <span class="keyword">new</span> People(<span class="string">'Chris Chen'</span>); <span class="comment">// Engineer (子类)继承 People (父类)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Programmer</span>(<span class="params">skill</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.skill = skill;</span><br><span class="line">  <span class="keyword">this</span>.showMsg = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hi, my name is '</span> + <span class="keyword">this</span>.name + <span class="string">', I am a '</span> + <span class="keyword">this</span>.type + <span class="string">' engineer, I can write '</span> + <span class="keyword">this</span>.skill + <span class="string">' code!'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Programmer.prototype = <span class="keyword">new</span> Engineer(<span class="string">'front-end'</span>); <span class="comment">// Programmer (子类) 继承 Engineer (父类)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> me = <span class="keyword">new</span> Programmer(<span class="string">'js'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(me); <span class="comment">// Object &#123; skill: "js", showMsg: showMsg() &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(me.showMsg()); <span class="comment">// Hi, my name is Chris Chen, I am a front-end engineer, I can write js code!</span></span><br></pre></td></tr></table></figure>
+<p>代码看完，我们从子类开始解释，也就是从下往上的顺序：</p>
+<ol>
+<li><code>me</code>是<code>Programmer</code>的实例化对象</li>
+<li><code>Programmer</code>的原型指向<code>Engineer</code>的实例对象</li>
+<li><code>Engineer</code>的原型指向<code>People</code>的实例对象</li>
+</ol>
+<p>我们再来一张图说明其关系</p>
+<p><img src="/2019/04/09/prototype/./proto_egg.jpg" alt="proto_egg"><br><em>这个.. 一盘煎蛋？？</em></p>
+<p>好伐，煎蛋就煎蛋，来，我们继续。</p>
+<p>请注意重点：<strong><code>Programmer</code>并无定义<code>type</code>, <code>name</code>属性，<code>Programmer</code>的<code>showMsg</code>中能显示<code>this.name</code> <code>this.type</code>分别来源于<code>Engineer</code>和<code>Programmer</code>的原型对象。</strong><br>很巧妙的一种属性搜索机制，<strong>自身的构造函数没有该属性，就从自身的原型对象中找，如果父类的原型对象没有，那么继续往父类的父类原型对象找，找到了就赋值；或直到没有父类，返回<code>undefined</code>；</strong>属性如此，方法也是同样的赋值机制。</p>
+<p>说到底属性搜索机制就是原型链的一种具体体现，我们再上一张图。</p>
+<p><img src="/2019/04/09/prototype/./proto_link.jpg" alt="proto_link"></p>
+<p>所以原型链的关键字是<strong>继承</strong>和<strong>原型对象</strong>！！</p>
+<blockquote>
+<p><strong>原型链：使用<code>prototype</code>和<code>_proto_</code>两个对象实现继承，由于是基于原型对象实现调用链，又称之为原型链。</strong></p>
+</blockquote>
+<p>关于原型链的第一步介绍就到这里，接下来我们从头开始，说说面向对象。</p>
+<h1 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h1><p>首先我们先来概述面向过程编程（opp）与面向对象（oop）。这是JS的两种编程范式，也可以理解为编程思想。<br>顾名思义，两者的重心不同。下面我们使用两种方法创建dom并挂载于页面。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 面向过程 */</span></span><br><span class="line"><span class="comment">// 1. 定义dom</span></span><br><span class="line"><span class="keyword">var</span> dom = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</span><br><span class="line"><span class="comment">// 2. 设置dom属性</span></span><br><span class="line">dom.innerHTML = <span class="string">'面向过程'</span>;</span><br><span class="line">dom.id = <span class="string">'opp'</span>;</span><br><span class="line">dom.style = <span class="string">'color: skyblue'</span>;</span><br><span class="line"><span class="comment">// 3. 挂载dmo</span></span><br><span class="line"><span class="keyword">var</span> container = <span class="built_in">document</span>.getElementById(<span class="string">'container'</span>);</span><br><span class="line">container.appendChild(dom);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 面向对象 */</span></span><br><span class="line"><span class="comment">// 1. 定义构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CreateElement</span>(<span class="params">tagName, id, innerText, style</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> dom = <span class="built_in">document</span>.createElement(tagName);</span><br><span class="line">  dom.innerHTML = innerText;</span><br><span class="line">  dom.id = id;</span><br><span class="line">  dom.style = style;</span><br><span class="line">  <span class="keyword">this</span>.dom = dom;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 2. 定义原型对象上的方法</span></span><br><span class="line">CreateElement.prototype = &#123;</span><br><span class="line">  render: <span class="function"><span class="keyword">function</span> (<span class="params">dom</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> container = <span class="built_in">document</span>.getElementById(dom);</span><br><span class="line">    container.appendChild(<span class="keyword">this</span>.dom);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化对象</span></span><br><span class="line"><span class="keyword">var</span> innerBox = <span class="keyword">new</span> CreateElement(<span class="string">'div'</span>, <span class="string">'oop'</span>, <span class="string">'面向对象'</span>, <span class="string">'color: pink;'</span>);</span><br><span class="line"><span class="comment">// 调用原型方法</span></span><br><span class="line">innerBox.render(<span class="string">'container'</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>面向过程比较流水线，更注重程序的实现过程，面向对象的程序由一个又一个的单位————对象组成，不关心对象的内部属性和方法，只需实例化，调用方法即可使用。</p>
+</blockquote>
+<p>或许上面的例子，还不是很有力得体现出两者的区别，那么如果现在，需要挂载多个元素呢？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 面向过程 */</span></span><br><span class="line"><span class="comment">// var dom_1 = document.createElement('div');</span></span><br><span class="line"><span class="comment">// dom_1.innerHTML = '面向过程_1';</span></span><br><span class="line"><span class="comment">// dom_1.id = 'opp-1';</span></span><br><span class="line"><span class="comment">// dom_1.style = 'color: skyblue';</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// var dom_2 = document.createElement('div');</span></span><br><span class="line"><span class="comment">// dom_2.innerHTML = '面向过程_2';</span></span><br><span class="line"><span class="comment">// dom_2.id = 'opp-2';</span></span><br><span class="line"><span class="comment">// dom_2.style = 'color: skyblue;';</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// var container = document.getElementById('container');</span></span><br><span class="line"><span class="comment">// container.appendChild(dom_1);</span></span><br><span class="line"><span class="comment">// container.appendChild(dom_2);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 这种方法傻的可爱，我们包装成函数吧 */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createElement</span>(<span class="params">tagName, id, innerText, style</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> dom = <span class="built_in">document</span>.createElement(tagName);</span><br><span class="line">  dom.innerHTML = innerText;</span><br><span class="line">  dom.id = id;</span><br><span class="line">  dom.style = style;</span><br><span class="line">  <span class="keyword">return</span> dom;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> container = <span class="built_in">document</span>.getElementById(<span class="string">'container'</span>);</span><br><span class="line"><span class="keyword">var</span> box_1 = createElement(<span class="string">'div'</span>, <span class="string">'oop-1'</span>, <span class="string">'面向过程_1'</span>, <span class="string">'color: skyblue;'</span>);</span><br><span class="line"><span class="keyword">var</span> box_2 = createElement(<span class="string">'div'</span>, <span class="string">'oop-2'</span>, <span class="string">'面向过程_2'</span>, <span class="string">'color: skyblue;'</span>);</span><br><span class="line">container.appendChild(box_1);</span><br><span class="line">container.appendChild(box_2);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 面向对象 */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CreateElement</span>(<span class="params">tagName, id, innerText, style</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> dom = <span class="built_in">document</span>.createElement(tagName);</span><br><span class="line">  dom.innerHTML = innerText;</span><br><span class="line">  dom.id = id;</span><br><span class="line">  dom.style = style;</span><br><span class="line">  <span class="keyword">this</span>.dom = dom;</span><br><span class="line">&#125;</span><br><span class="line">CreateElement.prototype = &#123;</span><br><span class="line">  render: <span class="function"><span class="keyword">function</span> (<span class="params">dom</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> container = <span class="built_in">document</span>.getElementById(dom);</span><br><span class="line">    container.appendChild(<span class="keyword">this</span>.dom);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> innerBox_1 = <span class="keyword">new</span> CreateElement(<span class="string">'div'</span>, <span class="string">'oop-1'</span>, <span class="string">'面向对象_1'</span>, <span class="string">'color: pink;'</span>);</span><br><span class="line">innerBox_1.render(<span class="string">'container'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里只需再实例化一个对象调用render方法即可</span></span><br><span class="line"><span class="keyword">var</span> innerBox_2 = <span class="keyword">new</span> CreateElement(<span class="string">'div'</span>, <span class="string">'oop-2'</span>, <span class="string">'面向对象_2'</span>, <span class="string">'color: pink;'</span>);</span><br><span class="line">innerBox_2.render(<span class="string">'container'</span>);</span><br></pre></td></tr></table></figure>
+<p>重复调用同样的方法，面向过程如果不包装一个函数，显得代码很冗余且愚蠢，而面向对象只需再次实例化即可。<br>这里也提醒我们平时写代码的时候要考虑复用性。</p>
+<p>好的，那我们现在需要给dom元素添加一些交互功能，又要怎么做？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 面向过程 */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createElement</span>(<span class="params">tagName, id, innerText, style, event, fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> dom = <span class="built_in">document</span>.createElement(tagName);</span><br><span class="line">  dom.innerHTML = innerText;</span><br><span class="line">  dom.id = id;</span><br><span class="line">  dom.style = style;</span><br><span class="line">  <span class="comment">// 直接修改内部函数</span></span><br><span class="line">  dom.addEventListener(event, fn);</span><br><span class="line">  <span class="keyword">return</span> dom;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> container = <span class="built_in">document</span>.getElementById(<span class="string">'container'</span>);</span><br><span class="line"><span class="keyword">var</span> box_1 = createElement(<span class="string">'div'</span>, <span class="string">'oop-1'</span>, <span class="string">'面向过程_1'</span>, <span class="string">'color: skyblue;'</span>, <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">  alert(e.target.innerHTML);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 过于死板，就算没有传参dom.addEventListener也会调用两次</span></span><br><span class="line"><span class="keyword">var</span> box_2 = createElement(<span class="string">'div'</span>, <span class="string">'oop-2'</span>, <span class="string">'面向过程_2'</span>, <span class="string">'color: skyblue;'</span>);</span><br><span class="line">container.appendChild(box_1);</span><br><span class="line">container.appendChild(box_2);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 面向对象 */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CreateElement</span>(<span class="params">tagName, id, innerText, style</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> dom = <span class="built_in">document</span>.createElement(tagName);</span><br><span class="line">  dom.innerHTML = innerText;</span><br><span class="line">  dom.id = id;</span><br><span class="line">  dom.style = style;</span><br><span class="line">  <span class="keyword">this</span>.dom = dom;</span><br><span class="line">&#125;</span><br><span class="line">CreateElement.prototype = &#123;</span><br><span class="line">  render: <span class="function"><span class="keyword">function</span> (<span class="params">dom</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> container = <span class="built_in">document</span>.getElementById(dom);</span><br><span class="line">    container.appendChild(<span class="keyword">this</span>.dom);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 在原型对象上添加方法</span></span><br><span class="line">  addMethod: <span class="function"><span class="keyword">function</span> (<span class="params">event, fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.dom.addEventListener(event, fn);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> innerBox_1 = <span class="keyword">new</span> CreateElement(<span class="string">'div'</span>, <span class="string">'oop-1'</span>, <span class="string">'面向对象_1'</span>, <span class="string">'color: pink;'</span>, <span class="string">'click'</span>);</span><br><span class="line">innerBox_1.render(<span class="string">'container'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> innerBox_2 = <span class="keyword">new</span> CreateElement(<span class="string">'div'</span>, <span class="string">'oop-2'</span>, <span class="string">'面向对象_2'</span>, <span class="string">'color: pink;'</span>, <span class="string">'click'</span>);</span><br><span class="line">innerBox_2.render(<span class="string">'container'</span>);</span><br><span class="line"><span class="comment">// 根据场景需求决定是否调用addMethod方法</span></span><br><span class="line">innerBox_2.addMethod(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">  alert(e.target.innerHTML);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>从这里可以我们看出两者的扩展方法截然不同，面向过程模式需要直接在函数中修改，而面向对像在原型对象上直接追加方法。</p>
+<blockquote>
+<p>面向对象比面向过程有更高的复用性和扩展性。</p>
+</blockquote>
+<p>PS：面向过程也并非一无是处，比面向对象更直观化，也更理解。若不需要考虑太多的因素，使用面向过程开发反而效率会更快。</p>
+<h1 id="下文还在更新中，继续续写精彩…"><a href="#下文还在更新中，继续续写精彩…" class="headerlink" title="下文还在更新中，继续续写精彩…"></a>下文还在更新中，继续续写精彩…</h1>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/08/web-safe/" rel="next" title="web安全基础">
+                <i class="fa fa-chevron-left"></i> web安全基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/avatar.jpg" alt="Chris Chen">
+            
+              <p class="site-author-name" itemprop="name">Chris Chen</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Fifth-Patient" title="GitHub &rarr; https://github.com/Fifth-Patient" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:1923407743@qq.com" title="E-Mail &rarr; mailto:1923407743@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#导读"><span class="nav-number">1.</span> <span class="nav-text">导读</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原型对象"><span class="nav-number">1.1.</span> <span class="nav-text">原型对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双对象实现原型继承"><span class="nav-number">1.2.</span> <span class="nav-text">双对象实现原型继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双对象与原型链"><span class="nav-number">1.3.</span> <span class="nav-text">双对象与原型链</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#面向对象"><span class="nav-number">2.</span> <span class="nav-text">面向对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下文还在更新中，继续续写精彩…"><span class="nav-number">3.</span> <span class="nav-text">下文还在更新中，继续续写精彩…</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chris Chen</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1276849986&web_id=1276849986"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="100,100,100" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
