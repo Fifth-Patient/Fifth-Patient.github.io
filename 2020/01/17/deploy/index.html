@@ -15,7 +15,7 @@
 
 
 <html class="theme-next gemini use-motion" lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="巫术师">
 <meta property="og:description" content="工作中实操过的项目部署记录，使用的是Ubuntu系统，nignx 和 C# 的运行环境均已安装。 前期配置文件准备12345678910111213141516# 以acs.HOST.cn举例 （HOST）为主域名# 项目路径/home/wwwroot/acs.xxx.cn# 从服务器下载文件配置文件（需要本机使用pscp或其他支持ftp协议的程序）pscp USERNAME@IP:/home/w">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-16T17:05:05.748Z">
+<meta property="og:updated_time" content="2020-01-19T04:37:56.181Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="项目部署">
 <meta name="twitter:description" content="工作中实操过的项目部署记录，使用的是Ubuntu系统，nignx 和 C# 的运行环境均已安装。 前期配置文件准备12345678910111213141516# 以acs.HOST.cn举例 （HOST）为主域名# 项目路径/home/wwwroot/acs.xxx.cn# 从服务器下载文件配置文件（需要本机使用pscp或其他支持ftp协议的程序）pscp USERNAME@IP:/home/w">
@@ -353,12 +353,24 @@
                 
               
 
-              <time title="创建时间：2020-01-17 00:30:34 / 修改时间：01:05:05" itemprop="dateCreated datePublished" datetime="2020-01-17T00:30:34+08:00">2020-01-17</time>
+              <time title="创建时间：2020-01-17 00:30:34" itemprop="dateCreated datePublished" datetime="2020-01-17T00:30:34+08:00">2020-01-17</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-19 12:37:56" itemprop="dateModified" datetime="2020-01-19T12:37:56+08:00">2020-01-19</time>
               
             
           </span>
@@ -393,11 +405,11 @@
 
       
         <p>工作中实操过的项目部署记录，使用的是Ubuntu系统，nignx 和 C# 的运行环境均已安装。</p>
-<h1 id="前期配置文件准备"><a href="#前期配置文件准备" class="headerlink" title="前期配置文件准备"></a>前期配置文件准备</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以acs.HOST.cn举例 （HOST）为主域名</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 项目路径</span></span><br><span class="line">/home/wwwroot/acs.xxx.cn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从服务器下载文件配置文件（需要本机使用pscp或其他支持ftp协议的程序）</span></span><br><span class="line">pscp USERNAME@IP:/home/wwwroot/acs.HOST.cn/appsettings.json E:\PATH</span><br><span class="line"></span><br><span class="line"><span class="comment"># nginx 配置acs 所有项目(HOSTboss.conf)</span></span><br><span class="line">usr/<span class="built_in">local</span>/nginx/conf/HOSTboss.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># nginx 配置路径</span></span><br><span class="line">usr/<span class="built_in">local</span>/nginx/conf/nginx.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 守护进程</span></span><br><span class="line">/etc/systemd/system/apps.acs.serive</span><br></pre></td></tr></table></figure>
+<h2 id="前期配置文件准备"><a href="#前期配置文件准备" class="headerlink" title="前期配置文件准备"></a>前期配置文件准备</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以acs.HOST.cn举例 （HOST）为主域名</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 项目路径</span></span><br><span class="line">/home/wwwroot/acs.xxx.cn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从服务器下载文件配置文件（需要本机使用pscp或其他支持ftp协议的程序）</span></span><br><span class="line">pscp USERNAME@IP:/home/wwwroot/acs.HOST.cn/appsettings.json E:\PATH</span><br><span class="line"></span><br><span class="line"><span class="comment"># nginx 配置acs 所有项目(HOSTboss.conf)</span></span><br><span class="line">usr/<span class="built_in">local</span>/nginx/conf/HOSTboss.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># nginx 配置路径</span></span><br><span class="line">usr/<span class="built_in">local</span>/nginx/conf/nginx.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 守护进程</span></span><br><span class="line">/etc/systemd/system/apps.acs.serive</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h1 id="配置nginx"><a href="#配置nginx" class="headerlink" title="配置nginx"></a>配置nginx</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建项目目录</span></span><br><span class="line">sudo mkdir /home/wwwroot/acs.HOST.cn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置文件夹权限为完全访问</span></span><br><span class="line">sudo chmod 777 acs.HOST.cn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到nginx目录</span></span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nginx</span><br><span class="line"><span class="built_in">cd</span> ./conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传项目配置</span></span><br><span class="line"><span class="comment"># C:\Users\Admin\Downloads\pscp.exe</span></span><br><span class="line">.\pscp.exe E:\PATH\HOSTboss.conf USERNAME@acs.HOST.cn:/home/wwwroot/acs.HOST.cn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 移动文件</span></span><br><span class="line">sudo mv HOSTboss.conf /usr/<span class="built_in">local</span>/nginx/conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查include</span></span><br><span class="line">sudo vim /usr/<span class="built_in">local</span>/nginx/conf/nginx.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查证书 HOST.cn.key  HOST.cn.pem</span></span><br><span class="line">ls /usr/<span class="built_in">local</span>/nginx/conf/cert</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试 重载nginx</span></span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nginx</span><br><span class="line"><span class="built_in">cd</span> ./sbin</span><br><span class="line">sudo ./nginx -t <span class="comment"># 测试</span></span><br><span class="line">sudo ./nginx -s reload <span class="comment"># 重载</span></span><br></pre></td></tr></table></figure>
-<h1 id="项目部署、守护进程"><a href="#项目部署、守护进程" class="headerlink" title="项目部署、守护进程"></a>项目部署、守护进程</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 上传已打包的项目到服务器</span></span><br><span class="line">.\pscp.exe E:\PATH\acs.HOST.cn\FILENAME.zip USERNAME@acs.HOST.cn:/home/wwwroot/acs.HOST.cn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压</span></span><br><span class="line"><span class="built_in">cd</span> /home/wwwroot/acs.HOST.cn</span><br><span class="line">sudo unzip -o FILENAME.zip</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查证书 HOST.pfx</span></span><br><span class="line">ls /home/wwwroot/acs.HOST.cn/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 移动守护进程配置文件到指定目录</span></span><br><span class="line">sudo mv ./apps.acs.service /etc/systemd/system</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义守护进程</span></span><br><span class="line">sudo systemctl <span class="built_in">enable</span> apps.acs.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启进程</span></span><br><span class="line">sudo systemctl start apps.acs.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看状态</span></span><br><span class="line">sudo systemctl status apps.acs.service</span><br></pre></td></tr></table></figure>
-<h1 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h1><p>web服务器只需部署nginx</p>
+<h2 id="配置nginx"><a href="#配置nginx" class="headerlink" title="配置nginx"></a>配置nginx</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建项目目录</span></span><br><span class="line">sudo mkdir /home/wwwroot/acs.HOST.cn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置文件夹权限为完全访问</span></span><br><span class="line">sudo chmod 777 acs.HOST.cn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到nginx目录</span></span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nginx</span><br><span class="line"><span class="built_in">cd</span> ./conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传项目配置</span></span><br><span class="line"><span class="comment"># C:\Users\Admin\Downloads\pscp.exe</span></span><br><span class="line">.\pscp.exe E:\PATH\HOSTboss.conf USERNAME@acs.HOST.cn:/home/wwwroot/acs.HOST.cn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 移动文件</span></span><br><span class="line">sudo mv HOSTboss.conf /usr/<span class="built_in">local</span>/nginx/conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查include</span></span><br><span class="line">sudo vim /usr/<span class="built_in">local</span>/nginx/conf/nginx.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查证书 HOST.cn.key  HOST.cn.pem</span></span><br><span class="line">ls /usr/<span class="built_in">local</span>/nginx/conf/cert</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试 重载nginx</span></span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nginx</span><br><span class="line"><span class="built_in">cd</span> ./sbin</span><br><span class="line">sudo ./nginx -t <span class="comment"># 测试</span></span><br><span class="line">sudo ./nginx -s reload <span class="comment"># 重载</span></span><br></pre></td></tr></table></figure>
+<h2 id="项目部署、守护进程"><a href="#项目部署、守护进程" class="headerlink" title="项目部署、守护进程"></a>项目部署、守护进程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 上传已打包的项目到服务器</span></span><br><span class="line">.\pscp.exe E:\PATH\acs.HOST.cn\FILENAME.zip USERNAME@acs.HOST.cn:/home/wwwroot/acs.HOST.cn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压</span></span><br><span class="line"><span class="built_in">cd</span> /home/wwwroot/acs.HOST.cn</span><br><span class="line">sudo unzip -o FILENAME.zip</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查证书 HOST.pfx</span></span><br><span class="line">ls /home/wwwroot/acs.HOST.cn/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 移动守护进程配置文件到指定目录</span></span><br><span class="line">sudo mv ./apps.acs.service /etc/systemd/system</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义守护进程</span></span><br><span class="line">sudo systemctl <span class="built_in">enable</span> apps.acs.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启进程</span></span><br><span class="line">sudo systemctl start apps.acs.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看状态</span></span><br><span class="line">sudo systemctl status apps.acs.service</span><br></pre></td></tr></table></figure>
+<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><p>web服务器只需部署nginx</p>
 <ul>
 <li>sso</li>
 <li>boss</li>
@@ -405,9 +417,9 @@
 </ul>
 <p>部署成功，对外开放三个地址</p>
 <ul>
-<li><a href="https://sso.HOST.cn" target="_blank" rel="noopener">https://sso.HOST.cn</a>  单点登录</li>
-<li><a href="https://boss.HOST.cn" target="_blank" rel="noopener">https://boss.HOST.cn</a> 门户网站</li>
-<li><a href="https://mgt.HOST.cn" target="_blank" rel="noopener">https://mgt.HOST.cn</a>  一体化管理中心</li>
+<li><code>https://sso.HOST.cn</code>  单点登录</li>
+<li><code>https://boss.HOST.cn</code> 门户网站</li>
+<li><code>https://mgt.HOST.cn</code>  一体化管理中心</li>
 </ul>
 
       
@@ -448,6 +460,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/17/control-pane/" rel="prev" title="vue技巧篇：我的浏览器也是“控制台”">
+                vue技巧篇：我的浏览器也是“控制台” <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -518,7 +534,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -537,7 +553,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -566,7 +584,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -630,7 +654,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前期配置文件准备"><span class="nav-number">1.</span> <span class="nav-text">前期配置文件准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置nginx"><span class="nav-number">2.</span> <span class="nav-text">配置nginx</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目部署、守护进程"><span class="nav-number">3.</span> <span class="nav-text">项目部署、守护进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#备注"><span class="nav-number">4.</span> <span class="nav-text">备注</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前期配置文件准备"><span class="nav-number">1.</span> <span class="nav-text">前期配置文件准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置nginx"><span class="nav-number">2.</span> <span class="nav-text">配置nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目部署、守护进程"><span class="nav-number">3.</span> <span class="nav-text">项目部署、守护进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备注"><span class="nav-number">4.</span> <span class="nav-text">备注</span></a></li></ol></div>
             
 
           </div>
@@ -663,7 +687,7 @@
 </div>
 
 
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
 
 
 
