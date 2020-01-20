@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言双向绑定 是 vue 的一大特点之一，使用也非常方便。在需要双向绑定的表单控件元素使用指令 v-model即可。 官方文档教程 —— 表单输入绑定（传送门）官方文档api —— v-model 指令（传送门） 注意了：到目前为止，双向绑定只是针对表单控件元素，并没有说明其他DOM元素，或者是自定义组件。 那我们要如何实现在组件（或者说其他DOM元素）的双向绑定呢？ 1&amp;lt;base-comp">
+<meta name="keywords" content="vue-skill">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue技巧篇：&quot;two-way-biding&quot;">
+<meta property="og:url" content="https://fifth-patient.github.io/2020/01/20/two-way-biding/index.html">
+<meta property="og:site_name" content="巫术师">
+<meta property="og:description" content="前言双向绑定 是 vue 的一大特点之一，使用也非常方便。在需要双向绑定的表单控件元素使用指令 v-model即可。 官方文档教程 —— 表单输入绑定（传送门）官方文档api —— v-model 指令（传送门） 注意了：到目前为止，双向绑定只是针对表单控件元素，并没有说明其他DOM元素，或者是自定义组件。 那我们要如何实现在组件（或者说其他DOM元素）的双向绑定呢？ 1&amp;lt;base-comp">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-01-20T10:08:55.035Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue技巧篇：&quot;two-way-biding&quot;">
+<meta name="twitter:description" content="前言双向绑定 是 vue 的一大特点之一，使用也非常方便。在需要双向绑定的表单控件元素使用指令 v-model即可。 官方文档教程 —— 表单输入绑定（传送门）官方文档api —— v-model 指令（传送门） 注意了：到目前为止，双向绑定只是针对表单控件元素，并没有说明其他DOM元素，或者是自定义组件。 那我们要如何实现在组件（或者说其他DOM元素）的双向绑定呢？ 1&amp;lt;base-comp">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://fifth-patient.github.io/2020/01/20/two-way-biding/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>vue技巧篇："two-way-biding" | 巫术师</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">巫术师</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">双手充满魔力</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fifth-patient.github.io/2020/01/20/two-way-biding/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chris Chen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="巫术师">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vue技巧篇："two-way-biding"
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-20 17:57:01 / 修改时间：18:08:55" itemprop="dateCreated datePublished" datetime="2020-01-20T17:57:01+08:00">2020-01-20</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vue/" itemprop="url" rel="index"><span itemprop="name">vue</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><strong>双向绑定</strong> 是 <code>vue</code> 的一大特点之一，使用也非常方便。<br>在需要双向绑定的<strong>表单控件元素</strong>使用指令 <code>v-model</code>即可。</p>
+<p>官方文档教程 —— 表单输入绑定（<a href="https://cn.vuejs.org/v2/guide/forms.html" target="_blank" rel="noopener">传送门</a>）<br>官方文档api —— v-model 指令（<a href="https://cn.vuejs.org/v2/api/#v-model" target="_blank" rel="noopener">传送门</a>）</p>
+<p>注意了：到目前为止，<strong>双向绑定只是针对表单控件元素，并没有说明其他DOM元素，或者是自定义组件。</strong></p>
+<p>那我们要如何实现在组件（或者说其他DOM元素）的双向绑定呢？</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">base-components</span> <span class="attr">v-model</span>=<span class="string">"fieldValue"</span>&gt;</span><span class="tag">&lt;/<span class="name">base-components</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="v-model-浅析"><a href="#v-model-浅析" class="headerlink" title="v-model 浅析"></a><code>v-model</code> 浅析</h2><blockquote>
+<p>v-model 本质上不过是语法糖。它负责监听用户的输入事件以更新数据，并对一些极端场景进行一些特殊处理。<br>v-model 会忽略所有表单元素的 value、checked、selected attribute 的初始值而总是将 Vue 实例的数据作为数据来源。你应该通过 JavaScript 在组件的 data 选项中声明初始值。<br>v-model 在内部为不同的输入元素使用不同的属性并抛出不同的事件：</p>
+<ul>
+<li>text 和 textarea 元素使用 value 属性和 input 事件；</li>
+<li>checkbox 和 radio 使用 checked 属性和 change 事件；  </li>
+<li>select 字段将 value 作为 prop 并将 change 作为事件。</li>
+</ul>
+</blockquote>
+<p>节选几段官方文档的资料，不难察觉<code>v-model</code> 会<strong>占用一个 <code>prop</code> 属性和一个 <code>$emit</code> 事件</strong>。<br>如果有冲突，也是可以更改的。</p>
+<p>如果还是好奇 <code>v-model</code>的实现原理，我可以告诉你大概是这样。</p>
+<blockquote>
+<p><strong>双向绑定基于getter/setter 结合观察者模式实现</strong><br>getter/setter指<code>Object.defineProperty</code>遍历vue实例的<code>data</code>选项<br>观察者模式是js的一种设计模型，可以实现发布订阅功能</p>
+</blockquote>
+<h2 id="组件使用双向绑定（基本类型版）"><a href="#组件使用双向绑定（基本类型版）" class="headerlink" title="组件使用双向绑定（基本类型版）"></a>组件使用双向绑定（基本类型版）</h2><!-- 组件使用双向绑定并不罕见，很多vue的ui框架包装的组件都支持直接使用`v-model`指令。 -->
+<p>有了相应的资料，我们可以开工了。准备一个组件 <code>base-input.vue</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'base-input'</span>,</span><br><span class="line">  props: &#123;</span><br><span class="line">    value: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      fieldValue: <span class="keyword">this</span>.value <span class="comment">// 初始化赋值</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    value (newVal) &#123;</span><br><span class="line">      <span class="keyword">this</span>.fieldValue = newVal <span class="comment">// 监听props（外部）更新，赋值给data（内部）</span></span><br><span class="line">    &#125;,</span><br><span class="line">    fieldValue () &#123;</span><br><span class="line">      <span class="keyword">this</span>.$emit(<span class="string">'input'</span>, <span class="keyword">this</span>.fieldValue) <span class="comment">// data（内部）更新，抛出到外部</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">v-model</span>=<span class="string">"fieldValue"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>有几个注意点要说明下：</p>
+<ol>
+<li><code>fieldValue</code>  必须初始化赋值为 <code>props</code> 的 <code>value</code></li>
+<li>初始化页面时 <code>watch</code> 并不执行</li>
+<li>内部更新，触发 <code>fieldValue</code> 监听函数</li>
+<li>外部更新，触发 <code>value</code>监听函数</li>
+</ol>
+<ul>
+<li>base-input 源码 <a href="https://github.com/Fifth-Patient/stardust/blob/master/src/views/skill/two-way-binding-base-type/base-input/base-input.vue" target="_blank" rel="noopener">传送门</a></li>
+<li>示例 <a href="https://github.com/Fifth-Patient/stardust/blob/master/src/views/skill/two-way-binding-base-type/two-way-binding-base-type.vue" target="_blank" rel="noopener">传送门</a></li>
+</ul>
+<h3 id="value-与v-model"><a href="#value-与v-model" class="headerlink" title=":value 与v-model"></a><strong><code>:value</code> 与<code>v-model</code></strong></h3><p>因为之前被这两个搞混过，不明白之间的联系和区别，这里单独拿出来讲一下。</p>
+<ul>
+<li><code>:value</code> 是绑定一个<code>prop value</code> 给组件，实现外部数据传入内部， <strong>单向绑定</strong></li>
+<li><code>v-model</code> 是<strong>双向绑定</strong>，默认占用<code>prop value</code> 属性和一个 <code>$emit input  事件</code>;<br>在<code>:value</code> 的基础上<code>$emit input</code>实现内部数据抛出外部，从而外部、内部数据达成同步且外内均可更改。</li>
+</ul>
+<p>把 <code>base-input v-model=&quot;inputValue&quot;&gt;&lt;/base-input&gt;</code> 换成 <code>:value=&quot;inputValue&quot;</code>试试？</p>
+<p><em>我们也将在下一节更改指令默认使用的<code>prop</code> 属性 和<code>$emit</code> 事件</em></p>
+<p><strong>可其实这种方式只支持js的基本类型，像对象或者数组的引用类型，这样处理是不够的，所以我们需要对现有的双向绑定方式进行升级。</strong></p>
+<h2 id="组件使用双向绑定（引用类型版）"><a href="#组件使用双向绑定（引用类型版）" class="headerlink" title="组件使用双向绑定（引用类型版）"></a>组件使用双向绑定（引用类型版）</h2><p>准备另一个组件：<code>base-div.vue</code></p>
+<p>把<code>base-input.vue</code> 的代码复制过来，组件名，类名什么的这些标识信息该改的就改一改。</p>
+<p>然后可能有的朋友到这里会把 <code>prop value</code> 的 <code>type</code> 改成 <code>Object</code>，这只是第一步而已。</p>
+<p>因为引用类型的特性，我们手动给内部变量赋值，会更改其引用地址，故相当于重新初始化了一个变量。<br>这里会触发另一个watch函数，而另一个watch也具备给内部变量赋值的能力；</p>
+<p>如果不特殊处理，这两个watch 函数触发其中一个，就会不断调用另一条，造曾死循环。<br>所以我们需要判断当内外部变量相等的时候，就不赋值了。嗯，<strong>判断两个对象相等</strong>。</p>
+<p><strong>判断两个对象相等可能有点尴尬， 那我们把两个对象序列化为JSON 字符串就可以了。</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">JSON</span>.stringify(obj1) === <span class="built_in">JSON</span>.stringify(obj2);</span><br></pre></td></tr></table></figure>
+<p>技术点已经准备够了，我们足够实现用<code>v-model</code>绑定一个对象了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">  props: &#123;</span><br><span class="line">    value: &#123;</span><br><span class="line">      type: [ <span class="built_in">Object</span>, <span class="built_in">Array</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      fieldValue: <span class="keyword">this</span>.value,</span><br><span class="line">      fieldValueStringify: <span class="built_in">JSON</span>.stringify(<span class="keyword">this</span>.value) <span class="comment">// 保存外部传入的变量快照，将在监听器中做比较使用</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    value: &#123;</span><br><span class="line">      deep: <span class="literal">true</span>, <span class="comment">// 深度监听</span></span><br><span class="line">      handler (newVal) &#123;</span><br><span class="line">        <span class="keyword">const</span> currentValue = <span class="built_in">JSON</span>.stringify(newVal)</span><br><span class="line">        <span class="comment">// 外部传入的变量与内部变量比较</span></span><br><span class="line">        <span class="comment">// 不相等，内部变量方可赋值为this.value</span></span><br><span class="line">        <span class="comment">// * 内部变量赋值，将会触发fieldValue监听函数</span></span><br><span class="line">        <span class="comment">// 且此时应更新fieldValue 对象字符串快照</span></span><br><span class="line">        <span class="keyword">if</span> (currentValue !== <span class="keyword">this</span>.fieldValue) &#123;</span><br><span class="line">          <span class="keyword">this</span>.fieldValue = <span class="built_in">JSON</span>.parse(currentValue)</span><br><span class="line">          <span class="keyword">this</span>.fieldValueStringify = currentValue</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    fieldValue: &#123;</span><br><span class="line">      deep: <span class="literal">true</span>, <span class="comment">// 为什么要使用深度监听呢？</span></span><br><span class="line">      handler (newVal) &#123;</span><br><span class="line">        <span class="comment">// 自己改变内部变量，或者因外部变量更新手动赋值内部变量</span></span><br><span class="line">        <span class="comment">// 这个函数都会被触发</span></span><br><span class="line">        <span class="comment">// 要实现的是内部与外部变量同步，所以快照才是保存外部变量</span></span><br><span class="line">        <span class="comment">// 1.当外部变量改动，会先调用 watch value，此时内外部变量同步</span></span><br><span class="line">        <span class="comment">//   这时不需要抛出事件，否则出现死循环</span></span><br><span class="line">        <span class="comment">// 2.当内部变量改动，会先调用 watch fieldValue</span></span><br><span class="line">        <span class="comment">//   抛出事件，外部的v-model又会自动更新内部的value</span></span><br><span class="line">        <span class="comment">//   从而触发 watch value</span></span><br><span class="line">        <span class="comment">//  （这里触发watch value了，可以回去看看1）</span></span><br><span class="line">        <span class="comment">//   如果你不会兜兜转，那我想你应该feel到了整个更新流程</span></span><br><span class="line">        <span class="comment">// **如果被兜住了，先理解外部变量的改动，再理解内部变量的改动</span></span><br><span class="line">        <span class="keyword">const</span> currentValue = <span class="built_in">JSON</span>.stringify(newVal)</span><br><span class="line">        <span class="keyword">if</span> (currentValue !== <span class="keyword">this</span>.fieldValueStringify) &#123;</span><br><span class="line">          <span class="keyword">this</span>.$emit(<span class="string">'input'</span>, <span class="built_in">JSON</span>.parse(currentValue))</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>base-div 源码 <a href="https://github.com/Fifth-Patient/stardust/blob/master/src/views/skill/two-way-binding-reference-type/base-div/base-div.vue" target="_blank" rel="noopener">传送门</a></li>
+<li>示例 <a href="https://github.com/Fifth-Patient/stardust/blob/master/src/views/skill/two-way-binding-reference-type/two-way-binding-reference-type.vue" target="_blank" rel="noopener">传送门</a></li>
+</ul>
+<p>接下来我们不使用 <code>prop value</code> <code>$emit input</code>了，我们使用 <code>prop insert</code> <code>$emit output</code>。</p>
+<p>直接在<code>base-div</code> 改动吧，其实也不复杂。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;  </span><br><span class="line">  model: &#123;</span><br><span class="line">    prop: <span class="string">'insert'</span>,</span><br><span class="line">    event: <span class="string">'output'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  props: &#123;</span><br><span class="line">    insert: &#123;</span><br><span class="line">      type: [<span class="built_in">Object</span>, <span class="built_in">Array</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      fieldValue: <span class="keyword">this</span>.insert,</span><br><span class="line">      fieldValueStringify: <span class="built_in">JSON</span>.stringify(<span class="keyword">this</span>.insert) <span class="comment">// 保存外部传入的变量快照，将在监听器中做比较使用</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    insert: &#123;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    &#125;,  </span><br><span class="line">    fieldValue: &#123;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">      <span class="keyword">this</span>.$emit(<span class="string">'output'</span>, <span class="built_in">JSON</span>.parse(currentValue))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在外部使用 <code>@output</code> 的时候，会发现外部更新不触发 <code>output</code> 事件。<br>刚开始以为组件实现还是有问题，后面想想不对，外部更新没必要抛出事件。<br>外部更新，可以在外部使用 watch 函数，这里确实不管内部组件的事情了。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">base-div</span> <span class="attr">v-model</span>=<span class="string">"formValue"</span> @<span class="attr">output</span>=<span class="string">"handleOutput"</span>&gt;</span><span class="tag">&lt;/<span class="name">base-div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>今天我们重新了解了 <code>v-model</code> 只针对于表单控件数据的双向绑定，并且会默认占用一个属性和一个事事件。<br><strong>也通过v-model，我们得以在自己的组件实现双向绑定，基本类型和引用类型的处理机制也不太一样。</strong></p>
+<p>工作中也经常用到这种需要自定义双向绑定的场景，有时候写得次数太多，就想着能不能抽象出来复用。<br><strong>想想 <code>mixins</code> ， <code>extend</code> 都不太适合，因为会固定占用prop data 事件， 容易起冲突。</strong><br>目前觉得指令可以一试，不过还需要好好研究一下，希望下次的更新能定义一条全局指令——<code>base-model</code>。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vue-skill/" rel="tag"># vue-skill</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/17/control-pane/" rel="next" title="vue技巧篇：我的浏览器也是“控制台”">
+                <i class="fa fa-chevron-left"></i> vue技巧篇：我的浏览器也是“控制台”
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/avatar.jpg" alt="Chris Chen">
+            
+              <p class="site-author-name" itemprop="name">Chris Chen</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Fifth-Patient" title="GitHub &rarr; https://github.com/Fifth-Patient" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:1923407743@qq.com" title="E-Mail &rarr; mailto:1923407743@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-model-浅析"><span class="nav-number">2.</span> <span class="nav-text">v-model 浅析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件使用双向绑定（基本类型版）"><span class="nav-number">3.</span> <span class="nav-text">组件使用双向绑定（基本类型版）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#value-与v-model"><span class="nav-number">3.1.</span> <span class="nav-text">:value 与v-model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件使用双向绑定（引用类型版）"><span class="nav-number">4.</span> <span class="nav-text">组件使用双向绑定（引用类型版）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">5.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chris Chen</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1276849986&web_id=1276849986"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="100,100,100" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
