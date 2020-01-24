@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>vue技巧篇：组件通讯</title>
-    <url>//component-communication/</url>
+    <url>//post/component-communication/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><strong>组件化</strong>也是vue的一大特点之一，组件是组成vue项目的基本单位。<br>一个组件可以做什么？ 这取决于组件的设计，组件一般由以下几点组成：</p>
 <ul>
 <li>选项</li>
@@ -155,7 +155,7 @@
   </entry>
   <entry>
     <title>vue技巧篇：自定义双向绑定</title>
-    <url>//two-way-binding/</url>
+    <url>//post/two-way-binding/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><strong>双向绑定</strong> 是 <code>vue</code> 的一大特点之一，使用也非常方便。<br>在需要双向绑定的<strong>表单控件元素</strong>使用指令 <code>v-model</code>即可。</p>
 <p>官方文档教程 —— 表单输入绑定（<a href="https://cn.vuejs.org/v2/guide/forms.html" target="_blank" rel="noopener">传送门</a>）<br>官方文档api —— v-model 指令（<a href="https://cn.vuejs.org/v2/api/#v-model" target="_blank" rel="noopener">传送门</a>）</p>
 <p>注意了：到目前为止，<strong>双向绑定只是针对表单控件元素，并没有说明其他DOM元素，或者是自定义组件。</strong></p>
@@ -228,7 +228,7 @@
   </entry>
   <entry>
     <title>vue技巧篇：我的浏览器也是“控制台”</title>
-    <url>//control-pane/</url>
+    <url>//post/control-pane/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>写代码少不了，调试最简单方便的方法是控制台输出信息，如js的 <code>control.log</code>。<br>可有时候我们要监听的变量是改动频繁，可能要多次使用<code>control.log</code>，控制台信息太多看得也容易乱。<br>有一次查阅资料的时候，看到其他开发者使用<code>pre</code>标签直接在页面上打印变量，突然受到了一点感悟。</p>
 <h2 id="pre-和-data"><a href="#pre-和-data" class="headerlink" title="pre 和 $data"></a>pre 和 $data</h2><p>html的<code>pre</code>标签并不常用，它可以保留原格式（空格和换行符），常用于表示源代码。<br>有了<code>pre</code>我们很容易在页面上输出源码。此外，还需要vue的声明式渲染 —— <code>｛｛ x ｝｝</code> 或者是 <code>v-text</code> 指令。<br>以及 vue 的 <code>$data</code> 实例属性，其实引用的是<code>data</code>对象属性的访问。</p>
 <p><em>附：博客系统，不支持双括号，这里用 <code>v-text</code>代替，大部分情况下两者可以互换</em></p>
@@ -294,7 +294,7 @@
   </entry>
   <entry>
     <title>项目部署</title>
-    <url>//deploy/</url>
+    <url>//post/deploy/</url>
     <content><![CDATA[<p>工作中实操过的项目部署记录，使用的是Ubuntu系统，nignx 和 C# 的运行环境均已安装。</p>
 <h2 id="前期配置文件准备"><a href="#前期配置文件准备" class="headerlink" title="前期配置文件准备"></a>前期配置文件准备</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 以acs.HOST.cn举例 （HOST）为主域名</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 项目路径</span></span><br><span class="line">/home/wwwroot/acs.xxx.cn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从服务器下载文件配置文件（需要本机使用pscp或其他支持ftp协议的程序）</span></span><br><span class="line">pscp USERNAME@IP:/home/wwwroot/acs.HOST.cn/appsettings.json E:\PATH</span><br><span class="line"></span><br><span class="line"><span class="comment"># nginx 配置acs 所有项目(HOSTboss.conf)</span></span><br><span class="line">usr/<span class="built_in">local</span>/nginx/conf/HOSTboss.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># nginx 配置路径</span></span><br><span class="line">usr/<span class="built_in">local</span>/nginx/conf/nginx.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 守护进程</span></span><br><span class="line">/etc/systemd/system/apps.acs.serive</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -316,7 +316,7 @@
   </entry>
   <entry>
     <title>vue的一些技巧</title>
-    <url>//vue-skill/</url>
+    <url>//post/vue-skill/</url>
     <content><![CDATA[<h2 id="v-if-获取-refs-问题"><a href="#v-if-获取-refs-问题" class="headerlink" title="v-if 获取 refs 问题"></a><code>v-if</code> 获取 <code>refs</code> 问题</h2><p>先简单介绍下这两个指令：</p>
 <ul>
 <li><code>v-if</code> 条件渲染</li>
@@ -355,7 +355,7 @@
   </entry>
   <entry>
     <title>原型链是如何贯穿js的</title>
-    <url>//prototype/</url>
+    <url>//post/prototype/</url>
     <content><![CDATA[<blockquote>
 <p>原型链是js的大动脉。</p>
 </blockquote>
@@ -508,7 +508,7 @@
   </entry>
   <entry>
     <title>es6主要特性小结</title>
-    <url>//es6-main/</url>
+    <url>//post/es6-main/</url>
     <content><![CDATA[<p>ECMAScript 6（以下简称ES6）是JavaScript语言的下一代标准。因为当前版本的ES6是在2015年发布的，所以又称ECMAScript 2015。</p>
 <p>Babel是一个广泛使用的ES6转码器，可以将ES6代码转为ES5代码，从而在现有环境执行。</p>
 <p>let：<code>let</code>实际上为JavaScript新增了块级作用域。用它所声明的变量，只在<code>let</code>命令所在的代码块（花括号）内有效；与<code>var</code>的区别是，<code>var</code>用来做循环的计数变量，会泄露成全局变量，在外部调用的值是循环完成后的值。</p>
@@ -538,7 +538,7 @@
   </entry>
   <entry>
     <title>web安全基础</title>
-    <url>//web-safe/</url>
+    <url>//post/web-safe/</url>
     <content><![CDATA[<h1 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h1><p>通过把SQL命令插入到web表单提交或者页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令</p>
 <p><strong>防范SQL注入</strong><br>1.校验用户输入的参数，限制其长度或转义单引号或双连字符<br>2.使用参数化SQL或直接使用存储过程进行数据查询存取<br>3.每个应用使用单独的权限有限的数据库连接，不使用管理器权限连接数据库<br>4.机密信息不明文存放，加密或hash掉密码和敏感信息</p>
 <h1 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h1><p>跨站脚本攻击(Cross Site Scripting)，缩写为XSS。恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页之时，嵌入其中Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。</p>
@@ -585,7 +585,7 @@
   </entry>
   <entry>
     <title>浏览器结构</title>
-    <url>//browser/</url>
+    <url>//post/browser/</url>
     <content><![CDATA[<p>简单来说浏览器可以分为两个部分，shell+内核，其中shell的种类比较多，内核的种类则比较少。</p>
 <p>Shell是指浏览器外壳：菜单、工具栏等；主要提供给用户操作，参数设置等，调用内核实现各种功能。</p>
 <p>内核是浏览器的核心，基于标记语言显示内容的程序或模块。可分两部分，渲染引擎和JS引擎，负责渲染网页内容，计算网页的显示方式，不同内核的渲染效果不同。JS引擎则执行javascript实现网页的动态效果。</p>
@@ -599,7 +599,7 @@
   </entry>
   <entry>
     <title>跨域</title>
-    <url>//cross-domain/</url>
+    <url>//post/cross-domain/</url>
     <content><![CDATA[<h3 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h3><p>源：源由协议，域名和端口号组成，若url地址的协议、域名和端口号均相同则属于同源。</p>
 <p>同源策略：浏览器的一个安全功能，不同源的客户端脚本在没有明确授权的情况下，不能读写对象自资源。其阻止的是数据的接受而不是请求的发送</p>
 <p>不受同源策略限制：<br>页面中的链接，重定向以及表单提交；<br>可以引入跨域资源，但js不能读写加载内容。 如嵌入到页面中的<code>&lt;script src=&quot;...&quot;&gt;&lt;/script&gt;</code>，<code>&lt;img&gt;</code>，<code>&lt;link&gt;</code>，<code>&lt;iframe&gt;</code>等。</p>
@@ -636,7 +636,7 @@
   </entry>
   <entry>
     <title>从HTTP到互联网协议，浏览器与服务器之间不得不说的故事</title>
-    <url>//http/</url>
+    <url>//post/http/</url>
     <content><![CDATA[<blockquote>
 <p>浏览器与服务器之间美好约定</p>
 </blockquote>
@@ -887,7 +887,7 @@
   </entry>
   <entry>
     <title>前端常见缓存机制</title>
-    <url>//web-cache/</url>
+    <url>//post/web-cache/</url>
     <content><![CDATA[<blockquote>
 <p>缓存是捷径，使http抄近道</p>
 </blockquote>
@@ -937,7 +937,7 @@
   </entry>
   <entry>
     <title>嗜夜</title>
-    <url>//killing-night/</url>
+    <url>//post/killing-night/</url>
     <content><![CDATA[<p>夜晚的钟声慢慢敲起。<br>原始丛林狼群双眸诡异的光芒。<br>无处安放的灵魂也回归平静。</p>
 <p>教徒合诵古老冗长的咒语。<br>祭坛的封印一步步被封开。<br>古墓冰尸发出阵阵哀嚎。<br>锁链断裂，癫狂抑制不住。<br>屠杀活动的序幕早已开始。</p>
 ]]></content>
@@ -947,7 +947,7 @@
   </entry>
   <entry>
     <title>用信鸽来解释 HTTPS</title>
-    <url>//https/</url>
+    <url>//post/https/</url>
     <content><![CDATA[<p>2019/01/09 | 分类： 基础技术 | 2 条评论 | 标签： https</p>
 <blockquote>
 <p>译文出处： <a href="https://www.oschina.net/translate/https-explained-with-carrier-pigeons" target="_blank" rel="noopener">oschina</a> |  原文出处：<a href="https://medium.freecodecamp.org/https-explained-with-carrier-pigeons-7029d2193351" target="_blank" rel="noopener">freecodecamp</a></p>
@@ -1001,7 +1001,7 @@
   </entry>
   <entry>
     <title>不再性感，不再赚钱，数据科学的时代变了</title>
-    <url>//database/</url>
+    <url>//post/database/</url>
     <content><![CDATA[<blockquote>
 <p>作者：Vicki Boykis | 译者：阿拉丁 </p>
 </blockquote>
@@ -1155,7 +1155,7 @@ UVA（美国弗吉尼亚大学）很自豪地宣布开设数据科学学院的�
   </entry>
   <entry>
     <title>JavaScript ES2019 中的 8 个新功能</title>
-    <url>//ES2019/</url>
+    <url>//post/ES2019/</url>
     <content><![CDATA[<p>JavaScript 一直在不断改进和添加更多新功能。TC39 已经完成，并批准了 ES2019 的 8 项新功能。这个过程包含了 5 个阶段：</p>
 <ul>
 <li>第 0 阶段：稻草人</li>
