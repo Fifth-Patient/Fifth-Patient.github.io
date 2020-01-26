@@ -55,12 +55,12 @@
 <meta property="og:site_name" content="巫术师">
 <meta property="og:description" content="前言组件化也是vue的一大特点之一，组件是组成vue项目的基本单位。一个组件可以做什么？ 这取决于组件的设计，组件一般由以下几点组成：  选项 实例属性/方法 生命周期 全局API 指令 导入的其他组件  组件是可复用的vue实例，可以复用，导入导出，组成组件化系统。 vue的组件都是保持相对独立的关系，可是又可以进行相互依赖（导入导出机制）；这种规范下，实际开发又难免会出现组件之间传递数据、转发">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://fifth-patient.github.io/component-communication/vuex-Flux.png">
+<meta property="og:image" content="https://fifth-patient.github.io/post/component-communication/vuex-Flux.png">
 <meta property="og:updated_time" content="2020-01-24T15:57:36.246Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue技巧篇：组件通讯">
 <meta name="twitter:description" content="前言组件化也是vue的一大特点之一，组件是组成vue项目的基本单位。一个组件可以做什么？ 这取决于组件的设计，组件一般由以下几点组成：  选项 实例属性/方法 生命周期 全局API 指令 导入的其他组件  组件是可复用的vue实例，可以复用，导入导出，组成组件化系统。 vue的组件都是保持相对独立的关系，可是又可以进行相互依赖（导入导出机制）；这种规范下，实际开发又难免会出现组件之间传递数据、转发">
-<meta name="twitter:image" content="https://fifth-patient.github.io/component-communication/vuex-Flux.png">
+<meta name="twitter:image" content="https://fifth-patient.github.io/post/component-communication/vuex-Flux.png">
 
 <link rel="canonical" href="https://fifth-patient.github.io/post/component-communication/">
 
@@ -310,7 +310,7 @@
 <li>不能直接改变 store 中的状态，若想改变，唯一途径就是显式地提交 (commit) mutation。</li>
 </ul>
 <p>一个store可以包含<br>state：储存状态   单一状态树<br>action： 提交mutation方法，可执行异步操作<br>mutation：更改store状态，必须是同步操作<br>getter：从state派生状态，返回值会根据依赖缓存<br>modules：将store分割成模块</p>
-<p><img src="/component-communication/./vuex-Flux.png" alt="vuex-Flux"></p>
+<p><img src="/post/component-communication/./vuex-Flux.png" alt="vuex-Flux"></p>
 <p>简单分析下这张图：</p>
 <ol>
 <li>State 直接渲染在vue组件</li>
@@ -439,7 +439,10 @@
     <a href="/post/two-way-binding/" rel="prev" title="vue技巧篇：自定义双向绑定">
       <i class="fa fa-chevron-left"></i> vue技巧篇：自定义双向绑定
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/post/lifecycle/" rel="next" title="vue技巧篇：生命周期">
+      vue技巧篇：生命周期 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -516,7 +519,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

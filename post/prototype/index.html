@@ -54,15 +54,15 @@
 <meta property="og:site_name" content="巫术师">
 <meta property="og:description" content="原型链是js的大动脉。  导读js的原型链难以避免要牵扯到面向对象，这里我们先简单说说原型还有原型链。之后我们说到面向对象的演变过程，会再次涉及到原型链，还有更多的东西。相信看完的读者会对JavaScript会有更深的认识。 原型对象本小节意在介绍js中几位朋友，读者只需要记住有它们的存在就行了，毕竟这几位朋友性格有点隐匿。 首先，我们要明白，声明一个对象，哪怕是空属性，js也生成一些内置的属性">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://fifth-patient.github.io/prototype/obj_attr.jpg">
-<meta property="og:image" content="https://fifth-patient.github.io/prototype/obj_1__proto__.jpg">
-<meta property="og:image" content="https://fifth-patient.github.io/prototype/proto_egg.jpg">
-<meta property="og:image" content="https://fifth-patient.github.io/prototype/proto_link.jpg">
+<meta property="og:image" content="https://fifth-patient.github.io/post/prototype/obj_attr.jpg">
+<meta property="og:image" content="https://fifth-patient.github.io/post/prototype/obj_1__proto__.jpg">
+<meta property="og:image" content="https://fifth-patient.github.io/post/prototype/proto_egg.jpg">
+<meta property="og:image" content="https://fifth-patient.github.io/post/prototype/proto_link.jpg">
 <meta property="og:updated_time" content="2020-01-24T15:57:36.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="原型链是如何贯穿js的">
 <meta name="twitter:description" content="原型链是js的大动脉。  导读js的原型链难以避免要牵扯到面向对象，这里我们先简单说说原型还有原型链。之后我们说到面向对象的演变过程，会再次涉及到原型链，还有更多的东西。相信看完的读者会对JavaScript会有更深的认识。 原型对象本小节意在介绍js中几位朋友，读者只需要记住有它们的存在就行了，毕竟这几位朋友性格有点隐匿。 首先，我们要明白，声明一个对象，哪怕是空属性，js也生成一些内置的属性">
-<meta name="twitter:image" content="https://fifth-patient.github.io/prototype/obj_attr.jpg">
+<meta name="twitter:image" content="https://fifth-patient.github.io/post/prototype/obj_attr.jpg">
 
 <link rel="canonical" href="https://fifth-patient.github.io/post/prototype/">
 
@@ -264,13 +264,13 @@
 <p>首先，我们要明白，声明一个对象，哪怕是空属性，js也生成一些内置的属性和方法。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 两种方法声明对象 */</span></span><br><span class="line"><span class="comment">// 对象直接量</span></span><br><span class="line"><span class="keyword">var</span> obj_1 = &#123;&#125;;</span><br><span class="line"><span class="comment">// new关键字声明对象</span></span><br><span class="line"><span class="keyword">var</span> obj_2 = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在Object的原型对象添加属性</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.attr = <span class="string">'myarr'</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj_1); <span class="comment">// &#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(obj_2); <span class="comment">// &#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// js中的恒等符号对函数来说只比较引用</span></span><br><span class="line"><span class="comment">// obj_1.valuOf函数来源于Object.valueOf</span></span><br><span class="line"><span class="comment">// 更准确来说是Object.protoype.valueOf</span></span><br><span class="line"><span class="built_in">console</span>.log(obj_1.valueOf === <span class="built_in">Object</span>.valueOf); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// obj_1并未声明attr属性，通过Object.prototype继承得到attr属性</span></span><br><span class="line"><span class="built_in">console</span>.log(obj_1.attr); <span class="comment">// myarr</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<p><img src="/prototype/./obj_attr.jpg" alt="空对象属性的prototype"></p>
+<p><img src="/post/prototype/./obj_attr.jpg" alt="空对象属性的prototype"></p>
 <p align="center"><em>firefox控制台中空对象仍然有<code>prototype</code>属性</em></p>
 
 <p>  误区：每个浏览器的控制台输出都不太一样，Chrome和Edge并不显示<code>prototype</code>属性，因为我们并没有给obj_1的<code>prototype</code>属性定义任何属性和方法。<br>  由于历代浏览器的更新和ECMAScript的修正，有时难以体现<code>prototype</code>和<code>__proto__</code>的存在，但我们的js代码能体现出它们的确是真实存在的。</p>
 <p><code>prototype</code>在这里称之为<code>obj_1</code>的原型对象，通过对象直接量和<code>new</code>关键字声明的对象都具有原型对象，继承自<code>Object.prototype</code>；几乎每个对象都有其原型对象，null是特例。</p>
 <h2 id="双对象实现原型继承"><a href="#双对象实现原型继承" class="headerlink" title="双对象实现原型继承"></a>双对象实现原型继承</h2><p>需要原型对象是为了实现继承，但有了原型对象我们还无法把<code>obj_1</code>与<code>Object.prototype</code>链接起来。<br>我们还需要另一个对象：<code>__proto__</code>，该属性能指向构造函数的原形属性<code>constructor</code>。<br>一些老版本浏览器不识别，有些无法识别其内部信息，但不影响程序的正常运行。</p>
-<p><img src="/prototype/./obj_1__proto__.jpg" alt="obj_1的__proto__"></p>
+<p><img src="/post/prototype/./obj_1__proto__.jpg" alt="obj_1的__proto__"></p>
 <p align="center"><em><code>obj_1</code>的<code>__proto__</code>对象, 该属性下又有<code>__proto__</code>和<code>constructor</code>属性</em></p>
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">obj_1.__proto__ === <span class="built_in">Object</span>.prototype  <span class="comment">// true</span></span><br><span class="line">obj_1.__proto__.constructor === <span class="built_in">Object</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
@@ -293,11 +293,11 @@
 <li><code>Engineer</code>的原型指向<code>People</code>的实例对象</li>
 </ol>
 <p>我们再来一张图说明其关系</p>
-<p><img src="/prototype/./proto_egg.jpg" alt="proto_egg"><br><em>这个.. 一盘煎蛋？？</em></p>
+<p><img src="/post/prototype/./proto_egg.jpg" alt="proto_egg"><br><em>这个.. 一盘煎蛋？？</em></p>
 <p>好伐，煎蛋就煎蛋，来，我们继续。</p>
 <p>请注意重点：<strong><code>Programmer</code>并无定义<code>type</code>, <code>name</code>属性，<code>Programmer</code>的<code>showMsg</code>中能显示<code>this.name</code> <code>this.type</code>分别来源于<code>Engineer</code>和<code>Programmer</code>的原型对象。</strong><br>很巧妙的一种属性搜索机制，<strong>自身的构造函数没有该属性，就从自身的原型对象中找，如果父类的原型对象没有，那么继续往父类的父类原型对象找，找到了就赋值；或直到没有父类，返回<code>undefined</code>；</strong>属性如此，方法也是同样的赋值机制。</p>
 <p>说到底属性搜索机制就是原型链的一种具体体现，我们再上一张图。</p>
-<p><img src="/prototype/./proto_link.jpg" alt="proto_link"></p>
+<p><img src="/post/prototype/./proto_link.jpg" alt="proto_link"></p>
 <p>所以原型链的关键字是<strong>继承</strong>和<strong>原型对象</strong>！！</p>
 <blockquote>
 <p><strong>原型链：使用<code>prototype</code>和<code>_proto_</code>两个对象实现继承，由于是基于原型对象实现调用链，又称之为原型链。</strong></p>
@@ -519,7 +519,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
