@@ -1,6 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>git笔记</title>
+    <url>//post/git-note/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>部分重要概念。</p>
+<ul>
+<li>HEAD</li>
+<li>Working Directory / Repository / Stage</li>
+<li>branch</li>
+<li>remote</li>
+<li>tag</li>
+</ul>
+<a id="more"></a>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol>
+<li>打开Git Bash，配置用户名字和邮件地址</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">"Your Name"</span></span><br><span class="line">$ git config --global user.email <span class="string">"email@example.com"</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>本机创建SSH，Github配置SSH</li>
+</ol>
+<p>一路回车</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"youremail@example.com"</span></span><br></pre></td></tr></table></figure>
+<p><code>win+r</code>输入<code>%USERPROFILE%/.ssh</code>,成功打开且有以下文件则成功.</p>
+<ol>
+<li>id_ras：私钥，不能泄露</li>
+<li>id_ras.pub：公钥，可以告诉任何人</li>
+</ol>
+<p><strong>以下操作需要Github账号，若无需注册。</strong></p>
+<p>添加SSH密钥 <a href="https://github.com/settings/keys/new" target="_blank" rel="noopener">传送门</a></p>
+<p><img src="/post/git-note/github-new-ssh.png" alt="github-new-ssh.png"></p>
+<ol start="3">
+<li>测试配置</li>
+</ol>
+<ul>
+<li>Github新建仓库，初始化</li>
+<li>本地clone下来，修改后提交，查看提交者信息是否正确</li>
+<li>推送至远端仓库，输入密码</li>
+<li>再次修改后提交，若SHH配置成功，无须输入密码</li>
+</ul>
+<p>操作省略..</p>
+<h2 id="文件状态"><a href="#文件状态" class="headerlink" title="文件状态"></a>文件状态</h2><table>
+<thead>
+<tr>
+<th>简写</th>
+<th>英文</th>
+<th style="text-align:center">翻译</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M</td>
+<td>modified</td>
+<td style="text-align:center">修改</td>
+</tr>
+<tr>
+<td>R</td>
+<td>renamed</td>
+<td style="text-align:center">重命名</td>
+</tr>
+<tr>
+<td>C</td>
+<td>both modified</td>
+<td style="text-align:center">冲突</td>
+</tr>
+<tr>
+<td>R</td>
+<td>Untracked</td>
+<td style="text-align:center">未跟踪</td>
+</tr>
+</tbody>
+</table>
+<h2 id="命令分析"><a href="#命令分析" class="headerlink" title="命令分析"></a>命令分析</h2><p>一些常用的命令分析，我很喜欢命令行，不过<a href="https://www.sourcetreeapp.com/" target="_blank" rel="noopener">source tree</a>也挺方便的。</p>
+<h3 id="git-status"><a href="#git-status" class="headerlink" title="git status"></a><code>git status</code></h3><p><strong>输出信息</strong></p>
+<ul>
+<li>当前分支</li>
+<li>远端分支状态（是否拉取/更新）</li>
+<li>暂存区</li>
+<li>工作区</li>
+</ul>
+<p><strong>实例分析</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">On branch master</span><br><span class="line">Your branch is ahead of <span class="string">'origin/master'</span> by 1 commit.</span><br><span class="line">  (use <span class="string">"git push"</span> to publish your <span class="built_in">local</span> commits)</span><br><span class="line"></span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use <span class="string">"git reset HEAD &lt;file&gt;..."</span> to unstage)</span><br><span class="line"></span><br><span class="line">        modified:   src/main.js</span><br><span class="line"></span><br><span class="line">Changes not staged <span class="keyword">for</span> commit:</span><br><span class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to update what will be committed)</span><br><span class="line">  (use <span class="string">"git checkout -- &lt;file&gt;..."</span> to discard changes <span class="keyword">in</span> working directory)</span><br><span class="line"></span><br><span class="line">        modified:   src/components/person-filed/index.vue</span><br><span class="line">        modified:   src/router.js</span><br><span class="line">        modified:   src/views/loop-action/index.vue</span><br><span class="line"></span><br><span class="line"><span class="comment"># ===== 翻译分割线 =====</span></span><br><span class="line"></span><br><span class="line">位于master分支</span><br><span class="line">您的分支超前“origin / master”一次提交。</span><br><span class="line">   （使用“git push”发布您的本地提交）</span><br><span class="line"></span><br><span class="line">要提交的更改：</span><br><span class="line">   （使用“git reset HEAD &lt;file&gt; ...”取消暂存）</span><br><span class="line"></span><br><span class="line">         修改：src / main.js</span><br><span class="line"></span><br><span class="line">未提交更改的更改：</span><br><span class="line">   （使用“git add &lt;file&gt; ...”来更新将要提交的内容）</span><br><span class="line">   （使用“git checkout  -  &lt;file&gt; ...”来丢弃工作目录中的更改）</span><br><span class="line"></span><br><span class="line">         修改：src / components / person-filed / index.vue</span><br><span class="line">         修改：src / router.js</span><br><span class="line">         修改：src / views / loop-action / index.vue</span><br></pre></td></tr></table></figure>
+<h3 id="git-commit"><a href="#git-commit" class="headerlink" title="git commit"></a><code>git commit</code></h3><p><strong>输出信息</strong></p>
+<ul>
+<li>提交分支</li>
+<li>commit hash值</li>
+<li>修改文件数量</li>
+<li>增删行数</li>
+</ul>
+<p><strong>实例分析</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[master 2918d65] 1</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># ===== 翻译分割线 =====</span></span><br><span class="line"></span><br><span class="line"> [master 2918d65] 1</span><br><span class="line">  1个文件已更改，1行插入（+）</span><br></pre></td></tr></table></figure>
+<h3 id="git-checkout"><a href="#git-checkout" class="headerlink" title="git checkout"></a><code>git checkout</code></h3><p>自修改后还没有被放到暂存区–回到版本库的状态；<br>已经添加到暂存区后，又作了修改–就回到添加到暂存区后的状态。</p>
+<p>git checkout其实是用版本库里的版本替换工作区的版本，<br>无论工作区是修改还是删除，都可以“一键还原”。</p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 清除工作区指定路径(&lt;paths&gt;)下的所有文件修改</span></span><br><span class="line">$ git checkout -- &lt;paths&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 清空暂存区指定路径(&lt;paths&gt;)文件（不重置修改）</span></span><br><span class="line">$ git reset -- &lt;paths&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 清空工作和暂存区的所有更改（重置本次提交）</span></span><br><span class="line">$ git reset HEAD --hard</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除 untracked files(-f) 包括目录-d</span></span><br><span class="line">$ git clean -fd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 比对指定路径（&lt;path&gt;）文件</span></span><br><span class="line">$ git diff &lt;commit&gt; -- &lt;path&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看已经暂存起来的文件(staged)和上次提交时的快照之间(HEAD)的差异</span></span><br><span class="line">$ git diff --cached</span><br><span class="line">$ git diff --staged</span><br><span class="line"></span><br><span class="line"><span class="comment"># 比对两次提交</span></span><br><span class="line">$ git diff &lt;hash1&gt; hash2 -- &lt;path&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 比对行改动，不显示具体内容</span></span><br><span class="line">$ git diff --<span class="built_in">stat</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 全部提交</span></span><br><span class="line">$ git commit -am <span class="string">"commit log"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 多行插入空行提交</span></span><br><span class="line">$ git commit -m <span class="string">'1.line-1'</span> - m <span class="string">'2.line-2'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 多行提交</span></span><br><span class="line">$ git commit -m <span class="string">'</span></span><br><span class="line"><span class="string">1. line-1</span></span><br><span class="line"><span class="string">2. line-2</span></span><br><span class="line"><span class="string">'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 简化工作日志</span></span><br><span class="line">$ git <span class="built_in">log</span> --pretty=oneline</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看分支合并图</span></span><br><span class="line">$ git <span class="built_in">log</span> --graph</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看分支的合并情况，简化提交信息、hash简写</span></span><br><span class="line">$ git <span class="built_in">log</span> --graph --pretty=oneline --abbrev-commit</span><br><span class="line"></span><br><span class="line"><span class="comment">#命令历史</span></span><br><span class="line">$ git reflog</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重命令分支</span></span><br><span class="line">$ git branch -m &lt;old_name&gt; &lt;new_name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换分支</span></span><br><span class="line">$ git checkout &lt;branch&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并分支</span></span><br><span class="line">$ git merge &lt;branch&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 远端版本信息</span></span><br><span class="line">$ git remote -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加git远端仓库</span></span><br><span class="line">$ git remote add &lt;url&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取远端分支提交</span></span><br><span class="line">$ git pull origin master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送远端分支提交</span></span><br><span class="line">$ git push origin master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取远端分支到本地新分支</span></span><br><span class="line">$ git checkout -b &lt;new_branch&gt; &lt;remote&gt; &lt;branch&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="skill"><a href="#skill" class="headerlink" title="skill"></a>skill</h2><p>一些简简单单的小技巧。</p>
+<h3 id="忽略文件-目录"><a href="#忽略文件-目录" class="headerlink" title="忽略文件/目录"></a>忽略文件/目录</h3><p>根目录创建.gitignore文件。</p>
+<p>windows系统需使用命令行创建，打开cmd，定位。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> <span class="built_in">type</span> nul &gt; .gitignore</span></span><br></pre></td></tr></table></figure>
+<p>.gitignore文件添加需要忽略的文件/目录即可。</p>
+<p>一般不需要自己编辑，github官方也提供了不同语言的.gitignore <a href="https://github.com/github/gitignore" target="_blank" rel="noopener">传送门</a></p>
+<h3 id="提交空目录"><a href="#提交空目录" class="headerlink" title="提交空目录"></a>提交空目录</h3><p>创建 .gitkeep 文件，内容如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Ignore everything in this directory </span><br><span class="line">* </span><br><span class="line"># Except this file !.gitkeep</span><br></pre></td></tr></table></figure>
+<p><img src="/post/git-note/git-guide.jpg" alt="git-guide.jpg"></p>
+<!--
+- [Git log 高级用法](https://www.cnblogs.com/zhangjianbin/p/7778625.html)
+- [Git diff](https://www.cnblogs.com/qianqiannian/p/6010219.html)
+-->
+]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue技巧篇：生命周期</title>
     <url>//post/lifecycle/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
@@ -413,7 +526,7 @@
 </ol>
 <ul>
 <li>base-input 源码 <a href="https://github.com/Fifth-Patient/stardust/blob/master/src/views/skill/two-way-binding-base-type/base-input/base-input.vue" target="_blank" rel="noopener">传送门</a></li>
-<li>示例 <a href="https://github.com/Fifth-Patient/stardust/blob/master/src/views/skill/two-way-binding-base-type/two-way-binding-base-type.vue" target="_blank" rel="noopener">传送门</a></li>
+<li>示例 <a href="https://fifth-patient.github.io/stardust/#/skill/two-way-binding-base-type">传送门</a></li>
 </ul>
 <h3 id="value-与v-model"><a href="#value-与v-model" class="headerlink" title=":value 与v-model"></a><strong><code>:value</code> 与<code>v-model</code></strong></h3><p>因为之前被这两个搞混过，不明白之间的联系和区别，这里单独拿出来讲一下。</p>
 <ul>
@@ -431,10 +544,10 @@
 <p><strong>判断两个对象相等可能有点尴尬， 那我们把两个对象序列化为JSON 字符串就可以了。</strong></p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">JSON</span>.stringify(obj1) === <span class="built_in">JSON</span>.stringify(obj2);</span><br></pre></td></tr></table></figure>
 <p>技术点已经准备够了，我们足够实现用<code>v-model</code>绑定一个对象了。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">  props: &#123;</span><br><span class="line">    value: &#123;</span><br><span class="line">      type: [ <span class="built_in">Object</span>, <span class="built_in">Array</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      fieldValue: <span class="keyword">this</span>.value,</span><br><span class="line">      fieldValueStringify: <span class="built_in">JSON</span>.stringify(<span class="keyword">this</span>.value) <span class="comment">// 保存外部传入的变量快照，将在监听器中做比较使用</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    value: &#123;</span><br><span class="line">      deep: <span class="literal">true</span>, <span class="comment">// 深度监听</span></span><br><span class="line">      handler (newVal) &#123;</span><br><span class="line">        <span class="keyword">const</span> currentValue = <span class="built_in">JSON</span>.stringify(newVal)</span><br><span class="line">        <span class="comment">// 外部传入的变量与内部变量比较</span></span><br><span class="line">        <span class="comment">// 不相等，内部变量方可赋值为this.value</span></span><br><span class="line">        <span class="comment">// * 内部变量赋值，将会触发fieldValue监听函数</span></span><br><span class="line">        <span class="comment">// 且此时应更新fieldValue 对象字符串快照</span></span><br><span class="line">        <span class="keyword">if</span> (currentValue !== <span class="keyword">this</span>.fieldValue) &#123;</span><br><span class="line">          <span class="keyword">this</span>.fieldValue = <span class="built_in">JSON</span>.parse(currentValue)</span><br><span class="line">          <span class="keyword">this</span>.fieldValueStringify = currentValue</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    fieldValue: &#123;</span><br><span class="line">      deep: <span class="literal">true</span>, <span class="comment">// 为什么要使用深度监听呢？</span></span><br><span class="line">      handler (newVal) &#123;</span><br><span class="line">        <span class="comment">// 自己改变内部变量，或者因外部变量更新手动赋值内部变量</span></span><br><span class="line">        <span class="comment">// 这个函数都会被触发</span></span><br><span class="line">        <span class="comment">// 要实现的是内部与外部变量同步，所以快照才是保存外部变量</span></span><br><span class="line">        <span class="comment">// 1.当外部变量改动，会先调用 watch value，此时内外部变量同步</span></span><br><span class="line">        <span class="comment">//   这时不需要抛出事件，否则出现死循环</span></span><br><span class="line">        <span class="comment">// 2.当内部变量改动，会先调用 watch fieldValue</span></span><br><span class="line">        <span class="comment">//   抛出事件，外部的v-model又会自动更新内部的value</span></span><br><span class="line">        <span class="comment">//   从而触发 watch value</span></span><br><span class="line">        <span class="comment">//  （这里触发watch value了，可以回去看看1）</span></span><br><span class="line">        <span class="comment">//   如果你不会兜兜转，那我想你应该feel到了整个更新流程</span></span><br><span class="line">        <span class="comment">// **如果被兜住了，先理解外部变量的改动，再理解内部变量的改动</span></span><br><span class="line">        <span class="keyword">const</span> currentValue = <span class="built_in">JSON</span>.stringify(newVal)</span><br><span class="line">        <span class="keyword">if</span> (currentValue !== <span class="keyword">this</span>.fieldValueStringify) &#123;</span><br><span class="line">          <span class="keyword">this</span>.$emit(<span class="string">'input'</span>, <span class="built_in">JSON</span>.parse(currentValue))</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  props: &#123;</span><br><span class="line">    value: &#123;</span><br><span class="line">      type: [ <span class="built_in">Object</span>, <span class="built_in">Array</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      fieldValue: <span class="keyword">this</span>.value,</span><br><span class="line">      fieldValueStringify: <span class="built_in">JSON</span>.stringify(<span class="keyword">this</span>.value) <span class="comment">// 保存外部传入的变量快照，将在监听器中做比较使用</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    value: &#123;</span><br><span class="line">      deep: <span class="literal">true</span>, <span class="comment">// 深度监听</span></span><br><span class="line">      handler (newVal) &#123;</span><br><span class="line">        <span class="keyword">const</span> currentValue = <span class="built_in">JSON</span>.stringify(newVal)</span><br><span class="line">        <span class="comment">// 外部传入的变量与内部变量比较</span></span><br><span class="line">        <span class="comment">// 不相等，内部变量方可赋值为this.value</span></span><br><span class="line">        <span class="comment">// * 内部变量赋值，将会触发fieldValue监听函数</span></span><br><span class="line">        <span class="comment">// 且此时应更新fieldValue 对象字符串快照</span></span><br><span class="line">        <span class="keyword">if</span> (currentValue !== <span class="keyword">this</span>.fieldValue) &#123;</span><br><span class="line">          <span class="keyword">this</span>.fieldValue = <span class="built_in">JSON</span>.parse(currentValue)</span><br><span class="line">          <span class="keyword">this</span>.fieldValueStringify = currentValue</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    fieldValue: &#123;</span><br><span class="line">      deep: <span class="literal">true</span>, <span class="comment">// 为什么要使用深度监听呢？</span></span><br><span class="line">      handler (newVal) &#123;</span><br><span class="line">        <span class="comment">// 自己改变内部变量，或者因外部变量更新手动赋值内部变量</span></span><br><span class="line">        <span class="comment">// 这个函数都会被触发</span></span><br><span class="line">        <span class="comment">// 要实现的是内部与外部变量同步，所以快照才是保存外部变量</span></span><br><span class="line">        <span class="comment">// 1.当外部变量改动，会先调用 watch value，此时内外部变量同步</span></span><br><span class="line">        <span class="comment">//   这时不需要抛出事件，否则出现死循环</span></span><br><span class="line">        <span class="comment">// 2.当内部变量改动，会先调用 watch fieldValue</span></span><br><span class="line">        <span class="comment">//   抛出事件，外部的v-model又会自动更新内部的value</span></span><br><span class="line">        <span class="comment">//   从而触发 watch value</span></span><br><span class="line">        <span class="comment">//  （这里触发watch value了，可以回去看看1）</span></span><br><span class="line">        <span class="comment">//   如果你不会兜兜转，那我想你应该feel到了整个更新流程</span></span><br><span class="line">        <span class="comment">// **如果被兜住了，先理解外部变量的改动，再理解内部变量的改动</span></span><br><span class="line">        <span class="keyword">const</span> currentValue = <span class="built_in">JSON</span>.stringify(newVal)</span><br><span class="line">        <span class="keyword">if</span> (currentValue !== <span class="keyword">this</span>.fieldValueStringify) &#123;</span><br><span class="line">          <span class="keyword">this</span>.$emit(<span class="string">'input'</span>, <span class="built_in">JSON</span>.parse(currentValue))</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>base-div 源码 <a href="https://github.com/Fifth-Patient/stardust/blob/master/src/views/skill/two-way-binding-reference-type/base-div/base-div.vue" target="_blank" rel="noopener">传送门</a></li>
-<li>示例 <a href="https://github.com/Fifth-Patient/stardust/blob/master/src/views/skill/two-way-binding-reference-type/two-way-binding-reference-type.vue" target="_blank" rel="noopener">传送门</a></li>
+<li>示例 <a href="https://fifth-patient.github.io/stardust/#/skill/two-way-binding-reference-type">传送门</a></li>
 </ul>
 <p>接下来我们不使用 <code>prop value</code> <code>$emit input</code>了，我们使用 <code>prop insert</code> <code>$emit output</code>。</p>
 <p>直接在<code>base-div</code> 改动吧，其实也不复杂。</p>
@@ -492,8 +605,8 @@
 <p><code>props</code>只定义了3个，也有插槽，可以自定义，使用起来也不繁琐，方便了很多，不是吗？</p>
 <ul>
 <li>组件源码：<a href="https://github.com/Fifth-Patient/stardust/blob/master/src/components/control-panel/control-panel.vue" target="_blank" rel="noopener">传送门</a></li>
-<li>复用-1：<a href="https://github.com/Fifth-Patient/stardust/blob/master/src/views/skill/multi-index-vue/index-1/index.vue" target="_blank" rel="noopener">传送门</a></li>
-<li>复用-2：<a href="https://github.com/Fifth-Patient/stardust/blob/master/src/views/skill/multi-index-vue/index-2/index.vue" target="_blank" rel="noopener">传送门</a></li>
+<li>复用-1：<a href="hhttps://fifth-patient.github.io/stardust/#/skill/multi-index-1">传送门</a></li>
+<li>复用-2：<a href="https://fifth-patient.github.io/stardust/#/skill/multi-index-2">传送门</a></li>
 </ul>
 <p>当然还可以再进行扩展，只是没什么必要，如：随机color，交互设置样式和插槽内容；<br><del>最好可以跟程序窗口一样可以最小化最大化关闭拖曳改变宽高..</del></p>
 <h2 id="彩蛋"><a href="#彩蛋" class="headerlink" title="彩蛋"></a>彩蛋</h2><p>设计一个组件，还要在实际项目中使用，可能因为各种现实因素影响，如果不喜欢组件的方式。<br>（不想写，或者是嫌弃麻烦的）这里可以提供一个代码片段，需要的使用的直接复制粘贴即可。</p>
