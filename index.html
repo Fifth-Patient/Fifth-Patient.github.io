@@ -196,6 +196,160 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://fifth-patient.github.io/post/render-JSX/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/avatar.jpg">
+      <meta itemprop="name" content="Chris Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="巫术师">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/render-JSX/" class="post-title-link" itemprop="url">vue技巧篇：渲染函数 & JSX</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-01-28 20:01:25 / 修改时间：20:10:34" itemprop="dateCreated datePublished" datetime="2020-01-28T20:01:25+08:00">2020-01-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.9k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>官方文档介绍的<a href="https://cn.vuejs.org/v2/guide/render-function.html" target="_blank" rel="noopener">渲染函数</a>似乎有点太过偏重表现而放轻原因。已经看过这部分好几次，还是有点不知所以然。这也不是第一次看不明白文档的介绍了，还是需要自己整理下知识点。所以，这里的内容是对文档做降级处理，好让这一块知识点更容易理解一点。文档有的东西，这里不会再重复。</p>
+<p>建议阅读顺序：先粗略浏览下官方文档；精读这篇文章同时结合文档。</p>
+<h2 id="render"><a href="#render" class="headerlink" title="render"></a>render</h2><p>先讨论render，再讨论JSX。因为JSX是为了render的编写更加方便。</p>
+<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p><a href="https://cn.vuejs.org/v2/guide/render-function.html#基础" target="_blank" rel="noopener">渲染函数 &amp; JSX - 基础</a> 这一小节官网介绍的是render的使用的场景。还举了个例子，真的不尽人意，起码看完我没能回答自己，render是啥。</p>
+<p><a href="https://cn.vuejs.org/v2/api/#render" target="_blank" rel="noopener">render</a>是一个实例方法，跟字符串模板/template选项一样可以创建DOM。比起字符串模板，render的强大之处在于：<strong>字符串模板创建的DOM是静态的；render可以借助js的能力动态创建DOM。</strong>（不要忘了render 本质上是一个被vue框架封装的js函数）</p>
+<p>静态/动态DOM如何理解？template不是也可以使用<code>v-if</code> <code>v-show</code> <code>v-for</code>之类的指令吗？<br>虽然template可以使用以上指定，对DOM进行修改，可是其无法改变HTML tag。以上的指令只是切换/移除/新增固定的HTML tag罢了。（举个反例，随机生成HTML tag 试试？）</p>
+<p>官网基础这一小节，我们只需知道render是可以使用js能力创建HTML，是template的升级版就够了。</p>
+<p>接下来的三个小节都是在讲如何使用render，我们先从<strong>虚拟DOM</strong>这个知识点入手。【基础】小节的例子，也会相应的介绍。</p>
+<ul>
+<li><a href="https://cn.vuejs.org/v2/guide/render-function.html#节点、树以及虚拟 DOM" target="_blank" rel="noopener">节点 树以及虚拟 DOM</a></li>
+<li><a href="https://cn.vuejs.org/v2/guide/render-function.html#createElement-参数" target="_blank" rel="noopener">createElement 参数</a></li>
+<li><a href="https://cn.vuejs.org/v2/guide/render-function.html#使用-JavaScript-代替模板功能" target="_blank" rel="noopener">使用 JavaScript 代替模板功能</a></li>
+</ul>
+<h3 id="节点、树以及虚拟-DOM"><a href="#节点、树以及虚拟-DOM" class="headerlink" title="节点、树以及虚拟 DOM"></a>节点、树以及虚拟 DOM</h3><p>HTML DOM 节点的知识点相信基础扎实的你烂熟于心了，也看过文档复习了，这里不重复。</p>
+<blockquote>
+<p>虚拟节点（virtual node）：描述 DOM 节点的JS对象，该对象保存着节点的相应信息。别名 <strong>VNode</strong>。</p>
+</blockquote>
+<p>那 DOM 是由节点组成，虚拟DOM的概念也自然很好理解：由Vnode组成的节点树结构。</p>
+<p>而<code>render</code>返回的值就是一个虚拟DOM，虚拟DOM最终也会被转换为真实的DOM挂载在页面上。</p>
+<h3 id="最简单的使用方式"><a href="#最简单的使用方式" class="headerlink" title="最简单的使用方式"></a>最简单的使用方式</h3><p>我学东西喜欢由简单到复杂，如果文档一开始就写个<code>Hello World</code>该多好。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"skill-render"</span>&gt;</span>skill-render<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们用<code>template</code>，<code>render</code>分别创建以上相同的dom。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// skill-template.vue</span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"skill-render"</span>&gt;</span></span><br><span class="line">    &#123;&#123;$options.name&#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="actionscript">  name: <span class="string">'skill-render'</span></span></span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>自行与下面的版本找不同。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// skill-render.vue</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="actionscript">  name: <span class="string">"skill-render"</span>,</span></span><br><span class="line">  render(createElement) &#123;</span><br><span class="line"><span class="actionscript">    <span class="keyword">return</span> createElement(</span></span><br><span class="line"><span class="actionscript">      <span class="string">"div"</span>,</span></span><br><span class="line">      &#123;</span><br><span class="line"><span class="actionscript">        <span class="class"><span class="keyword">class</span>: "<span class="title">skill</span>-<span class="title">render</span>"</span></span></span><br><span class="line">      &#125;,</span><br><span class="line"><span class="actionscript">      <span class="keyword">this</span>.$options.name</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>终于我们知识点足够使用最简单的render，可是这里还是要说明下。<code>render</code>返回的是<code>createElement</code>函数运行后的返回值。所以其实是<strong><code>createElement</code>有能力创建虚拟DOM，而<code>render</code>依赖<code>createElement</code>的能力渲染为HTML</strong>。两者的作用很符合函数名（笑）。</p>
+<p>你已经知道<code>createElement</code>可以创建虚拟DOM，现在可以好好看看 <a href="https://cn.vuejs.org/v2/guide/render-function.html#createElement-参数" target="_blank" rel="noopener">createElement 参数</a>了。</p>
+<h3 id="基础示例"><a href="#基础示例" class="headerlink" title="基础示例"></a>基础示例</h3><p>到现在，我们才要开始讲文档的基础示例，说实话，这个示例真的挺基础。<br>文档要解决的问题其实就是要设计一个<code>anchored-heading</code>组件。</p>
+<ul>
+<li>这个组件里面的HTML tag（<code>h1~h6</code>）可以使用prop动态决定，并且标题内部使用了插槽。</li>
+<li>而使用<code>template</code>方案，代码冗长又存在重复问题。</li>
+<li>所以使用了<code>render</code>函数<strong>动态创建</strong>HTML tag。</li>
+<li>在基础小节的最后还进行了一波劝退：<strong>深入渲染函数之前推荐阅读<a href="https://cn.vuejs.org/v2/api/#%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7" target="_blank" rel="noopener">实例属性 API</a></strong>。</li>
+</ul>
+<h3 id="深入使用"><a href="#深入使用" class="headerlink" title="深入使用"></a>深入使用</h3><blockquote>
+<p>只要在原生的 JavaScript 中可以轻松完成的操作，Vue 的渲染函数就不会提供专有的替代方法。</p>
+</blockquote>
+<p>文档也写得很详细了，深入底层的代价可以更好地控制交互细节。</p>
+<p>这里略过不重复。</p>
+<h3 id="render-h-gt-h-App"><a href="#render-h-gt-h-App" class="headerlink" title="render: h =&gt; h(App)"></a><code>render: h =&gt; h(App)</code></h3><p>当你认认真真把关于渲染函数的资料看完，你也自然理解了<code>main.js</code>中，<code>render</code>为什么这么写。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  render: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">&#125;).$mount(<span class="string">'#app'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>render函数并不复杂，理解其需要返回虚拟DOM，最后会挂载在页面上就可以了。编写会比较繁琐，具体的体现就是vue提供的某些指令需要自己实现。用途会比较少，不过有助于我们研究vue，如果你想之后阅读vue源码的话。</p>
+<h2 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h2><p>vue为了<code>render</code>编写更加方便，<code>createElement</code>可以使用JSX替换之。vue也支持JSX语法，不过需要一个<a href="https://github.com/vuejs/jsx" target="_blank" rel="noopener">Babel 插件</a>支持。</p>
+<h3 id="什么是JSX"><a href="#什么是JSX" class="headerlink" title="什么是JSX"></a>什么是JSX</h3><p>JSX的定义，我们引用下<a href="https://github.com/jsx/JSX" target="_blank" rel="noopener">官网</a>的描述。</p>
+<blockquote>
+<p>JSX - a faster, safer, easier JavaScript</p>
+</blockquote>
+<p>…<br>…<br>…</p>
+<p>好吧，那我按照自己的理解来介绍了。</p>
+<p>JSX是JavaScript的语法扩展。类似模版语言，本质上是js语法。</p>
+<h3 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h3><p>安装配置也很简单，使用也有介绍。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install @vue/babel-preset-jsx @vue/babel-helper-vue-jsx-merge-props</span><br></pre></td></tr></table></figure>
+<p>如果是vue-cli 2.x创建的vue项目，需要<code>.babelrc</code>配置，vue-cli 3.x+安装后忽略配置，可直接使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;presets&quot;: [&quot;@vue/babel-preset-jsx&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>新建一个vue文件。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- JSX.vue --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="actionscript">  name: <span class="string">"skill-jsx-vue"</span>,</span></span><br><span class="line">  data() &#123;</span><br><span class="line"><span class="actionscript">    <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="actionscript">      type: <span class="string">"vue"</span></span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  render() &#123;</span><br><span class="line"><span class="actionscript">    <span class="keyword">return</span> (</span></span><br><span class="line"><span class="handlebars"><span class="xml">      <span class="tag">&lt;<span class="name">p</span>&gt;</span></span></span></span><br><span class="line">        hello</span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;<span class="name">b</span>&gt;</span> &#123;this.type&#125;<span class="tag">&lt;/<span class="name">b</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">      <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span></span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后发现，这里甚至可以使用去掉<code>&lt;script&gt;</code>标签，直接用js文件编写，不更方便？于是我们删除<code>&lt;script&gt;</code>标签，另存为<code>JSX.js</code>，相应改变组件名还有type数据就能得到以下文件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JSX.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'skill-jsx-js'</span>,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      type: <span class="string">'js'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>hello <span class="tag">&lt;<span class="name">b</span>&gt;</span>&#123;this.type&#125;<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>美哉美哉。以后可以抛弃<code>*.vue</code>文件直接使用<code>*.js</code>编写组件了，可把自己高兴坏了。我也不喜欢<code>*.vue</code>的格式。</p>
+<p><img src="/post/render-JSX/vue-component.png" alt="vue-component.png"></p>
+<p>经常要考虑当前行的作用域问题，是vue示例呢，还是原生js的作用域呢。</p>
+<p>but！！</p>
+<h3 id="vue实现css-in-js"><a href="#vue实现css-in-js" class="headerlink" title="vue实现css-in-js"></a>vue实现css-in-js</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// JSX.vue</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="actionscript">  <span class="comment">// ..</span></span></span><br><span class="line">  render() &#123;</span><br><span class="line"><span class="actionscript">    <span class="keyword">return</span> (</span></span><br><span class="line"><span class="javascript">      &lt;p <span class="class"><span class="keyword">class</span></span>=<span class="string">"skill-jsx-vue"</span>&gt;</span></span><br><span class="line">        hello</span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;<span class="name">b</span>&gt;</span> &#123;this.type&#125;<span class="tag">&lt;/<span class="name">b</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">      <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span></span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="handlebars"><span class="xml"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">"stylus"</span>&gt;</span></span></span></span><br><span class="line">.skill-jsx-vue &#123;</span><br><span class="line">  color: green;</span><br><span class="line">&#125;</span><br><span class="line"><span class="handlebars"><span class="xml"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></span></span><br></pre></td></tr></table></figure>
+<p>JSX.js是原生js文件，不支持<code>&lt;style lang=&quot;stylus&quot;&gt;</code>的语法解析。那也没关系，css-in-js就是为了解决在js中编写css样式而出现的一种方案。</p>
+<p><em>虽然隔壁框架也有成熟的JSX还有css-in-js解决方案，不过这与本文无关，相关内容不会讨论。</em></p>
+<p>vue的css-in-js 解决方案是<a href="https://github.com/styled-components/vue-styled-components" target="_blank" rel="noopener">vue-styled-components</a>，当然不止这一个，还有其他的解决方案等待我们去探索。</p>
+<p>安装完后，我们需要声明一个组件，这个组件只有样式，内容是使用插槽传入的，插槽自动定义的，这个组件供render使用即可。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JSX.js</span></span><br><span class="line"><span class="keyword">import</span> styled <span class="keyword">from</span> <span class="string">'vue-styled-components'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> StyledP = styled.p<span class="string">`</span></span><br><span class="line"><span class="string">  color: wheat;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'skill-jsx-js'</span>,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      type: <span class="string">'js'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">StyledP</span> <span class="attr">class</span>=<span class="string">"skill-jsx-js"</span>&gt;</span>hello <span class="tag">&lt;<span class="name">b</span>&gt;</span>&#123;this.type&#125;<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">StyledP</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>StyledP</code>也是一个vue组件，而<code>render</code>的<code>&lt;StyledP&gt;&lt;/StyledP&gt;</code> 相当于使用这个vue组件，组件名是js变量，大小写敏感。</p>
+<p><em>思考一下，写一个带有样式的DOM，就需要声明一个vue组件，这样情况会不会造成组件滥用？</em></p>
+<p>当然你可能会觉得，这是不是违背了<strong>关注点分离</strong>的原则。对于组件化系统的框架的，组件是组成项目的基本单位，更加关注的是，以组件为单位，而一个组件又包括HTML、CSS、JS，vue觉得将其所有组合起来比较合理。<br><a href="https://cn.vuejs.org/v2/guide/single-file-components.html#%E6%80%8E%E4%B9%88%E7%9C%8B%E5%BE%85%E5%85%B3%E6%B3%A8%E7%82%B9%E5%88%86%E7%A6%BB%EF%BC%9F" target="_blank" rel="noopener">怎么看待关注点分离？</a></p>
+<p>当然我也会提供这一章的源码还有示例给你，还顺便实现了vue-styled-components官网的例子。</p>
+<ul>
+<li>JSX.vue <a href="https://github.com/Fifth-Patient/stardust/blob/master/src/views/skill/JSX/JSX.vue" target="_blank" rel="noopener">源码</a> <a href="https://fifth-patient.github.io/stardust/#/skill/JSX-vue">示例</a></li>
+<li>JSX.js <a href="https://github.com/Fifth-Patient/stardust/blob/master/src/views/skill/JSX/JSX.js" target="_blank" rel="noopener">源码</a> <a href="https://fifth-patient.github.io/stardust/#/skill/JSX-js">示例</a></li>
+<li>css-in-js.js<a href="https://github.com/Fifth-Patient/stardust/blob/master/src/views/skill/JSX/css-in-js.js" target="_blank" rel="noopener">源码</a> <a href="https://fifth-patient.github.io/stardust/#/skill/css-in-js">示例</a></li>
+</ul>
+<h2 id="尾声"><a href="#尾声" class="headerlink" title="尾声"></a>尾声</h2><p>今天我们从render出发，知道了虚拟DOM这一很重要的概念。途中认识了JSX，最后还结合了css-in-js实现JSX+css-in-jss。可是这些东西实际作用比较低。render函数示例开发中应用场景并不多，而JSX，css-in-js，vue对其的支持又有点不知道说什么好。不过如果你是抱着<strong>研究vue的精神</strong>而不<strong>是使用vue的想法</strong>看待以上内容，相信还是对你有点帮助的。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://fifth-patient.github.io/post/git-note/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -511,7 +665,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-27 20:18:06" itemprop="dateModified" datetime="2020-01-27T20:18:06+08:00">2020-01-27</time>
+                <time title="修改时间：2020-01-27 23:14:17" itemprop="dateModified" datetime="2020-01-27T23:14:17+08:00">2020-01-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -605,7 +759,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-27 20:18:06" itemprop="dateModified" datetime="2020-01-27T20:18:06+08:00">2020-01-27</time>
+                <time title="修改时间：2020-01-27 23:14:17" itemprop="dateModified" datetime="2020-01-27T23:14:17+08:00">2020-01-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1001,87 +1155,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://fifth-patient.github.io/post/web-safe/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/avatar.jpg">
-      <meta itemprop="name" content="Chris Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="巫术师">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/post/web-safe/" class="post-title-link" itemprop="url">web安全基础</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-04-08 22:02:34" itemprop="dateCreated datePublished" datetime="2019-04-08T22:02:34+08:00">2019-04-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-24 23:57:36" itemprop="dateModified" datetime="2020-01-24T23:57:36+08:00">2020-01-24</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h1><p>通过把SQL命令插入到web表单提交或者页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令</p>
-<p><strong>防范SQL注入</strong><br>1.校验用户输入的参数，限制其长度或转义单引号或双连字符<br>2.使用参数化SQL或直接使用存储过程进行数据查询存取<br>3.每个应用使用单独的权限有限的数据库连接，不使用管理器权限连接数据库<br>4.机密信息不明文存放，加密或hash掉密码和敏感信息</p>
-<h1 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h1><p>跨站脚本攻击(Cross Site Scripting)，缩写为XSS。恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页之时，嵌入其中Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/web-safe/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1154,7 +1227,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
