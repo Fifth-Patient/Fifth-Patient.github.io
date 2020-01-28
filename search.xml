@@ -5,6 +5,7 @@
     <url>//post/render-JSX/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>官方文档介绍的<a href="https://cn.vuejs.org/v2/guide/render-function.html" target="_blank" rel="noopener">渲染函数</a>似乎有点太过偏重表现而放轻原因。已经看过这部分好几次，还是有点不知所以然。这也不是第一次看不明白文档的介绍了，还是需要自己整理下知识点。所以，这里的内容是对文档做降级处理，好让这一块知识点更容易理解一点。文档有的东西，这里不会再重复。</p>
 <p>建议阅读顺序：先粗略浏览下官方文档；精读这篇文章同时结合文档。</p>
+<a id="more"></a>
 <h2 id="render"><a href="#render" class="headerlink" title="render"></a>render</h2><p>先讨论render，再讨论JSX。因为JSX是为了render的编写更加方便。</p>
 <h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p><a href="https://cn.vuejs.org/v2/guide/render-function.html#基础" target="_blank" rel="noopener">渲染函数 &amp; JSX - 基础</a> 这一小节官网介绍的是render的使用的场景。还举了个例子，真的不尽人意，起码看完我没能回答自己，render是啥。</p>
 <p><a href="https://cn.vuejs.org/v2/api/#render" target="_blank" rel="noopener">render</a>是一个实例方法，跟字符串模板/template选项一样可以创建DOM。比起字符串模板，render的强大之处在于：<strong>字符串模板创建的DOM是静态的；render可以借助js的能力动态创建DOM。</strong>（不要忘了render 本质上是一个被vue框架封装的js函数）</p>
