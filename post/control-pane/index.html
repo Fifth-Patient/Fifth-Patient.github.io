@@ -60,7 +60,7 @@
 <meta property="og:image" content="https://fifth-patient.github.io/post/control-pane/user_snippets.jpg">
 <meta property="og:image" content="https://fifth-patient.github.io/post/control-pane/user_snippets_lang.jpg">
 <meta property="og:image" content="https://fifth-patient.github.io/post/control-pane/vue-pre.jpg">
-<meta property="og:updated_time" content="2020-01-27T15:14:17.548Z">
+<meta property="og:updated_time" content="2020-02-01T16:05:53.252Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue技巧篇：我的浏览器也是“控制台”">
 <meta name="twitter:description" content="前言写代码少不了，调试最简单方便的方法是控制台输出信息，如js的 control.log。可有时候我们要监听的变量是改动频繁，可能要多次使用control.log，控制台信息太多看得也容易乱。有一次查阅资料的时候，看到其他开发者使用pre标签直接在页面上打印变量，突然受到了一点感悟。 pre 和 $datahtml的pre标签并不常用，它可以保留原格式（空格和换行符），常用于表示源代码。有了pre">
@@ -237,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-27 23:14:17" itemprop="dateModified" datetime="2020-01-27T23:14:17+08:00">2020-01-27</time>
+                <time title="修改时间：2020-02-02 00:05:53" itemprop="dateModified" datetime="2020-02-02T00:05:53+08:00">2020-02-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -321,7 +321,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"Print to pre dom"</span>: &#123;</span><br><span class="line">  <span class="string">"prefix"</span>: <span class="string">"vuepre"</span>,</span><br><span class="line">  <span class="string">"body"</span>: [</span><br><span class="line">   <span class="string">"&lt;pre style=\"position: fixed; top: 20px; left: 20px; bottom: 20px; width: 300px; overflow: auto; z-index: 9999; font-size: 16px; line-height: 20px; color: skyblue; background: rgba(0, 0, 0, .7)\"&gt;"</span>,</span><br><span class="line">   <span class="string">"  &#123;&#123; $1 $2 &#125;&#125;"</span>,</span><br><span class="line">   <span class="string">"&lt;/pre&gt;"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这样在<code>*.vue</code>的文件格式中，vs code 就支持对<code>vuepre</code>的代码提示了。</p>
 <p><img src="/post/control-pane/./vue-pre.jpg" alt="vue-pre"></p>
-<p>也直接直接拿我的 vue-html.json（<a href="./vue-html.txt">传送门</a>），使用任何文本编辑器打开，另存为：%APPData%\Code\User\snippets\vue-html.json</p>
+<p>也直接直接拿我的 vue-html.json（<a href="/download/vue-html.txt">传送门</a>），使用任何文本编辑器打开，另存为：%APPData%\Code\User\snippets\vue-html.json</p>
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>此本到这里就结束了，定义了一个可以监测变量的组件，相当于把控制台搬运到了网页，只是这个控制台是简化版的。<br><!-- 当然之后的开发，喜欢`control.log`、`debugger`还有打断点的还是会选择之前喜欢的方式调试。 --><br>只是很多开发者都很讨厌调试，因为只有自己的代码出现问题才会去调试。<br>其实调试本来就是一件苦中作乐的事情，平时写的代码，都是为了满足各种需求，有时候写得并不自由。<br>那么，我们在调试的时候，为何不使用一种更有趣味的方式去调试呢？起码这个时候自由度很高很高..</p>
 
     </div>
@@ -442,7 +442,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -453,7 +453,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
