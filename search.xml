@@ -88,7 +88,7 @@
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// JSX.js</span></span><br><span class="line"><span class="keyword">import</span> styled <span class="keyword">from</span> <span class="string">'vue-styled-components'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> StyledP = styled.p<span class="string">`</span></span><br><span class="line"><span class="string">  color: wheat;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'skill-jsx-js'</span>,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      type: <span class="string">'js'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">StyledP</span> <span class="attr">class</span>=<span class="string">"skill-jsx-js"</span>&gt;</span>hello <span class="tag">&lt;<span class="name">b</span>&gt;</span>&#123;this.type&#125;<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">StyledP</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>StyledP</code>也是一个vue组件，而<code>render</code>的<code>&lt;StyledP&gt;&lt;/StyledP&gt;</code> 相当于使用这个vue组件，组件名是js变量，大小写敏感。</p>
 <p><em>思考一下，写一个带有样式的DOM，就需要声明一个vue组件，这样情况会不会造成组件滥用？</em></p>
-<p>当然你可能会觉得，这是不是违背了<strong>关注点分离</strong>的原则。对于组件化系统的框架的，组件是组成项目的基本单位，更加关注的是，以组件为单位，而一个组件又包括HTML、CSS、JS，vue觉得将其所有组合起来比较合理。<br><a href="https://cn.vuejs.org/v2/guide/single-file-components.html#%E6%80%8E%E4%B9%88%E7%9C%8B%E5%BE%85%E5%85%B3%E6%B3%A8%E7%82%B9%E5%88%86%E7%A6%BB%EF%BC%9F" target="_blank" rel="noopener">怎么看待关注点分离？</a></p>
+<p>当然你可能会觉得，这是不是违背了<strong>关注点分离</strong>的原则。对于组件化系统的框架，组件是组成项目的基本单位，更加关注的是，以组件为单位，而一个组件又包括HTML、CSS、JS，vue觉得将其所有组合起来比较合理。<br><a href="https://cn.vuejs.org/v2/guide/single-file-components.html#%E6%80%8E%E4%B9%88%E7%9C%8B%E5%BE%85%E5%85%B3%E6%B3%A8%E7%82%B9%E5%88%86%E7%A6%BB%EF%BC%9F" target="_blank" rel="noopener">怎么看待关注点分离？</a></p>
 <p>当然我也会提供这一章的源码还有示例给你，还顺便实现了vue-styled-components官网的例子。</p>
 <ul>
 <li>JSX.vue <a href="https://github.com/Fifth-Patient/stardust/blob/master/src/views/skill/JSX/JSX.vue" target="_blank" rel="noopener">源码</a> <a href="https://fifth-patient.github.io/stardust/#/skill/JSX-vue">示例</a></li>
@@ -196,9 +196,9 @@
 <h3 id="git-checkout"><a href="#git-checkout" class="headerlink" title="git checkout"></a><code>git checkout</code></h3><p>自修改后还没有被放到暂存区–回到版本库的状态；<br>已经添加到暂存区后，又作了修改–就回到添加到暂存区后的状态。</p>
 <p>git checkout其实是用版本库里的版本替换工作区的版本，<br>无论工作区是修改还是删除，都可以“一键还原”。</p>
 <h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>个人常用命令，整理到一块，以后忘记了就直接复制，省事也方便。</p>
-<h3 id="工作区暂存区文件管理"><a href="#工作区暂存区文件管理" class="headerlink" title="工作区暂存区文件管理"></a>工作区暂存区文件管理</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 清除工作区指定路径(&lt;path&gt;)下的所有文件修改（重置文件）</span></span><br><span class="line">$ git checkout -- &lt;path&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 清空暂存区指定路径(&lt;path&gt;)文件（不重置修改）</span></span><br><span class="line">$ git reset -- &lt;path&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 清空工作和暂存区的所有更改（重置本次提交，不会处理untracked files）</span></span><br><span class="line">$ git reset HEAD --hard</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除 untracked files(-f) 包括目录(-d)</span></span><br><span class="line">$ git clean -fd</span><br></pre></td></tr></table></figure>
+<h3 id="工作区暂存区文件管理"><a href="#工作区暂存区文件管理" class="headerlink" title="工作区暂存区文件管理"></a>工作区暂存区文件管理</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 清除工作区指定路径(&lt;path&gt;)下的所有文件修改（重置文件） / 重置未暂存的文件</span></span><br><span class="line">$ git checkout -- &lt;path&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 清空暂存区指定路径(&lt;path&gt;)文件（不重置修改）/ 取消已暂存文件</span></span><br><span class="line">$ git reset -- &lt;path&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 清空工作和暂存区的所有更改（重置本次提交，不会处理untracked files）</span></span><br><span class="line">$ git reset HEAD --hard</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除 untracked files(-f) 包括目录(-d)</span></span><br><span class="line">$ git clean -fd</span><br></pre></td></tr></table></figure>
 <h3 id="比对文件"><a href="#比对文件" class="headerlink" title="比对文件"></a>比对文件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 比对指定路径（&lt;path&gt;）文件和暂存区的区别</span></span><br><span class="line">$ git diff &lt;commit&gt; -- &lt;path&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 比对已经暂存起来的文件(staged)和上次提交时的快照之间(HEAD)的差异</span></span><br><span class="line">$ git diff --cached</span><br><span class="line">$ git diff --staged</span><br><span class="line"></span><br><span class="line"><span class="comment"># 比对指定路径（&lt;path&gt;）两次提交</span></span><br><span class="line">$ git diff &lt;hash1&gt; &lt;hash2&gt; -- &lt;path&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 比对行改动，不显示具体内容</span></span><br><span class="line">$ git diff --<span class="built_in">stat</span></span><br></pre></td></tr></table></figure>
-<h3 id="提交文件"><a href="#提交文件" class="headerlink" title="提交文件"></a>提交文件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 全部暂存并提交</span></span><br><span class="line">$ git commit -am <span class="string">"commit log"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 多行插入空行提交</span></span><br><span class="line">$ git commit -m <span class="string">'1.line-1'</span> - m <span class="string">'2.line-2'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 多行提交</span></span><br><span class="line">$ git commit -m <span class="string">'</span></span><br><span class="line"><span class="string">1. line-1</span></span><br><span class="line"><span class="string">2. line-2</span></span><br><span class="line"><span class="string">'</span></span><br></pre></td></tr></table></figure>
+<h3 id="提交文件"><a href="#提交文件" class="headerlink" title="提交文件"></a>提交文件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 全部暂存并提交</span></span><br><span class="line">$ git commit -am <span class="string">"commit log"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 多行插入空行提交</span></span><br><span class="line">$ git commit -m <span class="string">'1.line-1'</span> - m <span class="string">'2.line-2'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 多行提交</span></span><br><span class="line">$ git commit -m <span class="string">'</span></span><br><span class="line"><span class="string">1. line-1</span></span><br><span class="line"><span class="string">2. line-2</span></span><br><span class="line"><span class="string">'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改上一次提交信息</span></span><br><span class="line">$ git commit --amend -m <span class="string">"New commit message"</span></span><br></pre></td></tr></table></figure>
 <h3 id="工作日志"><a href="#工作日志" class="headerlink" title="工作日志"></a>工作日志</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 简化工作日志</span></span><br><span class="line">$ git <span class="built_in">log</span> --pretty=oneline</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看分支合并情况</span></span><br><span class="line">$ git <span class="built_in">log</span> --graph</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看分支合并情况，简化提交信息、hash简写</span></span><br><span class="line">$ git <span class="built_in">log</span> --graph --pretty=oneline --abbrev-commit</span><br><span class="line"></span><br><span class="line"><span class="comment"># 美化输出、查看分支合并情况、简化提交信息、hash简写</span></span><br><span class="line">$ git <span class="built_in">log</span> --color --pretty=format:<span class="string">'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset'</span>  --graph  --abbrev-commit</span><br></pre></td></tr></table></figure>
 <h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 重命令分支</span></span><br><span class="line">$ git branch -m &lt;old_name&gt; &lt;new_name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换分支</span></span><br><span class="line">$ git checkout &lt;branch&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定提交检出新分支</span></span><br><span class="line">$ git checkout &lt;<span class="built_in">hash</span>&gt; -b &lt;branch_name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并分支</span></span><br><span class="line">$ git merge &lt;branch&gt;</span><br></pre></td></tr></table></figure>
 <h3 id="远端"><a href="#远端" class="headerlink" title="远端"></a>远端</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 远端版本信息</span></span><br><span class="line">$ git remote -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加git远端仓库</span></span><br><span class="line">$ git remote add &lt;url&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取远端分支提交</span></span><br><span class="line">$ git pull origin master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送远端分支提交</span></span><br><span class="line">$ git push origin master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取远端分支到本地新分支</span></span><br><span class="line">$ git checkout -b &lt;new_branch&gt; &lt;remote&gt; &lt;branch&gt;</span><br></pre></td></tr></table></figure>
@@ -248,53 +248,53 @@
 <li>什么阶段挂载数据</li>
 </ol>
 <a id="more"></a>
-<h2 id="生命周期图示"><a href="#生命周期图示" class="headerlink" title="生命周期图示"></a>生命周期图示</h2><p><img src="/post/lifecycle/./lifecycle.png" alt="lifecycle"></p>
+<h2 id="生命周期图示"><a href="#生命周期图示" class="headerlink" title="生命周期图示"></a>生命周期图示</h2><p><img src="/post/lifecycle/lifecycle.png" alt="lifecycle"></p>
 <p>生命周期钩子函数可以分成6个类型，除了一个最少用的子孙组件错误钩子函数。<br>每个类型都有 “beforeXX” “XXed”，总共有11个生命周期钩子函数。</p>
 <table>
 <thead>
 <tr>
-<th>序</th>
-<th>类型</th>
-<th style="text-align:left">钩子函数名 - 1</th>
-<th style="text-align:left">钩子函数名 - 2</th>
+<th style="text-align:center">序</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">钩子函数名 - 1</th>
+<th style="text-align:center">钩子函数名 - 2</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td>创建</td>
-<td style="text-align:left">beforeCreate</td>
-<td style="text-align:left">created</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">创建</td>
+<td style="text-align:center">beforeCreate</td>
+<td style="text-align:center">created</td>
 </tr>
 <tr>
-<td>2</td>
-<td>挂载</td>
-<td style="text-align:left">beforeMount</td>
-<td style="text-align:left">mounted</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">挂载</td>
+<td style="text-align:center">beforeMount</td>
+<td style="text-align:center">mounted</td>
 </tr>
 <tr>
-<td>3</td>
-<td>更新</td>
-<td style="text-align:left">beforeUpdate</td>
-<td style="text-align:left">updated</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">更新</td>
+<td style="text-align:center">beforeUpdate</td>
+<td style="text-align:center">updated</td>
 </tr>
 <tr>
-<td>4</td>
-<td>销毁</td>
-<td style="text-align:left">beforeDestroy</td>
-<td style="text-align:left">destroyed</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">销毁</td>
+<td style="text-align:center">beforeDestroy</td>
+<td style="text-align:center">destroyed</td>
 </tr>
 <tr>
-<td>5</td>
-<td>激活</td>
-<td style="text-align:left">activated</td>
-<td style="text-align:left">deactivated</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">激活</td>
+<td style="text-align:center">activated</td>
+<td style="text-align:center">deactivated</td>
 </tr>
 <tr>
-<td>6</td>
-<td>错误</td>
-<td style="text-align:left">errorCaptured</td>
-<td style="text-align:left">\</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">错误</td>
+<td style="text-align:center">errorCaptured</td>
+<td style="text-align:center">\</td>
 </tr>
 </tbody>
 </table>
@@ -319,14 +319,14 @@
 </blockquote>
 <p>那我们应该定义 prop， data， computed methods watch，<br>然后使用beforeCreate， created前后对比一下。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// process.vue</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// prop， data， computed methods watch</span></span><br><span class="line">  <span class="comment">// 自行定义，这里不浪费篇幅</span></span><br><span class="line">  props: &#123;&#125;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      msg: <span class="string">'Hey Jude!'</span></span><br><span class="line">    &#125;  </span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;&#125;,</span><br><span class="line">  watch: &#123;&#125;,</span><br><span class="line">  beforeCreate () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:orangeRed"</span>, <span class="string">'beforeCreate--实例创建前状态'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$props  :"</span> + <span class="keyword">this</span>.$props)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$data  :"</span> + <span class="keyword">this</span>.$data)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"computed :"</span> + <span class="keyword">this</span>.reverseMsg)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"methods  :"</span> + <span class="keyword">this</span>.reversedMsg)</span><br><span class="line">    <span class="comment">// this.msg = 'msg1'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  created ()  &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:red"</span>, <span class="string">'created--实例创建完成状态'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$props  :"</span> + <span class="keyword">this</span>.$props)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$data  :"</span> + <span class="keyword">this</span>.$data)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"computed :"</span> + <span class="keyword">this</span>.reverseMsg)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"methods  :"</span> + <span class="keyword">this</span>.reversedMsg())</span><br><span class="line">    <span class="comment">// this.msg = 'msg2'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/post/lifecycle/./beforeCreate-created.jpg" alt="beforeCreate-created.jpg"></p>
+<p><img src="/post/lifecycle/beforeCreate-created.jpg" alt="beforeCreate-created.jpg"></p>
 <p>prop， data， computed， methods， watch。<br>除了watch比较特殊，其他都得到了验证效果。<br>要验证也很简单，取消 beforeCreate， created 对 <code>this.msg</code>赋值的注释。<br><code>watch msg</code> 看看控制台会打印<code>msg1</code>还是<code>msg2</code>，或者两者皆可。<br>聪明的你肯定知道控制台只打印<code>msg2</code>的，所以我就不取消注释了。</p>
 <h3 id="mount"><a href="#mount" class="headerlink" title="mount"></a>mount</h3><blockquote>
 <p> el 被新创建的 vm.$el 替换。 如果根实例挂载到了一个文档内的元素上，当mounted被调用时vm.$el也在文档内。</p>
 </blockquote>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"skill-lifecycle-process"</span>&gt;</span></span><br><span class="line">    &#123;&#123; msg &#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  beforeMount () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:orangeRed"</span>, <span class="string">'beforeMount--挂载之前的状态'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$el  :"</span>,<span class="keyword">this</span>.$el)</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:orangeRed"</span>, <span class="string">'mounted--已经挂载的状态'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$el  :"</span>, <span class="keyword">this</span>.$el)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/post/lifecycle/./beforeMount-mounted.jpg" alt="beforeMount-mounted.jpg"></p>
+<p><img src="/post/lifecycle/beforeMount-mounted.jpg" alt="beforeMount-mounted.jpg"></p>
 <p>mount阶段，由于vue支持多种方式挂载DOM。<br>而vue实例在created之后，beforeMounted之前这一阶段，<br>对挂载DOM的方式有判断机制，这里的流程稍微复杂也比较重要。</p>
 <p>多种挂载DOM的方式。</p>
 <ul>
@@ -346,8 +346,7 @@
 <blockquote>
 <p>如果在实例化时存在这个选项，实例将立即进入编译过程，否则，需要显式调用 vm.$mount() 手动开启编译。</p>
 </blockquote>
-<p>el选项需要使用显示使用<code>new</code>创建的实例才生效。<br>为了方便，这里新建了<code>skill-lifecycle-el.html</code>放在publi（<a href="https://cli.vuejs.org/zh/guide/html-and-static-assets.html#public-%E6%96%87%E4%BB%B6%E5%A4%B9" target="_blank" rel="noopener">静态资源目录</a>）下。</p>
-<p><del>本来想用俄罗斯套娃的方式在vue组件套一个<code>new Vue()</code>，结果行不通。</del></p>
+<p>el选项需要使用显示使用<code>new</code>创建的实例才生效。<br>为了方便，这里新建了<code>skill-lifecycle-el.html</code>放在public（<a href="https://cli.vuejs.org/zh/guide/html-and-static-assets.html#public-%E6%96%87%E4%BB%B6%E5%A4%B9" target="_blank" rel="noopener">静态资源目录</a>）下。</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- skill-lifecycle-el.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-text</span>=<span class="string">"msg"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/vue/2.6.10/vue.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="actionscript">      <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="actionscript">        el: <span class="string">'#app'</span>,</span></span><br><span class="line">        props: &#123;&#125;,</span><br><span class="line">        data () &#123;</span><br><span class="line"><span class="actionscript">          <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="actionscript">            msg: <span class="string">'Hey Jude!'</span></span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        computed: &#123;&#125;,</span><br><span class="line">        methods: &#123;&#125;,</span><br><span class="line">        watch: &#123;&#125;,</span><br><span class="line">        beforeMount () &#123;</span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:orangeRed"</span>, <span class="string">'beforeMount--挂载之前的状态'</span>)</span></span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$el  :"</span>,<span class="keyword">this</span>.$el)</span></span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"el  :"</span> + <span class="keyword">this</span>.$el.innerHTML)</span></span><br><span class="line"><span class="actionscript">          <span class="comment">// debugger</span></span></span><br><span class="line">        &#125;,</span><br><span class="line">        mounted () &#123;</span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:orangeRed"</span>, <span class="string">'mounted--已经挂载的状态'</span>)</span></span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$el  :"</span>, <span class="keyword">this</span>.$el)</span></span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"el  :"</span> + <span class="keyword">this</span>.$el.innerHTML)</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line"><span class="actionscript">      <span class="comment">// vm.$mount('#app')</span></span></span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  </span><br><span class="line"><span class="tag">&lt;/<span class="name">bdoy</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><strong>el 还有 <a href="https://cn.vuejs.org/v2/api/#vm-mount" target="_blank" rel="noopener">vm.$mount</a> 必须要有一个，不然vue的声明周期就停止，beforeMount不触发。</strong></p>
 <blockquote>
@@ -355,14 +354,14 @@
 </blockquote>
 <p>两种挂载方式的效果是一样的。</p>
 <p><img src="/post/lifecycle/beforeMount-mounted-el.jpg" alt="beforeMount-mounted-el.jpg"></p>
-<p><strong>值得注意的是，<code>beforeMount</code>真实的DOM确实是会渲染双花括号还有指定的，<code>mounted</code>之后会被替换成真正的数据。</strong></p>
+<p><strong>值得注意的是，<code>beforeMount</code>真实的DOM确实是会渲染双花括号还有指令的，<code>mounted</code>之后会被替换成真正的数据。</strong></p>
 <h4 id="template"><a href="#template" class="headerlink" title="template"></a>template</h4><p>判断完el选项，接下来会判断有无<a href="https://cn.vuejs.org/v2/api/#template" target="_blank" rel="noopener">template选项</a></p>
 <blockquote>
 <p>一个字符串模板作为 Vue 实例的标识使用。模板将会替换挂载的元素。</p>
 </blockquote>
 <p>如此说来，作用跟el选项差不多，都是挂载元素的。</p>
 <p>那我们声明template选项，写上html tag string，然后把<code>#app</code> DOM里面的内容注释掉。（DOM保留）</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- skill-lifecycle-template.html --&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- 这个就叫 "#app" DOM --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">    &lt;p v-text="msg"&gt;&lt;/p&gt;</span></span><br><span class="line"><span class="comment">    &lt;p&gt;&#123;&#123; msg &#125;&#125;&lt;/p&gt;</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="actionscript">      el: <span class="string">'#app'</span>,</span></span><br><span class="line"><span class="handlebars"><span class="xml">      template: '<span class="tag">&lt;<span class="name">b</span>&gt;</span> </span><span class="template-variable">&#123;&#123; msg &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">b</span>&gt;</span>', // 这个就叫 template 选项</span></span></span><br><span class="line">      beforeMount () &#123;</span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:orangeRed"</span>, <span class="string">'beforeMount--挂载之前的状态'</span>)</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$el  :"</span>,<span class="keyword">this</span>.$el)</span></span><br><span class="line"><span class="actionscript">        <span class="comment">// debugger</span></span></span><br><span class="line">      &#125;,</span><br><span class="line">      mounted () &#123;</span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:orangeRed"</span>, <span class="string">'mounted--已经挂载的状态'</span>)</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$el  :"</span>, <span class="keyword">this</span>.$el)</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"#app :"</span>, <span class="built_in">document</span>.querySelector(<span class="string">'#app'</span>))</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- skill-lifecycle-template.html --&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- "#app" DOM --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">    &lt;p v-text="msg"&gt;&lt;/p&gt;</span></span><br><span class="line"><span class="comment">    &lt;p&gt;&#123;&#123; msg &#125;&#125;&lt;/p&gt;</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="actionscript">      el: <span class="string">'#app'</span>,</span></span><br><span class="line"><span class="handlebars"><span class="xml">      template: '<span class="tag">&lt;<span class="name">b</span>&gt;</span> </span><span class="template-variable">&#123;&#123; msg &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">b</span>&gt;</span>', // template 选项</span></span></span><br><span class="line">      beforeMount () &#123;</span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:orangeRed"</span>, <span class="string">'beforeMount--挂载之前的状态'</span>)</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$el  :"</span>,<span class="keyword">this</span>.$el)</span></span><br><span class="line"><span class="actionscript">        <span class="comment">// debugger</span></span></span><br><span class="line">      &#125;,</span><br><span class="line">      mounted () &#123;</span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:orangeRed"</span>, <span class="string">'mounted--已经挂载的状态'</span>)</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$el  :"</span>, <span class="keyword">this</span>.$el)</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"#app :"</span>, <span class="built_in">document</span>.querySelector(<span class="string">'#app'</span>))</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>我们在挂载后找一下<code>#app</code>还在不在。</p>
 <p><img src="/post/lifecycle/beforeMount-mounted-template.jpg" alt="beforeMount-mounted-template.jpg"></p>
 <p>从这图，我们可以知道：</p>
@@ -374,7 +373,7 @@
 <h4 id="render"><a href="#render" class="headerlink" title="render"></a>render</h4><p><a href="https://cn.vuejs.org/v2/api/#render" target="_blank" rel="noopener">render选项</a>是一个渲染函数，返回<strong>虚拟节点 (virtual node）</strong>，又名<strong>VNode</strong>。</p>
 <p>render函数的用法稍微复杂，又牵扯到虚拟DOM、JSX等技术点，之后会另写一篇详细讲解。</p>
 <p>假设我们现在并不明白render的用法，只知道它会返回虚拟节点，就够了。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- skill-lifecycle-template.html --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="actionscript">      el: <span class="string">'#app'</span>,</span></span><br><span class="line"><span class="handlebars"><span class="xml">        template: '<span class="tag">&lt;<span class="name">b</span>&gt;</span> </span><span class="template-variable">&#123;&#123; msg &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">b</span>&gt;</span>', // 这个就叫 template 选项</span></span></span><br><span class="line"><span class="actionscript">        render: <span class="function"><span class="keyword">function</span> <span class="params">(createElement, context)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">          <span class="keyword">return</span> createElement(<span class="string">'b'</span>, <span class="keyword">this</span>.msg + <span class="string">' from render'</span>)</span></span><br><span class="line"><span class="actionscript">        &#125;, <span class="comment">// render函数</span></span></span><br><span class="line">    &#125;)</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- skill-lifecycle-template.html --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="actionscript">      el: <span class="string">'#app'</span>,</span></span><br><span class="line"><span class="handlebars"><span class="xml">        template: '<span class="tag">&lt;<span class="name">b</span>&gt;</span> </span><span class="template-variable">&#123;&#123; msg &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">b</span>&gt;</span>', // template 选项</span></span></span><br><span class="line"><span class="actionscript">        render: <span class="function"><span class="keyword">function</span> <span class="params">(createElement, context)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">          <span class="keyword">return</span> createElement(<span class="string">'b'</span>, <span class="keyword">this</span>.msg + <span class="string">' from render'</span>)</span></span><br><span class="line"><span class="actionscript">        &#125;, <span class="comment">// render函数</span></span></span><br><span class="line">    &#125;)</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>可以看到这里template选项我们不注释，就算我们把注释掉template选项， 输出结果也还是一样。</p>
 <p><img src="/post/lifecycle/beforeMount-mounted-render.jpg" alt="beforeMount-mounted-render.jpg"></p>
 <p>可以粗暴理解为：render是template的升级版，template字符串模板，render返回的是由函数创建生成的VNode。</p>
@@ -398,7 +397,7 @@
 <p><a href="https://cn.vuejs.org/v2/guide/installation.html#%E8%BF%90%E8%A1%8C%E6%97%B6-%E7%BC%96%E8%AF%91%E5%99%A8-vs-%E5%8F%AA%E5%8C%85%E5%90%AB%E8%BF%90%E8%A1%8C%E6%97%B6" target="_blank" rel="noopener">什么时候必须使用完整版(编译器+运行时)？</a></p>
 <p><code>template 选项</code>、挂载DOM（<code>el选项</code>/<code>vm.$mount</code>)，需要依赖编译器编译，这时必须使用完整版。</p>
 <blockquote>
-<p>当使用 vue-loader 或 vueify 的时候，*.vue 文件内部的模板会在构建时预编译成 JavaScript。你在最终打好的包里实际上是不需要编译器的，所以只用运行时版本即可。</p>
+<p>当使用 <code>vue-loader</code> 或 <code>vueify</code> 的时候，*.vue 文件内部的模板会在构建时预编译成 JavaScript。你在最终打好的包里实际上是不需要编译器的，所以只用运行时版本即可。</p>
 </blockquote>
 <p>可以看看三个html文件的源码引用的vue版本。</p>
 <ul>
@@ -406,6 +405,8 @@
 <li><a href="https://github.com/Fifth-Patient/stardust/blob/master/public/skill-lifecycle-template.html" target="_blank" rel="noopener">skill-lifecycle-template.html</a></li>
 <li><a href="https://github.com/Fifth-Patient/stardust/blob/master/public/skill-lifecycle-render.html" target="_blank" rel="noopener">skill-lifecycle-render.html</a></li>
 </ul>
+<p>如何选择？</p>
+<p>推荐运行时，拥有预编功能，性能比完整版的要好，打包资源也小；<br>一个小代价就是不能使用template选项。<br>完整版是在运行的时候编译，性能相对一般，而且也需要把编译器一起打包。</p>
 <hr>
 <h3 id="update"><a href="#update" class="headerlink" title="update"></a>update</h3><blockquote>
 <p>数据更改导致的虚拟 DOM 重新渲染和打补丁。</p>
@@ -513,7 +514,7 @@
 <li>不能直接改变 store 中的状态，若想改变，唯一途径就是显式地提交 (commit) mutation。</li>
 </ul>
 <p>一个store可以包含<br>state：储存状态   单一状态树<br>action： 提交mutation方法，可执行异步操作<br>mutation：更改store状态，必须是同步操作<br>getter：从state派生状态，返回值会根据依赖缓存<br>modules：将store分割成模块</p>
-<p><img src="/post/component-communication/./vuex-Flux.png" alt="vuex-Flux"></p>
+<p><img src="/post/component-communication/vuex-Flux.png" alt="vuex-Flux"></p>
 <p>简单分析下这张图：</p>
 <ol>
 <li>State 直接渲染在vue组件</li>
@@ -698,7 +699,7 @@
 <p>如果在实际开发中，直接单纯只写一行，调试使用的<code>pre</code>可能会被其他DOM元素的样式所铺盖。<br>所以在编写组件前可以给这个<code>pre</code>写一点样式，先开头说的代码吧。</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">pre</span> <span class="attr">v-text</span>=<span class="string">"$data"</span>&gt;</span><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> Package  <span class="keyword">from</span> <span class="string">'@/../package.json'</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="actionscript">  name: <span class="string">'views-skill-control-panel'</span>,</span></span><br><span class="line">  data () &#123;</span><br><span class="line"><span class="actionscript">    <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="handlebars"><span class="xml">      strong: '<span class="tag">&lt;<span class="name">strong</span>&gt;</span>I \'m strong<span class="tag">&lt;/<span class="name">strong</span>&gt;</span>',</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">debugger</span>: <span class="literal">true</span>,</span></span><br><span class="line">      arr: [1,2,3,4,5],</span><br><span class="line"><span class="actionscript">      <span class="class"><span class="keyword">package</span>: <span class="title">Package</span></span></span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>可能比官网入门实例还要简单，唯一有疑问的可能也就是 <code>import</code> 一个 <code>json</code> 文件进来， 这在<code>es6 Modules</code>中是允许的，相关资料请自行查阅。</p>
-<p><img src="/post/control-pane/./pre-$data.jpg" alt="pre-$data"></p>
+<p><img src="/post/control-pane/pre-$data.jpg" alt="pre-$data"></p>
 <p>ok，先看html部分，再看css。</p>
 <p>html中，把<code>data</code>的属性都渲染到DOM上，并且html实体不会被转义，（<code>v-text</code>的功劳）。<br>数组、对象也全被展开，不像在浏览器控制台是默认闭合的，而且key值也被加上双引号，这是<code>JSON</code>的格式。</p>
 <p>内容上看非常友好，样式因为没写，非常朴素，但我们也不追求美感，能看就行，这里有几个因素影响了观看。</p>
@@ -713,7 +714,7 @@
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.pre-panel</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">z-index</span>: <span class="number">999999</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">380px</span>;</span><br><span class="line">  <span class="attribute">overflow</span>: auto;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, .<span class="number">7</span>); <span class="comment">/* 建议半透明背景 */</span></span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#34ecff</span>;                <span class="comment">/* 亮色的颜色即可 */</span></span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">  <span class="attribute">font-weight</span>: normal;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">text-indent</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>以上css样式都是在多次实践中一行行增加，现已能适应大多数页面。</strong></p>
 <p>模拟pre真实使用场景，完整代码：<a href="https://github.com/Fifth-Patient/stardust/blob/master/src/views/skill/control-panel/control-panel.vue" target="_blank" rel="noopener">传送门</a></p>
-<p><img src="/post/control-pane/./pre-panel.jpg" alt="pre-panel"></p>
+<p><img src="/post/control-pane/pre-panel.jpg" alt="pre-panel"></p>
 <p>即使在色彩强烈，内容纷乱的布局上，pre-panel仍然不影响阅读。</p>
 <h2 id="组件设计"><a href="#组件设计" class="headerlink" title="组件设计"></a>组件设计</h2><p>这个组件也非常简单，还是把一行代码还有样式抽象成一个组件，就基本完成了。<br>不过考虑到扩展性，我们也可以考虑下给组件一些常用的配置选项。</p>
 <p>第一步我们就是新建一个 <code>control-panel.vue</code> 文件，然后把刚才写的代码先复制过去。<br>接下来复用就会发现 <code>v-text=&quot;$data&quot;</code> 使得每次复用绑定的都是自身组件的变量。<br>我们这里应该使用插槽slot，然而每次插槽每次都要复用都要传值，我们更喜欢默认显示<code>$data</code>。<br>然后再给指定插槽内容；当然这个 <code>$data</code> 是 <code>control-panel</code> 的父组件（<strong>引用<code>control-panel</code>的那个组件</strong>）而不是自己。</p>
@@ -734,12 +735,12 @@
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pre</span> <span class="attr">style</span>=<span class="string">"position: fixed; top: 20px; left: 20px; bottom: 20px; width: 200px; overflow: auto; z-index: 9999; font-size: 16px; line-height: 20px; color: skyblue; background: rgba(0, 0, 0, .7)"</span>&gt;</span></span><br><span class="line">  &#123;&#123; formData &#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>什么？不想每次都复制一遍？想编辑器<strong>代码提示</strong>的功能一样打几个单词就帮你打一整段？<br>好伐，我也是一个嫌弃麻烦的人，如果你跟我一样是用vs code 的话，那我们可以用 vs code 增加用户自定义的代码提示。</p>
 <p><strong>vs code 菜单： 文件 =&gt; 首选项 =&gt; 用户代码片段 =&gt; vue-html.json</strong></p>
-<p><img src="/post/control-pane/./user_snippets.jpg" alt="user_snippets"></p>
-<p><img src="/post/control-pane/./user_snippets_lang.jpg" alt="user_snippets_lang"></p>
+<p><img src="/post/control-pane/user_snippets.jpg" alt="user_snippets"></p>
+<p><img src="/post/control-pane/user_snippets_lang.jpg" alt="user_snippets_lang"></p>
 <p>vue-html.json中增加这一段</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="string">"Print to pre dom"</span>: &#123;</span><br><span class="line">  <span class="string">"prefix"</span>: <span class="string">"vuepre"</span>,</span><br><span class="line">  <span class="string">"body"</span>: [</span><br><span class="line">   <span class="string">"&lt;pre style=\"position: fixed; top: 20px; left: 20px; bottom: 20px; width: 300px; overflow: auto; z-index: 9999; font-size: 16px; line-height: 20px; color: skyblue; background: rgba(0, 0, 0, .7)\"&gt;"</span>,</span><br><span class="line">   <span class="string">"  &#123;&#123; $$data$2 &#125;&#125;"</span>,</span><br><span class="line">   <span class="string">"&lt;/pre&gt;"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这样在<code>*.vue</code>的文件格式中，vs code 就支持对<code>vuepre</code>的代码提示了。</p>
-<p><img src="/post/control-pane/./vue-pre.jpg" alt="vue-pre"></p>
+<p><img src="/post/control-pane/vue-pre.jpg" alt="vue-pre"></p>
 <p>也直接直接拿我的 vue-html.json（<a href="/download/vue-html.txt">传送门</a>），使用任何文本编辑器打开，另存为：<code>%APPData%\Code\User\snippets\vue-html.json</code></p>
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>此本到这里就结束了，定义了一个可以监测变量的组件，相当于把控制台搬运到了网页，只是这个控制台是简化版的。<br><!-- 当然之后的开发，喜欢`control.log`、`debugger`还有打断点的还是会选择之前喜欢的方式调试。 --><br>只是很多开发者都很讨厌调试，因为只有自己的代码出现问题才会去调试。<br>其实调试本来就是一件苦中作乐的事情，平时写的代码，都是为了满足各种需求，有时候写得并不自由。<br>那么，我们在调试的时候，为何不使用一种更有趣味的方式去调试呢？起码这个时候自由度很高很高..</p>
 ]]></content>
@@ -839,13 +840,13 @@
 <p>首先，我们要明白，声明一个对象，哪怕是空属性，js也生成一些内置的属性和方法。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 两种方法声明对象 */</span></span><br><span class="line"><span class="comment">// 对象直接量</span></span><br><span class="line"><span class="keyword">var</span> obj_1 = &#123;&#125;;</span><br><span class="line"><span class="comment">// new关键字声明对象</span></span><br><span class="line"><span class="keyword">var</span> obj_2 = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在Object的原型对象添加属性</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.attr = <span class="string">'myarr'</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj_1); <span class="comment">// &#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(obj_2); <span class="comment">// &#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// js中的恒等符号对函数来说只比较引用</span></span><br><span class="line"><span class="comment">// obj_1.valuOf函数来源于Object.valueOf</span></span><br><span class="line"><span class="comment">// 更准确来说是Object.protoype.valueOf</span></span><br><span class="line"><span class="built_in">console</span>.log(obj_1.valueOf === <span class="built_in">Object</span>.valueOf); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// obj_1并未声明attr属性，通过Object.prototype继承得到attr属性</span></span><br><span class="line"><span class="built_in">console</span>.log(obj_1.attr); <span class="comment">// myarr</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<p><img src="/post/prototype/./obj_attr.jpg" alt="空对象属性的prototype"></p>
+<p><img src="/post/prototype/obj_attr.jpg" alt="空对象属性的prototype"></p>
 <p align="center"><em>firefox控制台中空对象仍然有<code>prototype</code>属性</em></p>
 
 <p>  误区：每个浏览器的控制台输出都不太一样，Chrome和Edge并不显示<code>prototype</code>属性，因为我们并没有给obj_1的<code>prototype</code>属性定义任何属性和方法。<br>  由于历代浏览器的更新和ECMAScript的修正，有时难以体现<code>prototype</code>和<code>__proto__</code>的存在，但我们的js代码能体现出它们的确是真实存在的。</p>
 <p><code>prototype</code>在这里称之为<code>obj_1</code>的原型对象，通过对象直接量和<code>new</code>关键字声明的对象都具有原型对象，继承自<code>Object.prototype</code>；几乎每个对象都有其原型对象，null是特例。</p>
 <h2 id="双对象实现原型继承"><a href="#双对象实现原型继承" class="headerlink" title="双对象实现原型继承"></a>双对象实现原型继承</h2><p>需要原型对象是为了实现继承，但有了原型对象我们还无法把<code>obj_1</code>与<code>Object.prototype</code>链接起来。<br>我们还需要另一个对象：<code>__proto__</code>，该属性能指向构造函数的原形属性<code>constructor</code>。<br>一些老版本浏览器不识别，有些无法识别其内部信息，但不影响程序的正常运行。</p>
-<p><img src="/post/prototype/./obj_1__proto__.jpg" alt="obj_1的__proto__"></p>
+<p><img src="/post/prototype/obj_1__proto__.jpg" alt="obj_1的__proto__"></p>
 <p align="center"><em><code>obj_1</code>的<code>__proto__</code>对象, 该属性下又有<code>__proto__</code>和<code>constructor</code>属性</em></p>
 
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">obj_1.__proto__ === <span class="built_in">Object</span>.prototype  <span class="comment">// true</span></span><br><span class="line">obj_1.__proto__.constructor === <span class="built_in">Object</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
@@ -868,11 +869,11 @@
 <li><code>Engineer</code>的原型指向<code>People</code>的实例对象</li>
 </ol>
 <p>我们再来一张图说明其关系</p>
-<p><img src="/post/prototype/./proto_egg.jpg" alt="proto_egg"><br><em>这个.. 一盘煎蛋？？</em></p>
+<p><img src="/post/prototype/proto_egg.jpg" alt="proto_egg"><br><em>这个.. 一盘煎蛋？？</em></p>
 <p>好伐，煎蛋就煎蛋，来，我们继续。</p>
 <p>请注意重点：<strong><code>Programmer</code>并无定义<code>type</code>, <code>name</code>属性，<code>Programmer</code>的<code>showMsg</code>中能显示<code>this.name</code> <code>this.type</code>分别来源于<code>Engineer</code>和<code>Programmer</code>的原型对象。</strong><br>很巧妙的一种属性搜索机制，<strong>自身的构造函数没有该属性，就从自身的原型对象中找，如果父类的原型对象没有，那么继续往父类的父类原型对象找，找到了就赋值；或直到没有父类，返回<code>undefined</code>；</strong>属性如此，方法也是同样的赋值机制。</p>
 <p>说到底属性搜索机制就是原型链的一种具体体现，我们再上一张图。</p>
-<p><img src="/post/prototype/./proto_link.jpg" alt="proto_link"></p>
+<p><img src="/post/prototype/proto_link.jpg" alt="proto_link"></p>
 <p>所以原型链的关键字是<strong>继承</strong>和<strong>原型对象</strong>！！</p>
 <blockquote>
 <p><strong>原型链：使用<code>prototype</code>和<code>_proto_</code>两个对象实现继承，由于是基于原型对象实现调用链，又称之为原型链。</strong></p>
@@ -1144,7 +1145,7 @@
 <li>首部字段：由关键字/值对组成，每行一对，关键字和值用英文冒号“:”分隔，关于请求/响应的信息</li>
 <li>主体：要发送给服务器的请求数据，或是服务器回复的响应数据</li>
 </ul>
-<p><img src="/post/http/./image1.jpg" alt="d7c0e5cfe6eb9ced302d14b50422caaf.png"></p>
+<p><img src="/http/image1.jpg" alt="d7c0e5cfe6eb9ced302d14b50422caaf.png"></p>
 <p><em>一个简单的HTTP实例 图源于《HTTP权威指南》</em></p>
 <h4 id="详解请求报文和响应报文"><a href="#详解请求报文和响应报文" class="headerlink" title="详解请求报文和响应报文"></a>详解请求报文和响应报文</h4><p>请求报文和响应报文的差异不大，可以对比了解。</p>
 <table>
@@ -1178,7 +1179,7 @@
 </tbody>
 </table>
 <h4 id="方法与状态码"><a href="#方法与状态码" class="headerlink" title="方法与状态码"></a>方法与状态码</h4><p>即使是同一个url，如果使用了其他的请求方法，服务器没有为url设置相对应的响应方法，那浏览器也不会拿到正确的资源，可能会出现的是几个数字（状态吗）和一句短语（原因短语）；</p>
-<p><img src="/post/http/./image2.jpg" alt></p>
+<p><img src="/http/image2.jpg" alt></p>
 <p><em><a href="https://fifth-patient.github.io/_">https://fifth-patient.github.io/_</a> 404代表了什么？</em></p>
 <p>因此最后小节我们有必要学习HTTP的请求方法和状态码。</p>
 <p>根据HTTP标准，HTTP请求定义了多种请求方法，在不同场景下执行不同的动作，常见的有…<br><code>GET</code>：向服务器请求资源（最常用的HTTP方法）<br><code>POST</code>：输入数据（一般用于用户登录，付款等）<br><code>PUT</code>：写入文档（更新数据，发表文章，评论等）<br><code>DELETE</code>：删除请求资源（删除资源，但服务器不一定会删除）</p>
@@ -1240,7 +1241,7 @@
 <blockquote>
 <p>五层模型将互联网分成了5个层，每一个层都定应了很多协议，所有的协议都是互联网协议。</p>
 </blockquote>
-<p><img src="/post/http/./image3.jpg" alt="f2eedd2ab72134dfe7c5350f9837b39d.png"></p>
+<p><img src="/http/image3.jpg" alt="f2eedd2ab72134dfe7c5350f9837b39d.png"></p>
 <p>应用层(Application Layer): 规定应用程序的数据格式。 应用程序协议<br>传输层(Transport Layer): 建立”端口到端口”的通信      UDP协议    TCP协议<br>网络层(Network Layer)： 建立”主机到主机”的通信      IP协议    ARP协议<br>链接层(Link Layer)：在“实体层”上方，确定了0和1的分组方式    以太网协议<br>实体层(Physical layer)：把电脑连接起来的物理手段。负责传送0和1的电信号</p>
 <p>顺序从下到上看，越下面的层，越靠近硬件；越上面的层，越靠近用户。</p>
 <!--
@@ -1258,7 +1259,7 @@
 </blockquote>
 <p>看到这里，应该理解了浏览器发送HTTP请求，是通过TCP/IP的方式与服务器链接的。</p>
 <p><strong>如何建立TCP连接？</strong></p>
-<p><img src="/post/http/./image4.jpg" alt="6c4f9604d0f4cc83eb0293c6659d646a.png"></p>
+<p><img src="/http/image4.jpg" alt="6c4f9604d0f4cc83eb0293c6659d646a.png"></p>
 <p><strong>三次握手</strong>：建立一个TCP连接时，需要客户端和服务器总共发送3个包</p>
 <ol>
 <li>首先，请求新的TCP 连接，客户端向服务器发送一个小的 TCP 分组这个分组中，包含的<strong>SYN</strong>标记说明这是一个连接请求。（a ）。 </li>
@@ -1283,7 +1284,7 @@
 </ul>
 <h3 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h3><p>虽说浏览器发送请求给服务器，但HTTP传输数据并不是直达目的服务器的。且HTTP是使用明文（不加密）传输数据的。这意味者请求在发送过程中，可能数据会被抓到导致泄露纂改，或经过某个网关/代理被拦截下来自己的身份被冒充，因此<strong>HTTP并不安全</strong>，为了确保请求能准确加密送达服务器，HTTPS出现了。</p>
 <!-- 龙舌兰是墨西哥的一种烈酒，它的传统喝法是配上柠檬和盐。 -->
-<p><img src="/post/http/./image5.jpg" alt="c04dbca7e19b08519ebf1ad2df2fd090.png"></p>
+<p><img src="/http/image5.jpg" alt="c04dbca7e19b08519ebf1ad2df2fd090.png"></p>
 <p><em>还记得之前一笔带过的TCP/IP分层（4层）吗？</em></p>
 <p><strong>如何加密？</strong></p>
 <p>HTTPS在安全的传输层上发送HTTP，在这里先加密后发送报文给TCP。同样遵循一层有一个或多个协议，安全层通过SSL或TLS协议实现（SSL采用公开密钥加密），安全层使得即使请求被第三方获取，也无法识别数据内容。</p>
@@ -1303,7 +1304,7 @@
 <p><strong>数字签名</strong>技术使用加密系统给报文签名，说明是谁编写的报文，同时也能证明报文没有被篡改过，这可以保证报文的准确传输。</p>
 <p><strong>服务器证书</strong>，SSL数字证书的一种形式，是因特网上的“ID卡”，由官方的“证书颁发机构”签发。记录了服务器名称，过期时间，证书发布者和发布者的数字签名等。</p>
 <p>SSL不检测站点服务器的证书，现代浏览器会自行检查，若没有证书，浏览器会警告用户连接并不安全。</p>
-<p><img src="/post/http/./image6.jpg" alt><br><img src="/post/http/./image7.jpg" alt></p>
+<p><img src="/http/image6.jpg" alt><br><img src="/http/image7.jpg" alt></p>
 <p><em>浏览器检测证书</em></p>
 <p>一个未正确配置SSL的网址，打开看看自己的浏览器有没有对SSL检测？<a href="https://self-signed.badssl.com/" target="_blank" rel="noopener">https://self-signed.badssl.com/</a></p>
 <p>相信比我更敏慧的你早已发现：”S”代表safe(安全)，safe是SSL/TLS。</p>
@@ -1475,64 +1476,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaScript ES2019 中的 8 个新功能</title>
-    <url>//post/ES2019/</url>
-    <content><![CDATA[<p>JavaScript 一直在不断改进和添加更多新功能。TC39 已经完成，并批准了 ES2019 的 8 项新功能。这个过程包含了 5 个阶段：</p>
-<ul>
-<li>第 0 阶段：稻草人</li>
-<li>第 1 阶段：提案</li>
-<li>第 2 阶段：草案</li>
-<li>第 3 阶段：候选</li>
-<li>第 4 阶段：已完成 / 已批准</li>
-</ul>
-<p>第 0 阶段的提案：<br><a href="https://github.com/tc39/proposals/blob/master/stage-0-proposals.md" target="_blank" rel="noopener">https://github.com/tc39/proposals/blob/master/stage-0-proposals.md</a></p>
-<p>第 1 至 3 阶段的提案：<br><a href="https://github.com/tc39/proposals" target="_blank" rel="noopener">https://github.com/tc39/proposals</a></p>
-<p>第 4 阶段的提案：<br><a href="https://github.com/tc39/proposals/blob/master/finished-proposals.md" target="_blank" rel="noopener">https://github.com/tc39/proposals/blob/master/finished-proposals.md</a></p>
-<p>废话不多说，接下来让我们来逐一介绍这些功能。</p>
-<a id="more"></a>
-<h3 id="1-可选的-catch-绑定"><a href="#1-可选的-catch-绑定" class="headerlink" title="1.可选的 catch 绑定"></a>1.可选的 catch 绑定</h3><p>可选的 catch 绑定提案是为了能够选择性地移除使用不到的 catch 绑定。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">	</span><br><span class="line">  // trying to use a new ES2019 feature</span><br><span class="line">	</span><br><span class="line">  // which may not be implemented in other browsers</span><br><span class="line">	</span><br><span class="line">&#125; catch (unused) &#123;</span><br><span class="line">	</span><br><span class="line">  // revert back to old way</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>现在可以删除使用不到的绑定。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">	</span><br><span class="line">  ...</span><br><span class="line">	</span><br><span class="line">&#125; catch &#123;</span><br><span class="line">	</span><br><span class="line">  ...</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="2-JSON-超集"><a href="#2-JSON-超集" class="headerlink" title="2.JSON 超集"></a>2.JSON 超集</h3><p>这个提案的目的是让 JSON 字符串可以包含未转义的 U+2028 LINE SEPARATOR 和 U+2029 PARAGRAPH SEPARATOR 字符，而 ECMAScript 字符串是不能包含这些字符的。在 ES2019 生效之前，这样做会出现“SyntaxError: Invalid or unexpected token”错误。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const LS = eval(&apos;&quot;\u2028&quot;&apos;);</span><br><span class="line">	</span><br><span class="line">const PS = eval(&quot;&apos;\u2029&apos;&quot;);</span><br></pre></td></tr></table></figure>
-<h3 id="3-符号描述"><a href="#3-符号描述" class="headerlink" title="3. 符号描述"></a>3. 符号描述</h3><p>符号是在 ES2015 中引入的，具有非常独特的功能。在 ES2019 中可以提供给定的描述，目的是避免间接从 Symbol.prototype.toString 获取描述。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const mySymbol = Symbol(&apos;myDescription&apos;);</span><br><span class="line">	</span><br><span class="line">console.log(mySymbol); // Symbol(myDescription)</span><br><span class="line">	</span><br><span class="line">console.log(mySymbol.toString()); // Symbol(myDescription)</span><br><span class="line">	</span><br><span class="line">console.log(mySymbol.description); // myDescription</span><br></pre></td></tr></table></figure>
-<h3 id="4-修订版的-Function-prototype-toString"><a href="#4-修订版的-Function-prototype-toString" class="headerlink" title="4. 修订版的 Function.prototype.toString"></a>4. 修订版的 Function.prototype.toString</h3><p>之前的函数原型已经有 toString 方法，但是在 ES2019 中，它经过了修订，可以包含函数内的注释，不过不适应于箭头函数。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function /* comment */ foo /* another comment */ ()&#123;&#125;</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">// Before</span><br><span class="line">	</span><br><span class="line">console.log(foo.toString()); // function foo()&#123;&#125;</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">// Now ES2019</span><br><span class="line">	</span><br><span class="line">console.log(foo.toString()); // function /* comment */ foo /* another comment */ ()&#123;&#125;</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">// Arrow Syntax</span><br><span class="line">	</span><br><span class="line">const bar /* comment */ = /* another comment */ () =&gt; &#123;&#125;</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">console.log(bar.toString()); // () =&gt; &#123;&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="5-Object-fromEntries"><a href="#5-Object-fromEntries" class="headerlink" title="5.Object.fromEntries"></a>5.Object.fromEntries</h3><p>它是 Object.entries 方法的反向操作，可用于克隆对象。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const obj = &#123;</span><br><span class="line">	</span><br><span class="line">    prop1: 1,</span><br><span class="line">	</span><br><span class="line">    prop2: 2,</span><br><span class="line">	</span><br><span class="line">&#125;;</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">const entries = Object.entries(obj);</span><br><span class="line">	</span><br><span class="line">console.log(entries); // [ [ &apos;prop1&apos;, 1 ], [ &apos;prop2&apos;, 2 ] ]</span><br><span class="line">	</span><br><span class="line">const fromEntries = Object.fromEntries(entries);</span><br><span class="line">	</span><br><span class="line">console.log(fromEntries); // Object &#123; prop1: 1, prop2: 2 &#125;</span><br><span class="line">	</span><br><span class="line">console.log(obj === fromEntries); // false</span><br><span class="line"></span><br><span class="line">不过需要注意的是，嵌入式对象 / 数组都只是引用。</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">const obj = &#123;</span><br><span class="line">	</span><br><span class="line">    prop1: 1,</span><br><span class="line">	</span><br><span class="line">    prop2: 2,</span><br><span class="line">	</span><br><span class="line">    deepCopy: &#123;</span><br><span class="line">	</span><br><span class="line">        mutateMe: true</span><br><span class="line">	</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">&#125;;</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">const entries = Object.entries(obj);</span><br><span class="line">	</span><br><span class="line">const fromEntries = Object.fromEntries(entries);</span><br><span class="line">	</span><br><span class="line">fromEntries.deepCopy.mutateMe = false;</span><br><span class="line">	</span><br><span class="line">console.log(obj.deepCopy.mutateMe); // false</span><br></pre></td></tr></table></figure>
-<h3 id="6-格式化的-JSON-stringify"><a href="#6-格式化的-JSON-stringify" class="headerlink" title="6. 格式化的 JSON.stringify"></a>6. 格式化的 JSON.stringify</h3><p>这个提案是由同一个人提出来的，与 JSON 超集有关。ES2019 将使用 JSON 转义序列表示输出结果，而不是返回 UTF-16 代码单元。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// Before</span><br><span class="line">	</span><br><span class="line">console.log(JSON.stringify(&apos;\uD800&apos;)); // &quot;?&quot;</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">// Now ES2019</span><br><span class="line">	</span><br><span class="line">console.log(JSON.stringify(&apos;\uD800&apos;)); // &quot;\ud800&quot;</span><br><span class="line"></span><br><span class="line">7.String.prototype 的 trimStart 和 trimEnd</span><br><span class="line"></span><br><span class="line">String 原型已经有了 trim 方法，用来移除字符串开头和结尾的空格。而 ES2019 引入了 trimStart 和 trimEnd。</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">// Trim</span><br><span class="line">	</span><br><span class="line">const name = &quot;   Codedam &quot;;</span><br><span class="line">	</span><br><span class="line">console.log(name.trim());   // &quot;Codedam&quot;</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">// Trim Start</span><br><span class="line">	</span><br><span class="line">const description = &quot;   Unlocks Secret Codes &quot;;</span><br><span class="line">	</span><br><span class="line">console.log(description.trimStart());   // &quot;Unlocks Secret Codes &quot;</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">// Trim End</span><br><span class="line">	</span><br><span class="line">const category = &quot;  JavaScript &quot;;</span><br><span class="line">	</span><br><span class="line">console.log(category.trimEnd());    // &quot;  JavaScript&quot;</span><br></pre></td></tr></table></figure>
-<h3 id="8-Array-prototype-的-flat-和-flatMap"><a href="#8-Array-prototype-的-flat-和-flatMap" class="headerlink" title="8.Array.prototype 的 flat 和 flatMap"></a>8.Array.prototype 的 flat 和 flatMap</h3><p>flat 方法通过将所有子数组元素以递归方式连接到指定的深度来创建数组。默认深度为 1，使数组的第一层嵌套展平。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const arr = [1, 2, [3, 4, [5, 6]]];</span><br><span class="line">	</span><br><span class="line">arr.flat(); // [1, 2, 3, 4, [5, 6]]</span><br><span class="line">	</span><br><span class="line">arr.flat(2); // [1, 2, 3, 4, 5, 6]</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">// You can use Infinity to flatten all the nested arrays no matter how deep the array is</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">const arrExtreme = [1, [2, [3, [4, [5, 6, 7, [8, 9]]]]]];</span><br><span class="line">	</span><br><span class="line">arrExtreme.flat(Infinity); // [1, 2, 3, 4, 5, 6, 7, 8, 9]</span><br><span class="line"></span><br><span class="line">flatMap 方法类似于 flat，并且还与 map 相关，它会先映射数组然后将其展平。</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">const arr = [&apos;Codedam&apos;, &apos;is Awsome&apos;, &apos;!&apos;];</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">const mapResult = arr.map(item =&gt; item.split(&apos; &apos;));</span><br><span class="line">	</span><br><span class="line">console.log(mapResult); // [ [ &apos;Codedam&apos; ], [ &apos;is&apos;, &apos;Awsome&apos; ], [ &apos;!&apos; ] ]</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">const flatMapResult = arr.flatMap(chunk =&gt; chunk.split(&apos; &apos;));</span><br><span class="line">	</span><br><span class="line">console.log(flatMapResult); // [&apos;Codedam&apos;, &apos;is&apos;,  &apos;Awsome&apos;, &apos;!&apos;];</span><br></pre></td></tr></table></figure>
-<p>其他</p>
-<p>我还想强调一下现在处在第 3 阶段的一些有用的特性。</p>
-<ul>
-<li><p><a href="https://github.com/tc39/proposal-global" target="_blank" rel="noopener">globalThis</a>；</p>
-</li>
-<li><p><a href="https://github.com/tc39/proposal-bigint" target="_blank" rel="noopener">BigInt</a>；</p>
-</li>
-<li><p><a href="https://github.com/tc39/proposal-dynamic-import" target="_blank" rel="noopener">import()</a>；</p>
-</li>
-<li><p><a href="https://github.com/tc39/proposal-regexp-legacy-features" target="_blank" rel="noopener">遗留的 RegEx</a>；</p>
-</li>
-<li><p><a href="https://github.com/tc39/proposal-private-methods" target="_blank" rel="noopener">私有的实例方法</a>；</p>
-</li>
-<li><p><a href="https://github.com/tc39/String.prototype.matchAll" target="_blank" rel="noopener">String.prototype.matchAll</a>。</p>
-</li>
-</ul>
-<p>英文原文：<a href="https://codedam.com/8-new-features-javascript-es2019/" target="_blank" rel="noopener">https://codedam.com/8-new-features-javascript-es2019/</a></p>
-<p>更多内容，请关注前端之巅。</p>
-]]></content>
-      <categories>
-        <category>转载</category>
-      </categories>
-      <tags>
-        <tag>转载</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>不再性感，不再赚钱，数据科学的时代变了</title>
     <url>//post/database/</url>
     <content><![CDATA[<blockquote>
@@ -1678,6 +1621,64 @@ UVA（美国弗吉尼亚大学）很自豪地宣布开设数据科学学院的�
 <p>不要因为想太多就望而却步。先从小处开始，做一些小的事情，学习一些小的东西，构建一些小的东西，把你做的事情告诉其他人。请记住，你在数据科学领域的第一份工作可能不是数据科学家。</p>
 <p>祝你好运！</p>
 <p>英文原文：<br><a href="https://veekaybee.github.io/2019/02/13/data-science-is-different/" target="_blank" rel="noopener">https://veekaybee.github.io/2019/02/13/data-science-is-different/</a></p>
+]]></content>
+      <categories>
+        <category>转载</category>
+      </categories>
+      <tags>
+        <tag>转载</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript ES2019 中的 8 个新功能</title>
+    <url>//post/ES2019/</url>
+    <content><![CDATA[<p>JavaScript 一直在不断改进和添加更多新功能。TC39 已经完成，并批准了 ES2019 的 8 项新功能。这个过程包含了 5 个阶段：</p>
+<ul>
+<li>第 0 阶段：稻草人</li>
+<li>第 1 阶段：提案</li>
+<li>第 2 阶段：草案</li>
+<li>第 3 阶段：候选</li>
+<li>第 4 阶段：已完成 / 已批准</li>
+</ul>
+<p>第 0 阶段的提案：<br><a href="https://github.com/tc39/proposals/blob/master/stage-0-proposals.md" target="_blank" rel="noopener">https://github.com/tc39/proposals/blob/master/stage-0-proposals.md</a></p>
+<p>第 1 至 3 阶段的提案：<br><a href="https://github.com/tc39/proposals" target="_blank" rel="noopener">https://github.com/tc39/proposals</a></p>
+<p>第 4 阶段的提案：<br><a href="https://github.com/tc39/proposals/blob/master/finished-proposals.md" target="_blank" rel="noopener">https://github.com/tc39/proposals/blob/master/finished-proposals.md</a></p>
+<p>废话不多说，接下来让我们来逐一介绍这些功能。</p>
+<a id="more"></a>
+<h3 id="1-可选的-catch-绑定"><a href="#1-可选的-catch-绑定" class="headerlink" title="1.可选的 catch 绑定"></a>1.可选的 catch 绑定</h3><p>可选的 catch 绑定提案是为了能够选择性地移除使用不到的 catch 绑定。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">	</span><br><span class="line">  // trying to use a new ES2019 feature</span><br><span class="line">	</span><br><span class="line">  // which may not be implemented in other browsers</span><br><span class="line">	</span><br><span class="line">&#125; catch (unused) &#123;</span><br><span class="line">	</span><br><span class="line">  // revert back to old way</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在可以删除使用不到的绑定。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">	</span><br><span class="line">  ...</span><br><span class="line">	</span><br><span class="line">&#125; catch &#123;</span><br><span class="line">	</span><br><span class="line">  ...</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-JSON-超集"><a href="#2-JSON-超集" class="headerlink" title="2.JSON 超集"></a>2.JSON 超集</h3><p>这个提案的目的是让 JSON 字符串可以包含未转义的 U+2028 LINE SEPARATOR 和 U+2029 PARAGRAPH SEPARATOR 字符，而 ECMAScript 字符串是不能包含这些字符的。在 ES2019 生效之前，这样做会出现“SyntaxError: Invalid or unexpected token”错误。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const LS = eval(&apos;&quot;\u2028&quot;&apos;);</span><br><span class="line">	</span><br><span class="line">const PS = eval(&quot;&apos;\u2029&apos;&quot;);</span><br></pre></td></tr></table></figure>
+<h3 id="3-符号描述"><a href="#3-符号描述" class="headerlink" title="3. 符号描述"></a>3. 符号描述</h3><p>符号是在 ES2015 中引入的，具有非常独特的功能。在 ES2019 中可以提供给定的描述，目的是避免间接从 Symbol.prototype.toString 获取描述。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const mySymbol = Symbol(&apos;myDescription&apos;);</span><br><span class="line">	</span><br><span class="line">console.log(mySymbol); // Symbol(myDescription)</span><br><span class="line">	</span><br><span class="line">console.log(mySymbol.toString()); // Symbol(myDescription)</span><br><span class="line">	</span><br><span class="line">console.log(mySymbol.description); // myDescription</span><br></pre></td></tr></table></figure>
+<h3 id="4-修订版的-Function-prototype-toString"><a href="#4-修订版的-Function-prototype-toString" class="headerlink" title="4. 修订版的 Function.prototype.toString"></a>4. 修订版的 Function.prototype.toString</h3><p>之前的函数原型已经有 toString 方法，但是在 ES2019 中，它经过了修订，可以包含函数内的注释，不过不适应于箭头函数。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function /* comment */ foo /* another comment */ ()&#123;&#125;</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">// Before</span><br><span class="line">	</span><br><span class="line">console.log(foo.toString()); // function foo()&#123;&#125;</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">// Now ES2019</span><br><span class="line">	</span><br><span class="line">console.log(foo.toString()); // function /* comment */ foo /* another comment */ ()&#123;&#125;</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">// Arrow Syntax</span><br><span class="line">	</span><br><span class="line">const bar /* comment */ = /* another comment */ () =&gt; &#123;&#125;</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">console.log(bar.toString()); // () =&gt; &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-Object-fromEntries"><a href="#5-Object-fromEntries" class="headerlink" title="5.Object.fromEntries"></a>5.Object.fromEntries</h3><p>它是 Object.entries 方法的反向操作，可用于克隆对象。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const obj = &#123;</span><br><span class="line">	</span><br><span class="line">    prop1: 1,</span><br><span class="line">	</span><br><span class="line">    prop2: 2,</span><br><span class="line">	</span><br><span class="line">&#125;;</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">const entries = Object.entries(obj);</span><br><span class="line">	</span><br><span class="line">console.log(entries); // [ [ &apos;prop1&apos;, 1 ], [ &apos;prop2&apos;, 2 ] ]</span><br><span class="line">	</span><br><span class="line">const fromEntries = Object.fromEntries(entries);</span><br><span class="line">	</span><br><span class="line">console.log(fromEntries); // Object &#123; prop1: 1, prop2: 2 &#125;</span><br><span class="line">	</span><br><span class="line">console.log(obj === fromEntries); // false</span><br><span class="line"></span><br><span class="line">不过需要注意的是，嵌入式对象 / 数组都只是引用。</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">const obj = &#123;</span><br><span class="line">	</span><br><span class="line">    prop1: 1,</span><br><span class="line">	</span><br><span class="line">    prop2: 2,</span><br><span class="line">	</span><br><span class="line">    deepCopy: &#123;</span><br><span class="line">	</span><br><span class="line">        mutateMe: true</span><br><span class="line">	</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">&#125;;</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">const entries = Object.entries(obj);</span><br><span class="line">	</span><br><span class="line">const fromEntries = Object.fromEntries(entries);</span><br><span class="line">	</span><br><span class="line">fromEntries.deepCopy.mutateMe = false;</span><br><span class="line">	</span><br><span class="line">console.log(obj.deepCopy.mutateMe); // false</span><br></pre></td></tr></table></figure>
+<h3 id="6-格式化的-JSON-stringify"><a href="#6-格式化的-JSON-stringify" class="headerlink" title="6. 格式化的 JSON.stringify"></a>6. 格式化的 JSON.stringify</h3><p>这个提案是由同一个人提出来的，与 JSON 超集有关。ES2019 将使用 JSON 转义序列表示输出结果，而不是返回 UTF-16 代码单元。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// Before</span><br><span class="line">	</span><br><span class="line">console.log(JSON.stringify(&apos;\uD800&apos;)); // &quot;?&quot;</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">// Now ES2019</span><br><span class="line">	</span><br><span class="line">console.log(JSON.stringify(&apos;\uD800&apos;)); // &quot;\ud800&quot;</span><br><span class="line"></span><br><span class="line">7.String.prototype 的 trimStart 和 trimEnd</span><br><span class="line"></span><br><span class="line">String 原型已经有了 trim 方法，用来移除字符串开头和结尾的空格。而 ES2019 引入了 trimStart 和 trimEnd。</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">// Trim</span><br><span class="line">	</span><br><span class="line">const name = &quot;   Codedam &quot;;</span><br><span class="line">	</span><br><span class="line">console.log(name.trim());   // &quot;Codedam&quot;</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">// Trim Start</span><br><span class="line">	</span><br><span class="line">const description = &quot;   Unlocks Secret Codes &quot;;</span><br><span class="line">	</span><br><span class="line">console.log(description.trimStart());   // &quot;Unlocks Secret Codes &quot;</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">// Trim End</span><br><span class="line">	</span><br><span class="line">const category = &quot;  JavaScript &quot;;</span><br><span class="line">	</span><br><span class="line">console.log(category.trimEnd());    // &quot;  JavaScript&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="8-Array-prototype-的-flat-和-flatMap"><a href="#8-Array-prototype-的-flat-和-flatMap" class="headerlink" title="8.Array.prototype 的 flat 和 flatMap"></a>8.Array.prototype 的 flat 和 flatMap</h3><p>flat 方法通过将所有子数组元素以递归方式连接到指定的深度来创建数组。默认深度为 1，使数组的第一层嵌套展平。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const arr = [1, 2, [3, 4, [5, 6]]];</span><br><span class="line">	</span><br><span class="line">arr.flat(); // [1, 2, 3, 4, [5, 6]]</span><br><span class="line">	</span><br><span class="line">arr.flat(2); // [1, 2, 3, 4, 5, 6]</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">// You can use Infinity to flatten all the nested arrays no matter how deep the array is</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">const arrExtreme = [1, [2, [3, [4, [5, 6, 7, [8, 9]]]]]];</span><br><span class="line">	</span><br><span class="line">arrExtreme.flat(Infinity); // [1, 2, 3, 4, 5, 6, 7, 8, 9]</span><br><span class="line"></span><br><span class="line">flatMap 方法类似于 flat，并且还与 map 相关，它会先映射数组然后将其展平。</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">const arr = [&apos;Codedam&apos;, &apos;is Awsome&apos;, &apos;!&apos;];</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">const mapResult = arr.map(item =&gt; item.split(&apos; &apos;));</span><br><span class="line">	</span><br><span class="line">console.log(mapResult); // [ [ &apos;Codedam&apos; ], [ &apos;is&apos;, &apos;Awsome&apos; ], [ &apos;!&apos; ] ]</span><br><span class="line">	</span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">const flatMapResult = arr.flatMap(chunk =&gt; chunk.split(&apos; &apos;));</span><br><span class="line">	</span><br><span class="line">console.log(flatMapResult); // [&apos;Codedam&apos;, &apos;is&apos;,  &apos;Awsome&apos;, &apos;!&apos;];</span><br></pre></td></tr></table></figure>
+<p>其他</p>
+<p>我还想强调一下现在处在第 3 阶段的一些有用的特性。</p>
+<ul>
+<li><p><a href="https://github.com/tc39/proposal-global" target="_blank" rel="noopener">globalThis</a>；</p>
+</li>
+<li><p><a href="https://github.com/tc39/proposal-bigint" target="_blank" rel="noopener">BigInt</a>；</p>
+</li>
+<li><p><a href="https://github.com/tc39/proposal-dynamic-import" target="_blank" rel="noopener">import()</a>；</p>
+</li>
+<li><p><a href="https://github.com/tc39/proposal-regexp-legacy-features" target="_blank" rel="noopener">遗留的 RegEx</a>；</p>
+</li>
+<li><p><a href="https://github.com/tc39/proposal-private-methods" target="_blank" rel="noopener">私有的实例方法</a>；</p>
+</li>
+<li><p><a href="https://github.com/tc39/String.prototype.matchAll" target="_blank" rel="noopener">String.prototype.matchAll</a>。</p>
+</li>
+</ul>
+<p>英文原文：<a href="https://codedam.com/8-new-features-javascript-es2019/" target="_blank" rel="noopener">https://codedam.com/8-new-features-javascript-es2019/</a></p>
+<p>更多内容，请关注前端之巅。</p>
 ]]></content>
       <categories>
         <category>转载</category>

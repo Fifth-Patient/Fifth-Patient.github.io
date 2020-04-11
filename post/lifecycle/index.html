@@ -62,7 +62,7 @@
 <meta property="og:image" content="https://fifth-patient.github.io/post/lifecycle/beforeMount-mounted-template.jpg">
 <meta property="og:image" content="https://fifth-patient.github.io/post/lifecycle/beforeMount-mounted-render.jpg">
 <meta property="og:image" content="https://fifth-patient.github.io/post/lifecycle/beforeUpdate-updated.jpg">
-<meta property="og:updated_time" content="2020-01-26T14:54:18.009Z">
+<meta property="og:updated_time" content="2020-04-10T15:04:53.126Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue技巧篇：生命周期">
 <meta name="twitter:description" content="前言 每个 Vue 实例在被创建时都要经过一系列的初始化过程——例如，需要设置数据监听、编译模板、将实例挂载到 DOM 并在数据变化时更新 DOM 等。同时在这个过程中也会运行一些叫做生命周期钩子的函数，这给了用户在不同阶段添加自己的代码的机会。  其实对生命周期而言，我们要搞懂的是。  什么阶段初始化数据 什么阶段初始化事件 什么阶段渲染DOM 什么阶段挂载数据">
@@ -239,7 +239,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-26 22:54:18" itemprop="dateModified" datetime="2020-01-26T22:54:18+08:00">2020-01-26</time>
+                <time title="修改时间：2020-04-10 23:04:53" itemprop="dateModified" datetime="2020-04-10T23:04:53+08:00">2020-04-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -282,53 +282,53 @@
 <li>什么阶段挂载数据</li>
 </ol>
 <a id="more"></a>
-<h2 id="生命周期图示"><a href="#生命周期图示" class="headerlink" title="生命周期图示"></a>生命周期图示</h2><p><img src="/post/lifecycle/./lifecycle.png" alt="lifecycle"></p>
+<h2 id="生命周期图示"><a href="#生命周期图示" class="headerlink" title="生命周期图示"></a>生命周期图示</h2><p><img src="/post/lifecycle/lifecycle.png" alt="lifecycle"></p>
 <p>生命周期钩子函数可以分成6个类型，除了一个最少用的子孙组件错误钩子函数。<br>每个类型都有 “beforeXX” “XXed”，总共有11个生命周期钩子函数。</p>
 <table>
 <thead>
 <tr>
-<th>序</th>
-<th>类型</th>
-<th style="text-align:left">钩子函数名 - 1</th>
-<th style="text-align:left">钩子函数名 - 2</th>
+<th style="text-align:center">序</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">钩子函数名 - 1</th>
+<th style="text-align:center">钩子函数名 - 2</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td>创建</td>
-<td style="text-align:left">beforeCreate</td>
-<td style="text-align:left">created</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">创建</td>
+<td style="text-align:center">beforeCreate</td>
+<td style="text-align:center">created</td>
 </tr>
 <tr>
-<td>2</td>
-<td>挂载</td>
-<td style="text-align:left">beforeMount</td>
-<td style="text-align:left">mounted</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">挂载</td>
+<td style="text-align:center">beforeMount</td>
+<td style="text-align:center">mounted</td>
 </tr>
 <tr>
-<td>3</td>
-<td>更新</td>
-<td style="text-align:left">beforeUpdate</td>
-<td style="text-align:left">updated</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">更新</td>
+<td style="text-align:center">beforeUpdate</td>
+<td style="text-align:center">updated</td>
 </tr>
 <tr>
-<td>4</td>
-<td>销毁</td>
-<td style="text-align:left">beforeDestroy</td>
-<td style="text-align:left">destroyed</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">销毁</td>
+<td style="text-align:center">beforeDestroy</td>
+<td style="text-align:center">destroyed</td>
 </tr>
 <tr>
-<td>5</td>
-<td>激活</td>
-<td style="text-align:left">activated</td>
-<td style="text-align:left">deactivated</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">激活</td>
+<td style="text-align:center">activated</td>
+<td style="text-align:center">deactivated</td>
 </tr>
 <tr>
-<td>6</td>
-<td>错误</td>
-<td style="text-align:left">errorCaptured</td>
-<td style="text-align:left">\</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">错误</td>
+<td style="text-align:center">errorCaptured</td>
+<td style="text-align:center">\</td>
 </tr>
 </tbody>
 </table>
@@ -353,14 +353,14 @@
 </blockquote>
 <p>那我们应该定义 prop， data， computed methods watch，<br>然后使用beforeCreate， created前后对比一下。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// process.vue</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// prop， data， computed methods watch</span></span><br><span class="line">  <span class="comment">// 自行定义，这里不浪费篇幅</span></span><br><span class="line">  props: &#123;&#125;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      msg: <span class="string">'Hey Jude!'</span></span><br><span class="line">    &#125;  </span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;&#125;,</span><br><span class="line">  watch: &#123;&#125;,</span><br><span class="line">  beforeCreate () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:orangeRed"</span>, <span class="string">'beforeCreate--实例创建前状态'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$props  :"</span> + <span class="keyword">this</span>.$props)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$data  :"</span> + <span class="keyword">this</span>.$data)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"computed :"</span> + <span class="keyword">this</span>.reverseMsg)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"methods  :"</span> + <span class="keyword">this</span>.reversedMsg)</span><br><span class="line">    <span class="comment">// this.msg = 'msg1'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  created ()  &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:red"</span>, <span class="string">'created--实例创建完成状态'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$props  :"</span> + <span class="keyword">this</span>.$props)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$data  :"</span> + <span class="keyword">this</span>.$data)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"computed :"</span> + <span class="keyword">this</span>.reverseMsg)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"methods  :"</span> + <span class="keyword">this</span>.reversedMsg())</span><br><span class="line">    <span class="comment">// this.msg = 'msg2'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/post/lifecycle/./beforeCreate-created.jpg" alt="beforeCreate-created.jpg"></p>
+<p><img src="/post/lifecycle/beforeCreate-created.jpg" alt="beforeCreate-created.jpg"></p>
 <p>prop， data， computed， methods， watch。<br>除了watch比较特殊，其他都得到了验证效果。<br>要验证也很简单，取消 beforeCreate， created 对 <code>this.msg</code>赋值的注释。<br><code>watch msg</code> 看看控制台会打印<code>msg1</code>还是<code>msg2</code>，或者两者皆可。<br>聪明的你肯定知道控制台只打印<code>msg2</code>的，所以我就不取消注释了。</p>
 <h3 id="mount"><a href="#mount" class="headerlink" title="mount"></a>mount</h3><blockquote>
 <p> el 被新创建的 vm.$el 替换。 如果根实例挂载到了一个文档内的元素上，当mounted被调用时vm.$el也在文档内。</p>
 </blockquote>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"skill-lifecycle-process"</span>&gt;</span></span><br><span class="line">    &#123;&#123; msg &#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  beforeMount () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:orangeRed"</span>, <span class="string">'beforeMount--挂载之前的状态'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$el  :"</span>,<span class="keyword">this</span>.$el)</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:orangeRed"</span>, <span class="string">'mounted--已经挂载的状态'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$el  :"</span>, <span class="keyword">this</span>.$el)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/post/lifecycle/./beforeMount-mounted.jpg" alt="beforeMount-mounted.jpg"></p>
+<p><img src="/post/lifecycle/beforeMount-mounted.jpg" alt="beforeMount-mounted.jpg"></p>
 <p>mount阶段，由于vue支持多种方式挂载DOM。<br>而vue实例在created之后，beforeMounted之前这一阶段，<br>对挂载DOM的方式有判断机制，这里的流程稍微复杂也比较重要。</p>
 <p>多种挂载DOM的方式。</p>
 <ul>
@@ -380,8 +380,7 @@
 <blockquote>
 <p>如果在实例化时存在这个选项，实例将立即进入编译过程，否则，需要显式调用 vm.$mount() 手动开启编译。</p>
 </blockquote>
-<p>el选项需要使用显示使用<code>new</code>创建的实例才生效。<br>为了方便，这里新建了<code>skill-lifecycle-el.html</code>放在publi（<a href="https://cli.vuejs.org/zh/guide/html-and-static-assets.html#public-%E6%96%87%E4%BB%B6%E5%A4%B9" target="_blank" rel="noopener">静态资源目录</a>）下。</p>
-<p><del>本来想用俄罗斯套娃的方式在vue组件套一个<code>new Vue()</code>，结果行不通。</del></p>
+<p>el选项需要使用显示使用<code>new</code>创建的实例才生效。<br>为了方便，这里新建了<code>skill-lifecycle-el.html</code>放在public（<a href="https://cli.vuejs.org/zh/guide/html-and-static-assets.html#public-%E6%96%87%E4%BB%B6%E5%A4%B9" target="_blank" rel="noopener">静态资源目录</a>）下。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- skill-lifecycle-el.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-text</span>=<span class="string">"msg"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/vue/2.6.10/vue.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="actionscript">      <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="actionscript">        el: <span class="string">'#app'</span>,</span></span><br><span class="line">        props: &#123;&#125;,</span><br><span class="line">        data () &#123;</span><br><span class="line"><span class="actionscript">          <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="actionscript">            msg: <span class="string">'Hey Jude!'</span></span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        computed: &#123;&#125;,</span><br><span class="line">        methods: &#123;&#125;,</span><br><span class="line">        watch: &#123;&#125;,</span><br><span class="line">        beforeMount () &#123;</span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:orangeRed"</span>, <span class="string">'beforeMount--挂载之前的状态'</span>)</span></span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$el  :"</span>,<span class="keyword">this</span>.$el)</span></span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"el  :"</span> + <span class="keyword">this</span>.$el.innerHTML)</span></span><br><span class="line"><span class="actionscript">          <span class="comment">// debugger</span></span></span><br><span class="line">        &#125;,</span><br><span class="line">        mounted () &#123;</span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:orangeRed"</span>, <span class="string">'mounted--已经挂载的状态'</span>)</span></span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$el  :"</span>, <span class="keyword">this</span>.$el)</span></span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"el  :"</span> + <span class="keyword">this</span>.$el.innerHTML)</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line"><span class="actionscript">      <span class="comment">// vm.$mount('#app')</span></span></span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  </span><br><span class="line"><span class="tag">&lt;/<span class="name">bdoy</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><strong>el 还有 <a href="https://cn.vuejs.org/v2/api/#vm-mount" target="_blank" rel="noopener">vm.$mount</a> 必须要有一个，不然vue的声明周期就停止，beforeMount不触发。</strong></p>
 <blockquote>
@@ -389,14 +388,14 @@
 </blockquote>
 <p>两种挂载方式的效果是一样的。</p>
 <p><img src="/post/lifecycle/beforeMount-mounted-el.jpg" alt="beforeMount-mounted-el.jpg"></p>
-<p><strong>值得注意的是，<code>beforeMount</code>真实的DOM确实是会渲染双花括号还有指定的，<code>mounted</code>之后会被替换成真正的数据。</strong></p>
+<p><strong>值得注意的是，<code>beforeMount</code>真实的DOM确实是会渲染双花括号还有指令的，<code>mounted</code>之后会被替换成真正的数据。</strong></p>
 <h4 id="template"><a href="#template" class="headerlink" title="template"></a>template</h4><p>判断完el选项，接下来会判断有无<a href="https://cn.vuejs.org/v2/api/#template" target="_blank" rel="noopener">template选项</a></p>
 <blockquote>
 <p>一个字符串模板作为 Vue 实例的标识使用。模板将会替换挂载的元素。</p>
 </blockquote>
 <p>如此说来，作用跟el选项差不多，都是挂载元素的。</p>
 <p>那我们声明template选项，写上html tag string，然后把<code>#app</code> DOM里面的内容注释掉。（DOM保留）</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- skill-lifecycle-template.html --&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- 这个就叫 "#app" DOM --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">    &lt;p v-text="msg"&gt;&lt;/p&gt;</span></span><br><span class="line"><span class="comment">    &lt;p&gt;&#123;&#123; msg &#125;&#125;&lt;/p&gt;</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="actionscript">      el: <span class="string">'#app'</span>,</span></span><br><span class="line"><span class="handlebars"><span class="xml">      template: '<span class="tag">&lt;<span class="name">b</span>&gt;</span> </span><span class="template-variable">&#123;&#123; msg &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">b</span>&gt;</span>', // 这个就叫 template 选项</span></span></span><br><span class="line">      beforeMount () &#123;</span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:orangeRed"</span>, <span class="string">'beforeMount--挂载之前的状态'</span>)</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$el  :"</span>,<span class="keyword">this</span>.$el)</span></span><br><span class="line"><span class="actionscript">        <span class="comment">// debugger</span></span></span><br><span class="line">      &#125;,</span><br><span class="line">      mounted () &#123;</span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:orangeRed"</span>, <span class="string">'mounted--已经挂载的状态'</span>)</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$el  :"</span>, <span class="keyword">this</span>.$el)</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"#app :"</span>, <span class="built_in">document</span>.querySelector(<span class="string">'#app'</span>))</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- skill-lifecycle-template.html --&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- "#app" DOM --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">    &lt;p v-text="msg"&gt;&lt;/p&gt;</span></span><br><span class="line"><span class="comment">    &lt;p&gt;&#123;&#123; msg &#125;&#125;&lt;/p&gt;</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="actionscript">      el: <span class="string">'#app'</span>,</span></span><br><span class="line"><span class="handlebars"><span class="xml">      template: '<span class="tag">&lt;<span class="name">b</span>&gt;</span> </span><span class="template-variable">&#123;&#123; msg &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">b</span>&gt;</span>', // template 选项</span></span></span><br><span class="line">      beforeMount () &#123;</span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:orangeRed"</span>, <span class="string">'beforeMount--挂载之前的状态'</span>)</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$el  :"</span>,<span class="keyword">this</span>.$el)</span></span><br><span class="line"><span class="actionscript">        <span class="comment">// debugger</span></span></span><br><span class="line">      &#125;,</span><br><span class="line">      mounted () &#123;</span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:orangeRed"</span>, <span class="string">'mounted--已经挂载的状态'</span>)</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"$el  :"</span>, <span class="keyword">this</span>.$el)</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"%c%s"</span>, <span class="string">"color:skyblue"</span>, <span class="string">"#app :"</span>, <span class="built_in">document</span>.querySelector(<span class="string">'#app'</span>))</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>我们在挂载后找一下<code>#app</code>还在不在。</p>
 <p><img src="/post/lifecycle/beforeMount-mounted-template.jpg" alt="beforeMount-mounted-template.jpg"></p>
 <p>从这图，我们可以知道：</p>
@@ -408,7 +407,7 @@
 <h4 id="render"><a href="#render" class="headerlink" title="render"></a>render</h4><p><a href="https://cn.vuejs.org/v2/api/#render" target="_blank" rel="noopener">render选项</a>是一个渲染函数，返回<strong>虚拟节点 (virtual node）</strong>，又名<strong>VNode</strong>。</p>
 <p>render函数的用法稍微复杂，又牵扯到虚拟DOM、JSX等技术点，之后会另写一篇详细讲解。</p>
 <p>假设我们现在并不明白render的用法，只知道它会返回虚拟节点，就够了。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- skill-lifecycle-template.html --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="actionscript">      el: <span class="string">'#app'</span>,</span></span><br><span class="line"><span class="handlebars"><span class="xml">        template: '<span class="tag">&lt;<span class="name">b</span>&gt;</span> </span><span class="template-variable">&#123;&#123; msg &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">b</span>&gt;</span>', // 这个就叫 template 选项</span></span></span><br><span class="line"><span class="actionscript">        render: <span class="function"><span class="keyword">function</span> <span class="params">(createElement, context)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">          <span class="keyword">return</span> createElement(<span class="string">'b'</span>, <span class="keyword">this</span>.msg + <span class="string">' from render'</span>)</span></span><br><span class="line"><span class="actionscript">        &#125;, <span class="comment">// render函数</span></span></span><br><span class="line">    &#125;)</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- skill-lifecycle-template.html --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="actionscript">      el: <span class="string">'#app'</span>,</span></span><br><span class="line"><span class="handlebars"><span class="xml">        template: '<span class="tag">&lt;<span class="name">b</span>&gt;</span> </span><span class="template-variable">&#123;&#123; msg &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">b</span>&gt;</span>', // template 选项</span></span></span><br><span class="line"><span class="actionscript">        render: <span class="function"><span class="keyword">function</span> <span class="params">(createElement, context)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">          <span class="keyword">return</span> createElement(<span class="string">'b'</span>, <span class="keyword">this</span>.msg + <span class="string">' from render'</span>)</span></span><br><span class="line"><span class="actionscript">        &#125;, <span class="comment">// render函数</span></span></span><br><span class="line">    &#125;)</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>可以看到这里template选项我们不注释，就算我们把注释掉template选项， 输出结果也还是一样。</p>
 <p><img src="/post/lifecycle/beforeMount-mounted-render.jpg" alt="beforeMount-mounted-render.jpg"></p>
 <p>可以粗暴理解为：render是template的升级版，template字符串模板，render返回的是由函数创建生成的VNode。</p>
@@ -432,7 +431,7 @@
 <p><a href="https://cn.vuejs.org/v2/guide/installation.html#%E8%BF%90%E8%A1%8C%E6%97%B6-%E7%BC%96%E8%AF%91%E5%99%A8-vs-%E5%8F%AA%E5%8C%85%E5%90%AB%E8%BF%90%E8%A1%8C%E6%97%B6" target="_blank" rel="noopener">什么时候必须使用完整版(编译器+运行时)？</a></p>
 <p><code>template 选项</code>、挂载DOM（<code>el选项</code>/<code>vm.$mount</code>)，需要依赖编译器编译，这时必须使用完整版。</p>
 <blockquote>
-<p>当使用 vue-loader 或 vueify 的时候，*.vue 文件内部的模板会在构建时预编译成 JavaScript。你在最终打好的包里实际上是不需要编译器的，所以只用运行时版本即可。</p>
+<p>当使用 <code>vue-loader</code> 或 <code>vueify</code> 的时候，*.vue 文件内部的模板会在构建时预编译成 JavaScript。你在最终打好的包里实际上是不需要编译器的，所以只用运行时版本即可。</p>
 </blockquote>
 <p>可以看看三个html文件的源码引用的vue版本。</p>
 <ul>
@@ -440,6 +439,8 @@
 <li><a href="https://github.com/Fifth-Patient/stardust/blob/master/public/skill-lifecycle-template.html" target="_blank" rel="noopener">skill-lifecycle-template.html</a></li>
 <li><a href="https://github.com/Fifth-Patient/stardust/blob/master/public/skill-lifecycle-render.html" target="_blank" rel="noopener">skill-lifecycle-render.html</a></li>
 </ul>
+<p>如何选择？</p>
+<p>推荐运行时，拥有预编功能，性能比完整版的要好，打包资源也小；<br>一个小代价就是不能使用template选项。<br>完整版是在运行的时候编译，性能相对一般，而且也需要把编译器一起打包。</p>
 <hr>
 <h3 id="update"><a href="#update" class="headerlink" title="update"></a>update</h3><blockquote>
 <p>数据更改导致的虚拟 DOM 重新渲染和打补丁。</p>

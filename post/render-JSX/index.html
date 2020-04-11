@@ -56,7 +56,7 @@
 <meta property="og:description" content="前言官方文档介绍的渲染函数似乎有点太过偏重表现而放轻原因。已经看过这部分好几次，还是有点不知所以然。这也不是第一次看不明白文档的介绍了，还是需要自己整理下知识点。所以，这里的内容是对文档做降级处理，好让这一块知识点更容易理解一点。文档有的东西，这里不会再重复。 建议阅读顺序：先粗略浏览下官方文档；精读这篇文章同时结合文档。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://fifth-patient.github.io/post/render-JSX/vue-component.png">
-<meta property="og:updated_time" content="2020-01-28T12:18:26.579Z">
+<meta property="og:updated_time" content="2020-04-11T06:45:26.917Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue技巧篇：渲染函数 &amp; JSX">
 <meta name="twitter:description" content="前言官方文档介绍的渲染函数似乎有点太过偏重表现而放轻原因。已经看过这部分好几次，还是有点不知所以然。这也不是第一次看不明白文档的介绍了，还是需要自己整理下知识点。所以，这里的内容是对文档做降级处理，好让这一块知识点更容易理解一点。文档有的东西，这里不会再重复。 建议阅读顺序：先粗略浏览下官方文档；精读这篇文章同时结合文档。">
@@ -225,10 +225,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-01-28 20:01:25 / 修改时间：20:18:26" itemprop="dateCreated datePublished" datetime="2020-01-28T20:01:25+08:00">2020-01-28</time>
+              <time title="创建时间：2020-01-28 20:01:25" itemprop="dateCreated datePublished" datetime="2020-01-28T20:01:25+08:00">2020-01-28</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-11 14:45:26" itemprop="dateModified" datetime="2020-04-11T14:45:26+08:00">2020-04-11</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -330,7 +336,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JSX.js</span></span><br><span class="line"><span class="keyword">import</span> styled <span class="keyword">from</span> <span class="string">'vue-styled-components'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> StyledP = styled.p<span class="string">`</span></span><br><span class="line"><span class="string">  color: wheat;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'skill-jsx-js'</span>,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      type: <span class="string">'js'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">StyledP</span> <span class="attr">class</span>=<span class="string">"skill-jsx-js"</span>&gt;</span>hello <span class="tag">&lt;<span class="name">b</span>&gt;</span>&#123;this.type&#125;<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">StyledP</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>StyledP</code>也是一个vue组件，而<code>render</code>的<code>&lt;StyledP&gt;&lt;/StyledP&gt;</code> 相当于使用这个vue组件，组件名是js变量，大小写敏感。</p>
 <p><em>思考一下，写一个带有样式的DOM，就需要声明一个vue组件，这样情况会不会造成组件滥用？</em></p>
-<p>当然你可能会觉得，这是不是违背了<strong>关注点分离</strong>的原则。对于组件化系统的框架的，组件是组成项目的基本单位，更加关注的是，以组件为单位，而一个组件又包括HTML、CSS、JS，vue觉得将其所有组合起来比较合理。<br><a href="https://cn.vuejs.org/v2/guide/single-file-components.html#%E6%80%8E%E4%B9%88%E7%9C%8B%E5%BE%85%E5%85%B3%E6%B3%A8%E7%82%B9%E5%88%86%E7%A6%BB%EF%BC%9F" target="_blank" rel="noopener">怎么看待关注点分离？</a></p>
+<p>当然你可能会觉得，这是不是违背了<strong>关注点分离</strong>的原则。对于组件化系统的框架，组件是组成项目的基本单位，更加关注的是，以组件为单位，而一个组件又包括HTML、CSS、JS，vue觉得将其所有组合起来比较合理。<br><a href="https://cn.vuejs.org/v2/guide/single-file-components.html#%E6%80%8E%E4%B9%88%E7%9C%8B%E5%BE%85%E5%85%B3%E6%B3%A8%E7%82%B9%E5%88%86%E7%A6%BB%EF%BC%9F" target="_blank" rel="noopener">怎么看待关注点分离？</a></p>
 <p>当然我也会提供这一章的源码还有示例给你，还顺便实现了vue-styled-components官网的例子。</p>
 <ul>
 <li>JSX.vue <a href="https://github.com/Fifth-Patient/stardust/blob/master/src/views/skill/JSX/JSX.vue" target="_blank" rel="noopener">源码</a> <a href="https://fifth-patient.github.io/stardust/#/skill/JSX-vue">示例</a></li>

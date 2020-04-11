@@ -56,7 +56,7 @@
 <meta property="og:description" content="前言组件化也是vue的一大特点之一，组件是组成vue项目的基本单位。一个组件可以做什么？ 这取决于组件的设计，组件一般由以下几点组成：  选项 实例属性/方法 生命周期 全局API 指令 导入的其他组件  组件是可复用的vue实例，可以复用，导入导出，组成组件化系统。 vue的组件都是保持相对独立的关系，可是又可以进行相互依赖（导入导出机制）；这种规范下，实际开发又难免会出现组件之间传递数据、转发">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://fifth-patient.github.io/post/component-communication/vuex-Flux.png">
-<meta property="og:updated_time" content="2020-01-24T15:57:36.246Z">
+<meta property="og:updated_time" content="2020-04-10T15:01:44.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue技巧篇：组件通讯">
 <meta name="twitter:description" content="前言组件化也是vue的一大特点之一，组件是组成vue项目的基本单位。一个组件可以做什么？ 这取决于组件的设计，组件一般由以下几点组成：  选项 实例属性/方法 生命周期 全局API 指令 导入的其他组件  组件是可复用的vue实例，可以复用，导入导出，组成组件化系统。 vue的组件都是保持相对独立的关系，可是又可以进行相互依赖（导入导出机制）；这种规范下，实际开发又难免会出现组件之间传递数据、转发">
@@ -225,10 +225,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-01-24 20:05:19 / 修改时间：23:57:36" itemprop="dateCreated datePublished" datetime="2020-01-24T20:05:19+08:00">2020-01-24</time>
+              <time title="创建时间：2020-01-24 20:05:19" itemprop="dateCreated datePublished" datetime="2020-01-24T20:05:19+08:00">2020-01-24</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-10 23:01:44" itemprop="dateModified" datetime="2020-04-10T23:01:44+08:00">2020-04-10</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -310,7 +316,7 @@
 <li>不能直接改变 store 中的状态，若想改变，唯一途径就是显式地提交 (commit) mutation。</li>
 </ul>
 <p>一个store可以包含<br>state：储存状态   单一状态树<br>action： 提交mutation方法，可执行异步操作<br>mutation：更改store状态，必须是同步操作<br>getter：从state派生状态，返回值会根据依赖缓存<br>modules：将store分割成模块</p>
-<p><img src="/post/component-communication/./vuex-Flux.png" alt="vuex-Flux"></p>
+<p><img src="/post/component-communication/vuex-Flux.png" alt="vuex-Flux"></p>
 <p>简单分析下这张图：</p>
 <ol>
 <li>State 直接渲染在vue组件</li>
