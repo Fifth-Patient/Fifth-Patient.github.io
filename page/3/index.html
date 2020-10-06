@@ -47,31 +47,27 @@
   };
 </script>
 
-  <meta name="description" content="工作中实操过的项目部署记录，使用的是Ubuntu系统，nignx 和 C# 的运行环境均已安装。 前期配置文件准备12345678910111213141516# 以acs.HOST.cn举例 （HOST）为主域名# 项目路径/home/wwwroot/acs.xxx.cn# 从服务器下载文件配置文件（需要本机使用pscp或其他支持ftp协议的程序）pscp USERNAME@IP:/home/w">
-<meta property="og:type" content="article">
-<meta property="og:title" content="项目部署">
-<meta property="og:url" content="https://fifth-patient.github.io/post/deploy/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="巫术师">
+<meta property="og:url" content="https://fifth-patient.github.io/page/3/index.html">
 <meta property="og:site_name" content="巫术师">
-<meta property="og:description" content="工作中实操过的项目部署记录，使用的是Ubuntu系统，nignx 和 C# 的运行环境均已安装。 前期配置文件准备12345678910111213141516# 以acs.HOST.cn举例 （HOST）为主域名# 项目路径/home/wwwroot/acs.xxx.cn# 从服务器下载文件配置文件（需要本机使用pscp或其他支持ftp协议的程序）pscp USERNAME@IP:/home/w">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-04-05T04:06:13.659Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="项目部署">
-<meta name="twitter:description" content="工作中实操过的项目部署记录，使用的是Ubuntu系统，nignx 和 C# 的运行环境均已安装。 前期配置文件准备12345678910111213141516# 以acs.HOST.cn举例 （HOST）为主域名# 项目路径/home/wwwroot/acs.xxx.cn# 从服务器下载文件配置文件（需要本机使用pscp或其他支持ftp协议的程序）pscp USERNAME@IP:/home/w">
+<meta name="twitter:title" content="巫术师">
 
-<link rel="canonical" href="https://fifth-patient.github.io/post/deploy/">
+<link rel="canonical" href="https://fifth-patient.github.io/page/3/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: false,
-    isPost: true
+    isHome: true,
+    isPost: false
   };
 </script>
 
-  <title>项目部署 | 巫术师</title>
+  <title>巫术师 - 双手充满魔力</title>
   
 
 
@@ -196,11 +192,11 @@
             
 
   <div class="posts-expand">
-      
+        
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://fifth-patient.github.io/post/deploy/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://fifth-patient.github.io/post/ES2019/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/avatar.jpg">
@@ -213,7 +209,8 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          项目部署
+          
+            <a href="/post/ES2019/" class="post-title-link" itemprop="url">JavaScript ES2019 中的 8 个新功能</a>
         </h2>
 
         <div class="post-meta">
@@ -223,7 +220,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-01-17 00:30:34" itemprop="dateCreated datePublished" datetime="2020-01-17T00:30:34+08:00">2020-01-17</time>
+              <time title="创建时间：2019-01-09 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-09T00:00:00+08:00">2019-01-09</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -232,6 +229,17 @@
                 <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2020-04-05 12:06:13" itemprop="dateModified" datetime="2020-04-05T12:06:13+08:00">2020-04-05</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/转载/" itemprop="url" rel="index">
+                    <span itemprop="name">转载</span>
+                  </a>
+                </span>
+            </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -239,7 +247,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>182</span>
+              <span>1.1k</span>
             </span>
 
         </div>
@@ -251,65 +259,35 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>工作中实操过的项目部署记录，使用的是Ubuntu系统，nignx 和 C# 的运行环境均已安装。</p>
-<h2 id="前期配置文件准备"><a href="#前期配置文件准备" class="headerlink" title="前期配置文件准备"></a>前期配置文件准备</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以acs.HOST.cn举例 （HOST）为主域名</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 项目路径</span></span><br><span class="line">/home/wwwroot/acs.xxx.cn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从服务器下载文件配置文件（需要本机使用pscp或其他支持ftp协议的程序）</span></span><br><span class="line">pscp USERNAME@IP:/home/wwwroot/acs.HOST.cn/appsettings.json E:\PATH</span><br><span class="line"></span><br><span class="line"><span class="comment"># nginx 配置acs 所有项目(HOSTboss.conf)</span></span><br><span class="line">usr/<span class="built_in">local</span>/nginx/conf/HOSTboss.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># nginx 配置路径</span></span><br><span class="line">usr/<span class="built_in">local</span>/nginx/conf/nginx.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 守护进程</span></span><br><span class="line">/etc/systemd/system/apps.acs.serive</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h2 id="配置nginx"><a href="#配置nginx" class="headerlink" title="配置nginx"></a>配置nginx</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建项目目录</span></span><br><span class="line">sudo mkdir /home/wwwroot/acs.HOST.cn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置文件夹权限为完全访问</span></span><br><span class="line">sudo chmod 777 acs.HOST.cn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到nginx目录</span></span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nginx</span><br><span class="line"><span class="built_in">cd</span> ./conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传项目配置</span></span><br><span class="line"><span class="comment"># C:\Users\Admin\Downloads\pscp.exe</span></span><br><span class="line">.\pscp.exe E:\PATH\HOSTboss.conf USERNAME@acs.HOST.cn:/home/wwwroot/acs.HOST.cn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 移动文件</span></span><br><span class="line">sudo mv HOSTboss.conf /usr/<span class="built_in">local</span>/nginx/conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查include</span></span><br><span class="line">sudo vim /usr/<span class="built_in">local</span>/nginx/conf/nginx.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查证书 HOST.cn.key  HOST.cn.pem</span></span><br><span class="line">ls /usr/<span class="built_in">local</span>/nginx/conf/cert</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试 重载nginx</span></span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nginx</span><br><span class="line"><span class="built_in">cd</span> ./sbin</span><br><span class="line">sudo ./nginx -t <span class="comment"># 测试</span></span><br><span class="line">sudo ./nginx -s reload <span class="comment"># 重载</span></span><br></pre></td></tr></table></figure>
-<h2 id="项目部署、守护进程"><a href="#项目部署、守护进程" class="headerlink" title="项目部署、守护进程"></a>项目部署、守护进程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 上传已打包的项目到服务器</span></span><br><span class="line">.\pscp.exe E:\PATH\acs.HOST.cn\FILENAME.zip USERNAME@acs.HOST.cn:/home/wwwroot/acs.HOST.cn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压</span></span><br><span class="line"><span class="built_in">cd</span> /home/wwwroot/acs.HOST.cn</span><br><span class="line">sudo unzip -o FILENAME.zip</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查证书 HOST.pfx</span></span><br><span class="line">ls /home/wwwroot/acs.HOST.cn/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 移动守护进程配置文件到指定目录</span></span><br><span class="line">sudo mv ./apps.acs.service /etc/systemd/system</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义守护进程</span></span><br><span class="line">sudo systemctl <span class="built_in">enable</span> apps.acs.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启进程</span></span><br><span class="line">sudo systemctl start apps.acs.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看状态</span></span><br><span class="line">sudo systemctl status apps.acs.service</span><br></pre></td></tr></table></figure>
-<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><p>web服务器只需部署nginx</p>
+          <p>JavaScript 一直在不断改进和添加更多新功能。TC39 已经完成，并批准了 ES2019 的 8 项新功能。这个过程包含了 5 个阶段：</p>
 <ul>
-<li>sso</li>
-<li>boss</li>
-<li>mgt</li>
+<li>第 0 阶段：稻草人</li>
+<li>第 1 阶段：提案</li>
+<li>第 2 阶段：草案</li>
+<li>第 3 阶段：候选</li>
+<li>第 4 阶段：已完成 / 已批准</li>
 </ul>
-<p>部署成功，对外开放三个地址</p>
-<ul>
-<li><code>https://sso.HOST.cn</code>  单点登录</li>
-<li><code>https://boss.HOST.cn</code> 门户网站</li>
-<li><code>https://mgt.HOST.cn</code>  一体化管理中心</li>
-</ul>
-
+<p>第 0 阶段的提案：<br><a href="https://github.com/tc39/proposals/blob/master/stage-0-proposals.md" target="_blank" rel="noopener">https://github.com/tc39/proposals/blob/master/stage-0-proposals.md</a></p>
+<p>第 1 至 3 阶段的提案：<br><a href="https://github.com/tc39/proposals" target="_blank" rel="noopener">https://github.com/tc39/proposals</a></p>
+<p>第 4 阶段的提案：<br><a href="https://github.com/tc39/proposals/blob/master/finished-proposals.md" target="_blank" rel="noopener">https://github.com/tc39/proposals/blob/master/finished-proposals.md</a></p>
+<p>废话不多说，接下来让我们来逐一介绍这些功能。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/post/ES2019/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
     </div>
 
     
     
     
-        
-
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者： </strong>Chris Chen
-  </li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="https://fifth-patient.github.io/post/deploy/" title="项目部署">https://fifth-patient.github.io/post/deploy/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
-</div>
-
-
       <footer class="post-footer">
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/post/vue-skill/" rel="prev" title="vue的一些技巧">
-      <i class="fa fa-chevron-left"></i> vue的一些技巧
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/post/control-pane/" rel="next" title="vue技巧篇：我的浏览器也是“控制台”">
-      vue技巧篇：我的浏览器也是“控制台” <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
+        <div class="post-eof"></div>
       </footer>
-    
   </article>
   
   
@@ -317,10 +295,15 @@
 
   </div>
 
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
+
 
           </div>
           
-    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -367,7 +350,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前期配置文件准备"><span class="nav-number">1.</span> <span class="nav-text">前期配置文件准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置nginx"><span class="nav-number">2.</span> <span class="nav-text">配置nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目部署、守护进程"><span class="nav-number">3.</span> <span class="nav-text">项目部署、守护进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备注"><span class="nav-number">4.</span> <span class="nav-text">备注</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -561,25 +543,6 @@ window.addEventListener('pjax:success', () => {
 
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-<script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID: 'a6abf0490c8440e73360',
-      clientSecret: '32fbbae44e3293b81901fa2ceb61a93eb4320646',
-      repo: 'Fifth-Patient.github.io',
-      owner: 'Fifth-Patient',
-      admin: ['Fifth-Patient'],
-      id: 'f2964f892084471a804f3f0c886af2fb',
-        language: '',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
-</script>
 
     </div>
 </body>
